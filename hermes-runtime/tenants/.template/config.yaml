@@ -1,0 +1,35 @@
+# OpenClawHub 租户级 Hermes 配置
+# 模板文件，创建租户时复制并替换 {{TENANT_ID}}
+
+tenant:
+  id: "{{TENANT_ID}}"
+  name: "{{TENANT_NAME}}"
+  plan: "free"              # free / pro / enterprise
+  created_at: "{{CREATED_AT}}"
+
+hermes:
+  model: "minimax/MiniMax-M2.7"
+  provider: "api.minimax.chat"
+  base_url: "https://api.minimax.chat/v1"
+  
+  # 多租户隔离：每个租户独立的 HERMES_HOME
+  # 由 TenantIsolation 服务在启动时设置
+  hermes_home: "hermes-runtime/tenants/{{TENANT_ID}}/hermes_home"
+
+limits:
+  max_agents: 3              # 最大数字员工数
+  max_sessions_per_day: 100
+  max_cron_jobs: 10
+  max_tool_calls_per_task: 500
+
+platform:
+  # 共享平台技能目录（所有租户可见）
+  shared_skills_dir: "hermes-runtime/shared_skills"
+  
+  # 租户私有技能目录
+  private_skills_dir: "hermes-runtime/tenants/{{TENANT_ID}}/hermes_home/skills"
+
+# MCP 扩展（租户级配置）
+mcp:
+  enabled: true
+  servers: []

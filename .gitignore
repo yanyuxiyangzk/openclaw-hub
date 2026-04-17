@@ -1,46 +1,28 @@
+# Dependencies (re-cloned separately)
+hermes-agent/
+
+# Generated directories
+node_modules/
+dist/
+logs/
+data/
+
+
 # Python
 __pycache__/
-*.py[cod]
+*.pyc
 *.egg-info/
-dist/
-build/
-.venv/
-venv/
-*.egg
+.eggs/
 
-# Node
-node_modules/
-pnpm-lock.yaml
-dist/
+# macOS
+.DS_Store
 
 # IDE
-.idea/
 .vscode/
-*.swp
-*.swo
+.idea/
 
-# Logs
-logs/
-*.log
-
-# Data
-data/*.db
-data/*.sqlite
-
-# Environment
-.env
-.env.local
+# Verify script
+verify_hermes.py
 
 # OS
-.DS_Store
 Thumbs.db
-
-# Build
-*.pyc
-.pytest_cache/
-.coverage
-htmlcov/
-
-# OpenClawHarness (local engine, not part of the SaaS repo)
-harness/
-*.task

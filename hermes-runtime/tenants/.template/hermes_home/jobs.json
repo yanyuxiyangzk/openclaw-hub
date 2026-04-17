@@ -1,0 +1,20 @@
+{
+  "jobs": [
+    {
+      "id": "daily-standup",
+      "schedule": "0 9 * * 1-5",
+      "prompt": "collect_agent_status",
+      "skill": "pm-manager-skill",
+      "target": "pm",
+      "enabled": true
+    },
+    {
+      "id": "weekly-evolution",
+      "schedule": "0 22 * * 0",
+      "prompt": "review_recent_corrections",
+      "skill": "evolution-skill",
+      "target": "platform",
+      "enabled": true
+    }
+  ]
+}
