@@ -1,6 +1,6 @@
 # OpenClawHub × Hermes Agent 集成方案
 
-> 版本：v1.0 | 日期：2026-04-17 | 状态：待老赵审批
+> 版本：v1.1 | 日期：2026-04-17 | 状态：✅ 已批准并执行 Phase 0
 > 角色：妙妙（Architect + PM）
 > 目标：以 Hermes Agent 为底座，重构 OpenClawHub 技术架构
 
