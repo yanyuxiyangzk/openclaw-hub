@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from config import get_settings
+from routers import auth_router, users_router, orgs_router, invitations_router
+from core.database import engine, Base
 
 settings = get_settings()
 
@@ -17,6 +19,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(auth_router)
+app.include_router(users_router)
+app.include_router(orgs_router)
+app.include_router(invitations_router)
 
 
 @app.get("/health")
