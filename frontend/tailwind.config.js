@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#4F46E5',
+        primary: '#8B5CF6', // purple-500
         secondary: '#10B981',
         danger: '#EF4444',
         warning: '#F59E0B',
