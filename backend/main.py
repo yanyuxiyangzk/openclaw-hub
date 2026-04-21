@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from config import get_settings
-from routers import auth_router, users_router, orgs_router, invitations_router, projects_router, agents_router, ws_router
+from routers import auth_router, users_router, orgs_router, invitations_router, projects_router, agents_router, ws_router, phase3_router, tasks_router
 from core.database import engine, Base
 
 settings = get_settings()
@@ -52,6 +52,8 @@ app.include_router(invitations_router)
 app.include_router(projects_router)
 app.include_router(agents_router)
 app.include_router(ws_router)
+app.include_router(phase3_router)
+app.include_router(tasks_router)
 
 
 @app.get("/health")

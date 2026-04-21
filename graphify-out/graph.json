@@ -60,7 +60,7 @@
       "file_type": "code",
       "name": "main.py",
       "extension": ".py",
-      "line_count": 70,
+      "line_count": 72,
       "path": "backend/main.py"
     },
     {
@@ -69,7 +69,7 @@
       "file_type": "other",
       "name": "openclawhub.db",
       "extension": ".db",
-      "line_count": 120,
+      "line_count": 285,
       "path": "backend/openclawhub.db"
     },
     {
@@ -289,6 +289,15 @@
       "path": "harness/TASK-Phase2-Agent基础API.md"
     },
     {
+      "id": "harness/TASK-Phase2-All.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "TASK-Phase2-All.md",
+      "extension": ".md",
+      "line_count": 137,
+      "path": "harness/TASK-Phase2-All.md"
+    },
+    {
       "id": "harness/TASK-Phase2-Frontend.md",
       "type": "file",
       "file_type": "doc",
@@ -341,6 +350,24 @@
       "extension": ".md",
       "line_count": 132,
       "path": "harness/TASK-Phase2-项目管理API.md"
+    },
+    {
+      "id": "harness/TASK-Phase3.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "TASK-Phase3.md",
+      "extension": ".md",
+      "line_count": 93,
+      "path": "harness/TASK-Phase3.md"
+    },
+    {
+      "id": "harness/TASK-Phase4.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "TASK-Phase4.md",
+      "extension": ".md",
+      "line_count": 112,
+      "path": "harness/TASK-Phase4.md"
     },
     {
       "id": "harness/TASK-架构师_开发计划制定.md",
@@ -15499,6 +15526,15 @@
       "path": "frontend/src/api/orgs.ts"
     },
     {
+      "id": "frontend/src/api/phase3.ts",
+      "type": "file",
+      "file_type": "code",
+      "name": "phase3.ts",
+      "extension": ".ts",
+      "line_count": 191,
+      "path": "frontend/src/api/phase3.ts"
+    },
+    {
       "id": "frontend/src/api/projects.ts",
       "type": "file",
       "file_type": "code",
@@ -15506,6 +15542,15 @@
       "extension": ".ts",
       "line_count": 64,
       "path": "frontend/src/api/projects.ts"
+    },
+    {
+      "id": "frontend/src/api/tasks.ts",
+      "type": "file",
+      "file_type": "code",
+      "name": "tasks.ts",
+      "extension": ".ts",
+      "line_count": 214,
+      "path": "frontend/src/api/tasks.ts"
     },
     {
       "id": "frontend/src/api/users.ts",
@@ -15522,7 +15567,7 @@
       "file_type": "code",
       "name": "index.ts",
       "extension": ".ts",
-      "line_count": 101,
+      "line_count": 161,
       "path": "frontend/src/router/index.ts"
     },
     {
@@ -15567,7 +15612,7 @@
       "file_type": "code",
       "name": "index.ts",
       "extension": ".ts",
-      "line_count": 126,
+      "line_count": 285,
       "path": "frontend/src/types/index.ts"
     },
     {
@@ -15643,12 +15688,21 @@
       "path": "frontend/src/views/SettingsView.vue"
     },
     {
+      "id": "frontend/src/views/agents/AgentConfigView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "AgentConfigView.vue",
+      "extension": ".vue",
+      "line_count": 230,
+      "path": "frontend/src/views/agents/AgentConfigView.vue"
+    },
+    {
       "id": "frontend/src/views/agents/AgentDetailView.vue",
       "type": "file",
       "file_type": "other",
       "name": "AgentDetailView.vue",
       "extension": ".vue",
-      "line_count": 273,
+      "line_count": 301,
       "path": "frontend/src/views/agents/AgentDetailView.vue"
     },
     {
@@ -15659,6 +15713,42 @@
       "extension": ".vue",
       "line_count": 151,
       "path": "frontend/src/views/agents/AgentListView.vue"
+    },
+    {
+      "id": "frontend/src/views/agents/AgentMemoryView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "AgentMemoryView.vue",
+      "extension": ".vue",
+      "line_count": 250,
+      "path": "frontend/src/views/agents/AgentMemoryView.vue"
+    },
+    {
+      "id": "frontend/src/views/agents/AgentMetricsView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "AgentMetricsView.vue",
+      "extension": ".vue",
+      "line_count": 193,
+      "path": "frontend/src/views/agents/AgentMetricsView.vue"
+    },
+    {
+      "id": "frontend/src/views/agents/AgentRoleCreateView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "AgentRoleCreateView.vue",
+      "extension": ".vue",
+      "line_count": 141,
+      "path": "frontend/src/views/agents/AgentRoleCreateView.vue"
+    },
+    {
+      "id": "frontend/src/views/agents/AgentRoleListView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "AgentRoleListView.vue",
+      "extension": ".vue",
+      "line_count": 186,
+      "path": "frontend/src/views/agents/AgentRoleListView.vue"
     },
     {
       "id": "frontend/src/views/projects/ProjectDetailView.vue",
@@ -15677,6 +15767,51 @@
       "extension": ".vue",
       "line_count": 139,
       "path": "frontend/src/views/projects/ProjectListView.vue"
+    },
+    {
+      "id": "frontend/src/views/tasks/DueSoonView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "DueSoonView.vue",
+      "extension": ".vue",
+      "line_count": 160,
+      "path": "frontend/src/views/tasks/DueSoonView.vue"
+    },
+    {
+      "id": "frontend/src/views/tasks/ProjectKanbanView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "ProjectKanbanView.vue",
+      "extension": ".vue",
+      "line_count": 162,
+      "path": "frontend/src/views/tasks/ProjectKanbanView.vue"
+    },
+    {
+      "id": "frontend/src/views/tasks/ProjectTaskListView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "ProjectTaskListView.vue",
+      "extension": ".vue",
+      "line_count": 193,
+      "path": "frontend/src/views/tasks/ProjectTaskListView.vue"
+    },
+    {
+      "id": "frontend/src/views/tasks/ProjectTimelineView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "ProjectTimelineView.vue",
+      "extension": ".vue",
+      "line_count": 204,
+      "path": "frontend/src/views/tasks/ProjectTimelineView.vue"
+    },
+    {
+      "id": "frontend/src/views/tasks/TaskDetailView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "TaskDetailView.vue",
+      "extension": ".vue",
+      "line_count": 256,
+      "path": "frontend/src/views/tasks/TaskDetailView.vue"
     },
     {
       "id": "frontend/src/views/__tests__/InvitationView.spec.ts",
@@ -15787,6 +15922,78 @@
       "path": "frontend/src/components/projects/ProjectCard.vue"
     },
     {
+      "id": "frontend/src/components/tasks/CommentThread.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "CommentThread.vue",
+      "extension": ".vue",
+      "line_count": 77,
+      "path": "frontend/src/components/tasks/CommentThread.vue"
+    },
+    {
+      "id": "frontend/src/components/tasks/DueDatePicker.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "DueDatePicker.vue",
+      "extension": ".vue",
+      "line_count": 30,
+      "path": "frontend/src/components/tasks/DueDatePicker.vue"
+    },
+    {
+      "id": "frontend/src/components/tasks/KanbanBoard.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "KanbanBoard.vue",
+      "extension": ".vue",
+      "line_count": 52,
+      "path": "frontend/src/components/tasks/KanbanBoard.vue"
+    },
+    {
+      "id": "frontend/src/components/tasks/KanbanColumn.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "KanbanColumn.vue",
+      "extension": ".vue",
+      "line_count": 62,
+      "path": "frontend/src/components/tasks/KanbanColumn.vue"
+    },
+    {
+      "id": "frontend/src/components/tasks/SubtaskList.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "SubtaskList.vue",
+      "extension": ".vue",
+      "line_count": 73,
+      "path": "frontend/src/components/tasks/SubtaskList.vue"
+    },
+    {
+      "id": "frontend/src/components/tasks/TaskCard.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "TaskCard.vue",
+      "extension": ".vue",
+      "line_count": 105,
+      "path": "frontend/src/components/tasks/TaskCard.vue"
+    },
+    {
+      "id": "frontend/src/components/tasks/TaskDetailDrawer.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "TaskDetailDrawer.vue",
+      "extension": ".vue",
+      "line_count": 338,
+      "path": "frontend/src/components/tasks/TaskDetailDrawer.vue"
+    },
+    {
+      "id": "frontend/src/components/tasks/TaskFilter.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "TaskFilter.vue",
+      "extension": ".vue",
+      "line_count": 100,
+      "path": "frontend/src/components/tasks/TaskFilter.vue"
+    },
+    {
       "id": "backend/alembic/script.py.mako",
       "type": "file",
       "file_type": "other",
@@ -15828,8 +16035,35 @@
       "file_type": "code",
       "name": "agent.py",
       "extension": ".py",
-      "line_count": 23,
+      "line_count": 25,
       "path": "backend/models/agent.py"
+    },
+    {
+      "id": "backend/models/agent_metric.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "agent_metric.py",
+      "extension": ".py",
+      "line_count": 20,
+      "path": "backend/models/agent_metric.py"
+    },
+    {
+      "id": "backend/models/agent_role.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "agent_role.py",
+      "extension": ".py",
+      "line_count": 20,
+      "path": "backend/models/agent_role.py"
+    },
+    {
+      "id": "backend/models/agent_skill.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "agent_skill.py",
+      "extension": ".py",
+      "line_count": 18,
+      "path": "backend/models/agent_skill.py"
     },
     {
       "id": "backend/models/invitation.py",
@@ -15846,7 +16080,7 @@
       "file_type": "code",
       "name": "organization.py",
       "extension": ".py",
-      "line_count": 35,
+      "line_count": 36,
       "path": "backend/models/organization.py"
     },
     {
@@ -15855,7 +16089,7 @@
       "file_type": "code",
       "name": "project.py",
       "extension": ".py",
-      "line_count": 25,
+      "line_count": 26,
       "path": "backend/models/project.py"
     },
     {
@@ -15877,6 +16111,33 @@
       "path": "backend/models/project_member.py"
     },
     {
+      "id": "backend/models/task.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "task.py",
+      "extension": ".py",
+      "line_count": 73,
+      "path": "backend/models/task.py"
+    },
+    {
+      "id": "backend/models/task_attachment.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "task_attachment.py",
+      "extension": ".py",
+      "line_count": 23,
+      "path": "backend/models/task_attachment.py"
+    },
+    {
+      "id": "backend/models/task_comment.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "task_comment.py",
+      "extension": ".py",
+      "line_count": 22,
+      "path": "backend/models/task_comment.py"
+    },
+    {
       "id": "backend/models/user.py",
       "type": "file",
       "file_type": "code",
@@ -15891,7 +16152,7 @@
       "file_type": "code",
       "name": "__init__.py",
       "extension": ".py",
-      "line_count": 19,
+      "line_count": 33,
       "path": "backend/models/__init__.py"
     },
     {
@@ -15931,6 +16192,15 @@
       "path": "backend/routers/orgs.py"
     },
     {
+      "id": "backend/routers/phase3.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "phase3.py",
+      "extension": ".py",
+      "line_count": 317,
+      "path": "backend/routers/phase3.py"
+    },
+    {
       "id": "backend/routers/projects.py",
       "type": "file",
       "file_type": "code",
@@ -15938,6 +16208,15 @@
       "extension": ".py",
       "line_count": 366,
       "path": "backend/routers/projects.py"
+    },
+    {
+      "id": "backend/routers/tasks.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "tasks.py",
+      "extension": ".py",
+      "line_count": 529,
+      "path": "backend/routers/tasks.py"
     },
     {
       "id": "backend/routers/users.py",
@@ -15963,7 +16242,7 @@
       "file_type": "code",
       "name": "__init__.py",
       "extension": ".py",
-      "line_count": 10,
+      "line_count": 12,
       "path": "backend/routers/__init__.py"
     },
     {
@@ -15974,6 +16253,15 @@
       "extension": ".py",
       "line_count": 107,
       "path": "backend/schemas/agent.py"
+    },
+    {
+      "id": "backend/schemas/agent_role.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "agent_role.py",
+      "extension": ".py",
+      "line_count": 152,
+      "path": "backend/schemas/agent_role.py"
     },
     {
       "id": "backend/schemas/auth.py",
@@ -16012,6 +16300,15 @@
       "path": "backend/schemas/project.py"
     },
     {
+      "id": "backend/schemas/task.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "task.py",
+      "extension": ".py",
+      "line_count": 174,
+      "path": "backend/schemas/task.py"
+    },
+    {
       "id": "backend/schemas/user.py",
       "type": "file",
       "file_type": "code",
@@ -16026,7 +16323,7 @@
       "file_type": "code",
       "name": "__init__.py",
       "extension": ".py",
-      "line_count": 28,
+      "line_count": 56,
       "path": "backend/schemas/__init__.py"
     },
     {
@@ -16057,6 +16354,15 @@
       "path": "backend/services/org_service.py"
     },
     {
+      "id": "backend/services/phase3_service.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "phase3_service.py",
+      "extension": ".py",
+      "line_count": 313,
+      "path": "backend/services/phase3_service.py"
+    },
+    {
       "id": "backend/services/project_service.py",
       "type": "file",
       "file_type": "code",
@@ -16064,6 +16370,15 @@
       "extension": ".py",
       "line_count": 137,
       "path": "backend/services/project_service.py"
+    },
+    {
+      "id": "backend/services/task_service.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "task_service.py",
+      "extension": ".py",
+      "line_count": 485,
+      "path": "backend/services/task_service.py"
     },
     {
       "id": "backend/services/__init__.py",
@@ -16181,6 +16496,24 @@
       "extension": ".py",
       "line_count": 80,
       "path": "backend/alembic/versions/64d21646b23e_create_projects_agents_project_agents_.py"
+    },
+    {
+      "id": "backend/alembic/versions/9a7b3c1d_create_agent_roles_skills_metrics.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "9a7b3c1d_create_agent_roles_skills_metrics.py",
+      "extension": ".py",
+      "line_count": 65,
+      "path": "backend/alembic/versions/9a7b3c1d_create_agent_roles_skills_metrics.py"
+    },
+    {
+      "id": "backend/alembic/versions/9a7b3c1d_create_tasks_tables.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "9a7b3c1d_create_tasks_tables.py",
+      "extension": ".py",
+      "line_count": 83,
+      "path": "backend/alembic/versions/9a7b3c1d_create_tasks_tables.py"
     }
   ],
   "edges": [
@@ -41905,6 +42238,81 @@
       "type": "uses"
     },
     {
+      "source": "backend/models/agent_metric.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/agent_metric.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/agent_metric.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/agent_metric.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/agent_metric.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/agent_role.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/agent_role.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/agent_role.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/agent_role.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/agent_role.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/agent_skill.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/agent_skill.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/agent_skill.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/agent_skill.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/agent_skill.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
       "source": "backend/models/invitation.py",
       "target": "import:uuid",
       "type": "uses"
@@ -42060,6 +42468,106 @@
       "type": "uses"
     },
     {
+      "source": "backend/models/task.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task.py",
+      "target": "import:sqlalchemy.dialects.sqlite",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task.py",
+      "target": "import:sqlalchemy.sql",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task.py",
+      "target": "import:enum",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task_attachment.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task_attachment.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task_attachment.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task_attachment.py",
+      "target": "import:sqlalchemy.dialects.sqlite",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task_attachment.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task_attachment.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task_comment.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task_comment.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task_comment.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task_comment.py",
+      "target": "import:sqlalchemy.dialects.sqlite",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task_comment.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/task_comment.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
       "source": "backend/models/user.py",
       "target": "import:uuid",
       "type": "uses"
@@ -42122,6 +42630,21 @@
     {
       "source": "backend/models/__init__.py",
       "target": "import:models.project_member",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/__init__.py",
+      "target": "import:models.agent_role",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/__init__.py",
+      "target": "import:models.agent_skill",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/__init__.py",
+      "target": "import:models.agent_metric",
       "type": "uses"
     },
     {
@@ -42290,6 +42813,56 @@
       "type": "uses"
     },
     {
+      "source": "backend/routers/phase3.py",
+      "target": "import:fastapi",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/phase3.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/phase3.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/phase3.py",
+      "target": "import:core.security",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/phase3.py",
+      "target": "import:models.user",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/phase3.py",
+      "target": "import:models.agent",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/phase3.py",
+      "target": "import:models.organization",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/phase3.py",
+      "target": "import:schemas.agent_role",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/phase3.py",
+      "target": "import:services.phase3_service",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/phase3.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
       "source": "backend/routers/projects.py",
       "target": "import:fastapi",
       "type": "uses"
@@ -42327,6 +42900,56 @@
     {
       "source": "backend/routers/projects.py",
       "target": "import:services.project_service",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/tasks.py",
+      "target": "import:fastapi",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/tasks.py",
+      "target": "import:fastapi",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/tasks.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/tasks.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/tasks.py",
+      "target": "import:core.security",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/tasks.py",
+      "target": "import:models.user",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/tasks.py",
+      "target": "import:models.task",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/tasks.py",
+      "target": "import:models.task_comment",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/tasks.py",
+      "target": "import:models.task_attachment",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/tasks.py",
+      "target": "import:schemas.task",
       "type": "uses"
     },
     {
@@ -42430,12 +43053,32 @@
       "type": "uses"
     },
     {
+      "source": "backend/routers/__init__.py",
+      "target": "import:routers.phase3",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/__init__.py",
+      "target": "import:routers.tasks",
+      "type": "uses"
+    },
+    {
       "source": "backend/schemas/agent.py",
       "target": "import:pydantic",
       "type": "uses"
     },
     {
       "source": "backend/schemas/agent.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/agent_role.py",
+      "target": "import:pydantic",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/agent_role.py",
       "target": "import:datetime",
       "type": "uses"
     },
@@ -42475,6 +43118,21 @@
       "type": "uses"
     },
     {
+      "source": "backend/schemas/task.py",
+      "target": "import:pydantic",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/task.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/task.py",
+      "target": "import:typing",
+      "type": "uses"
+    },
+    {
       "source": "backend/schemas/user.py",
       "target": "import:pydantic",
       "type": "uses"
@@ -42502,6 +43160,16 @@
     {
       "source": "backend/schemas/__init__.py",
       "target": "import:schemas.invitation",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/__init__.py",
+      "target": "import:schemas.agent_role",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/__init__.py",
+      "target": "import:schemas.task",
       "type": "uses"
     },
     {
@@ -42625,6 +43293,56 @@
       "type": "uses"
     },
     {
+      "source": "backend/services/phase3_service.py",
+      "target": "import:json",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/phase3_service.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/phase3_service.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/phase3_service.py",
+      "target": "import:fastapi",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/phase3_service.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/phase3_service.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/phase3_service.py",
+      "target": "import:models.agent",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/phase3_service.py",
+      "target": "import:models.agent_role",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/phase3_service.py",
+      "target": "import:models.agent_skill",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/phase3_service.py",
+      "target": "import:models.agent_metric",
+      "type": "uses"
+    },
+    {
       "source": "backend/services/project_service.py",
       "target": "import:fastapi",
       "type": "uses"
@@ -42662,6 +43380,56 @@
     {
       "source": "backend/services/project_service.py",
       "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/task_service.py",
+      "target": "import:json",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/task_service.py",
+      "target": "import:csv",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/task_service.py",
+      "target": "import:io",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/task_service.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/task_service.py",
+      "target": "import:typing",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/task_service.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/task_service.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/task_service.py",
+      "target": "import:models.task",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/task_service.py",
+      "target": "import:models.task_comment",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/task_service.py",
+      "target": "import:models.task_attachment",
       "type": "uses"
     },
     {
@@ -42858,22 +43626,52 @@
       "source": "backend/alembic/versions/64d21646b23e_create_projects_agents_project_agents_.py",
       "target": "import:sqlalchemy",
       "type": "uses"
+    },
+    {
+      "source": "backend/alembic/versions/9a7b3c1d_create_agent_roles_skills_metrics.py",
+      "target": "import:typing",
+      "type": "uses"
+    },
+    {
+      "source": "backend/alembic/versions/9a7b3c1d_create_agent_roles_skills_metrics.py",
+      "target": "import:alembic",
+      "type": "uses"
+    },
+    {
+      "source": "backend/alembic/versions/9a7b3c1d_create_agent_roles_skills_metrics.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/alembic/versions/9a7b3c1d_create_tasks_tables.py",
+      "target": "import:typing",
+      "type": "uses"
+    },
+    {
+      "source": "backend/alembic/versions/9a7b3c1d_create_tasks_tables.py",
+      "target": "import:alembic",
+      "type": "uses"
+    },
+    {
+      "source": "backend/alembic/versions/9a7b3c1d_create_tasks_tables.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
     }
   ],
   "metadata": {
     "project": "D:\\project\\aicoding\\OpenClawHub",
     "project_name": "OpenClawHub",
-    "analyzed_at": "2026-04-21T21:05:33.099955",
+    "analyzed_at": "2026-04-21T22:21:53.050715",
     "stats": {
-      "total_files": 1798,
-      "code_files": 978,
-      "doc_files": 606,
+      "total_files": 1835,
+      "code_files": 994,
+      "doc_files": 609,
       "config_files": 51,
-      "total_lines": 752146,
+      "total_lines": 758461,
       "languages": {
-        "Python": 900,
+        "Python": 914,
         "JavaScript": 5,
-        "TypeScript": 42,
+        "TypeScript": 44,
         "TypeScript (TSX)": 30,
         "Ruby": 1
       }

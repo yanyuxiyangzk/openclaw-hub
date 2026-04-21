@@ -21,3 +21,5 @@ class Agent(Base):
 
     organization = relationship("Organization", back_populates="agents")
     project_agents = relationship("ProjectAgent", back_populates="agent", cascade="all, delete-orphan")
+    skills = relationship("AgentSkill", back_populates="agent", cascade="all, delete-orphan")
+    metrics = relationship("AgentMetric", back_populates="agent", cascade="all, delete-orphan")

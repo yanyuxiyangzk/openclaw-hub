@@ -72,6 +72,66 @@ const routes: RouteRecordRaw[] = [
     name: 'AgentDetail',
     component: () => import('@/views/agents/AgentDetailView.vue'),
     meta: { auth: true }
+  },
+  {
+    path: '/agents/:id/config',
+    name: 'AgentConfig',
+    component: () => import('@/views/agents/AgentConfigView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/agents/:id/memory',
+    name: 'AgentMemory',
+    component: () => import('@/views/agents/AgentMemoryView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/agents/:id/metrics',
+    name: 'AgentMetrics',
+    component: () => import('@/views/agents/AgentMetricsView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/agent-roles',
+    name: 'AgentRoleList',
+    component: () => import('@/views/agents/AgentRoleListView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/agent-roles/new',
+    name: 'AgentRoleCreate',
+    component: () => import('@/views/agents/AgentRoleCreateView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/projects/:id/kanban',
+    name: 'ProjectKanban',
+    component: () => import('@/views/tasks/ProjectKanbanView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/projects/:id/tasks',
+    name: 'ProjectTaskList',
+    component: () => import('@/views/tasks/ProjectTaskListView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/projects/:id/timeline',
+    name: 'ProjectTimeline',
+    component: () => import('@/views/tasks/ProjectTimelineView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/tasks/:id',
+    name: 'TaskDetail',
+    component: () => import('@/views/tasks/TaskDetailView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/tasks/due-soon',
+    name: 'DueSoon',
+    component: () => import('@/views/tasks/DueSoonView.vue'),
+    meta: { auth: true }
   }
 ]
 

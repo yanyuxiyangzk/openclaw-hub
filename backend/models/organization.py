@@ -20,6 +20,7 @@ class Organization(Base):
     invitations = relationship("Invitation", back_populates="organization", cascade="all, delete-orphan")
     projects = relationship("Project", back_populates="organization", cascade="all, delete-orphan")
     agents = relationship("Agent", back_populates="organization", cascade="all, delete-orphan")
+    agent_roles = relationship("AgentRole", back_populates="organization", cascade="all, delete-orphan")
 
 
 class OrganizationMember(Base):

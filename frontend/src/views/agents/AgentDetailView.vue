@@ -62,6 +62,34 @@
           </div>
         </div>
 
+        <!-- Navigation Tabs -->
+        <div class="flex gap-4 mb-6 border-b border-gray-700 pb-4">
+          <router-link
+            :to="`/agents/${agentId}`"
+            class="text-white font-medium pb-2 border-b-2 border-purple-500"
+          >
+            概览
+          </router-link>
+          <router-link
+            :to="`/agents/${agentId}/config`"
+            class="text-gray-400 hover:text-white pb-2 border-b-2 border-transparent hover:border-gray-600 transition"
+          >
+            配置
+          </router-link>
+          <router-link
+            :to="`/agents/${agentId}/memory`"
+            class="text-gray-400 hover:text-white pb-2 border-b-2 border-transparent hover:border-gray-600 transition"
+          >
+            记忆
+          </router-link>
+          <router-link
+            :to="`/agents/${agentId}/metrics`"
+            class="text-gray-400 hover:text-white pb-2 border-b-2 border-transparent hover:border-gray-600 transition"
+          >
+            指标
+          </router-link>
+        </div>
+
         <!-- Health Info -->
         <div v-if="agentStore.agentHealth" class="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-6">
           <h3 class="text-lg font-semibold text-white mb-4">健康状态</h3>

@@ -5,6 +5,12 @@ from models.project import Project
 from models.agent import Agent
 from models.project_agent import ProjectAgent
 from models.project_member import ProjectMember
+from models.agent_role import AgentRole
+from models.agent_skill import AgentSkill
+from models.agent_metric import AgentMetric
+from models.task import Task, TaskStatus, TaskPriority
+from models.task_comment import TaskComment
+from models.task_attachment import TaskAttachment
 
 __all__ = [
     "User",
@@ -15,4 +21,12 @@ __all__ = [
     "Agent",
     "ProjectAgent",
     "ProjectMember",
+    "AgentRole",
+    "AgentSkill",
+    "AgentMetric",
+    "Task",
+    "TaskStatus",
+    "TaskPriority",
+    "TaskComment",
+    "TaskAttachment",
 ]

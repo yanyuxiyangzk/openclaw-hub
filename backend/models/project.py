@@ -23,3 +23,4 @@ class Project(Base):
     owner = relationship("User", foreign_keys=[created_by])
     members = relationship("ProjectMember", back_populates="project", cascade="all, delete-orphan")
     project_agents = relationship("ProjectAgent", back_populates="project", cascade="all, delete-orphan")
+    tasks = relationship("Task", back_populates="project", cascade="all, delete-orphan")
