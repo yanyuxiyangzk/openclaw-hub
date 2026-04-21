@@ -23,7 +23,7 @@
           @click="router.push(`/orgs/${org.id}`)"
         >
           <h3 class="text-lg font-semibold text-white">{{ org.name }}</h3>
-          <p class="text-gray-400 text-sm mt-1">{{ org.description || '暂无描述' }}</p>
+          <p class="text-gray-400 text-sm mt-1">成员</p>
         </div>
       </div>
 
@@ -40,14 +40,6 @@
                 class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
                 required
               />
-            </div>
-            <div class="mb-4">
-              <label class="block text-gray-400 mb-2 text-sm">描述 (可选)</label>
-              <textarea
-                v-model="newOrg.description"
-                class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                rows="3"
-              ></textarea>
             </div>
             <p v-if="createError" class="mb-4 text-sm text-red-400">{{ createError }}</p>
             <div class="flex gap-3">
@@ -85,7 +77,7 @@ const loading = ref(false)
 const showCreate = ref(false)
 const createLoading = ref(false)
 const createError = ref('')
-const newOrg = ref({ name: '', description: '' })
+const newOrg = ref({ name: '' })
 
 onMounted(async () => {
   loading.value = true
@@ -97,9 +89,9 @@ const handleCreate = async () => {
   createLoading.value = true
   createError.value = ''
   try {
-    await orgStore.createOrg(newOrg.value.name, newOrg.value.description)
+    await orgStore.createOrg(newOrg.value.name)
     showCreate.value = false
-    newOrg.value = { name: '', description: '' }
+    newOrg.value = { name: '' }
   } catch (e) {
     createError.value = '创建失败'
   } finally {

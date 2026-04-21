@@ -8,7 +8,7 @@ vi.mock('@/stores/auth', () => ({
     fetchMe: vi.fn(),
     updateUser: vi.fn(),
     logout: vi.fn(),
-    user: { id: '1', name: 'Test', email: 'test@example.com' },
+    user: { id: '1', name: 'Test', email: 'test@example.com', avatar: null },
   })),
 }))
 
@@ -30,7 +30,7 @@ describe('SettingsView', () => {
       global: { plugins: [router] },
     })
     expect(wrapper.find('h2').text()).toBe('个人设置')
-    expect(wrapper.findAll('input').length).toBe(2)
+    expect(wrapper.findAll('input').length).toBe(3)
   })
 
   it('has logout button', async () => {

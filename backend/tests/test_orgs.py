@@ -122,3 +122,162 @@ class TestOrgInvitation:
         assert data["code"] == 0
         assert data["data"]["email"] == "invitee@example.com"
         assert data["data"]["status"] == "pending"
+
+
+class TestOrgAccessDenied:
+    def test_get_org_not_member(self, client, db, test_org):
+        from models.user import User
+        from core.security import get_password_hash
+        import uuid
+
+        other = User(
+            id=str(uuid.uuid4()),
+            email="other@example.com",
+            password_hash=get_password_hash("password123"),
+            name="Other User",
+            is_active=True,
+            is_superuser=False,
+        )
+        db.add(other)
+        db.commit()
+
+        login = client.post("/api/auth/login", json={"email": "other@example.com", "password": "password123"})
+        headers = {"Authorization": f"Bearer {login.json()['data']['access_token']}"}
+
+        response = client.get(f"/api/orgs/{test_org.id}", headers=headers)
+        assert response.status_code == 403
+
+    def test_update_org_not_owner(self, client, db, test_org):
+        from models.user import User
+        from models.organization import OrganizationMember
+        from core.security import get_password_hash
+        import uuid
+
+        member_user = User(
+            id=str(uuid.uuid4()),
+            email="member2@example.com",
+            password_hash=get_password_hash("password123"),
+            name="Member User",
+            is_active=True,
+            is_superuser=False,
+        )
+        db.add(member_user)
+        db.commit()
+
+        member = OrganizationMember(
+            id=str(uuid.uuid4()),
+            org_id=test_org.id,
+            user_id=member_user.id,
+            role="member",
+        )
+        db.add(member)
+        db.commit()
+
+        login = client.post("/api/auth/login", json={"email": "member2@example.com", "password": "password123"})
+        headers = {"Authorization": f"Bearer {login.json()['data']['access_token']}"}
+
+        response = client.put(f"/api/orgs/{test_org.id}", headers=headers, json={"name": "Hacked"})
+        assert response.status_code == 403
+
+    def test_delete_org_not_owner(self, client, db, test_org):
+        from models.user import User
+        from models.organization import OrganizationMember
+        from core.security import get_password_hash
+        import uuid
+
+        member_user = User(
+            id=str(uuid.uuid4()),
+            email="member3@example.com",
+            password_hash=get_password_hash("password123"),
+            name="Member User 3",
+            is_active=True,
+            is_superuser=False,
+        )
+        db.add(member_user)
+        db.commit()
+
+        member = OrganizationMember(
+            id=str(uuid.uuid4()),
+            org_id=test_org.id,
+            user_id=member_user.id,
+            role="admin",
+        )
+        db.add(member)
+        db.commit()
+
+        login = client.post("/api/auth/login", json={"email": "member3@example.com", "password": "password123"})
+        headers = {"Authorization": f"Bearer {login.json()['data']['access_token']}"}
+
+        response = client.delete(f"/api/orgs/{test_org.id}", headers=headers)
+        assert response.status_code == 403
+
+    def test_remove_member_not_admin(self, client, db, test_org):
+        from models.user import User
+        from models.organization import OrganizationMember
+        from core.security import get_password_hash
+        import uuid
+
+        member_user = User(
+            id=str(uuid.uuid4()),
+            email="member4@example.com",
+            password_hash=get_password_hash("password123"),
+            name="Member User 4",
+            is_active=True,
+            is_superuser=False,
+        )
+        db.add(member_user)
+        db.commit()
+
+        member = OrganizationMember(
+            id=str(uuid.uuid4()),
+            org_id=test_org.id,
+            user_id=member_user.id,
+            role="member",
+        )
+        db.add(member)
+        db.commit()
+
+        login = client.post("/api/auth/login", json={"email": "member4@example.com", "password": "password123"})
+        headers = {"Authorization": f"Bearer {login.json()['data']['access_token']}"}
+
+        response = client.delete(f"/api/orgs/{test_org.id}/members/{member_user.id}", headers=headers)
+        assert response.status_code == 403
+
+    def test_remove_owner_forbidden(self, client, auth_headers, test_org, test_user):
+        response = client.delete(f"/api/orgs/{test_org.id}/members/{test_user.id}", headers=auth_headers)
+        assert response.status_code == 403
+
+    def test_create_invitation_not_admin(self, client, db, test_org):
+        from models.user import User
+        from models.organization import OrganizationMember
+        from core.security import get_password_hash
+        import uuid
+
+        member_user = User(
+            id=str(uuid.uuid4()),
+            email="member5@example.com",
+            password_hash=get_password_hash("password123"),
+            name="Member User 5",
+            is_active=True,
+            is_superuser=False,
+        )
+        db.add(member_user)
+        db.commit()
+
+        member = OrganizationMember(
+            id=str(uuid.uuid4()),
+            org_id=test_org.id,
+            user_id=member_user.id,
+            role="member",
+        )
+        db.add(member)
+        db.commit()
+
+        login = client.post("/api/auth/login", json={"email": "member5@example.com", "password": "password123"})
+        headers = {"Authorization": f"Bearer {login.json()['data']['access_token']}"}
+
+        response = client.post(f"/api/orgs/{test_org.id}/invitations", headers=headers, json={
+            "email": "newinvite@example.com",
+            "role": "member"
+        })
+        assert response.status_code == 403

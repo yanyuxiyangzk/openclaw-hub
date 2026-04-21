@@ -4,7 +4,7 @@
       <div class="flex items-center justify-between mb-6">
         <div>
           <h2 class="text-2xl font-bold text-white">{{ orgStore.currentOrg?.name }}</h2>
-          <p class="text-gray-400 text-sm mt-1">{{ orgStore.currentOrg?.description || '暂无描述' }}</p>
+          <p class="text-gray-400 text-sm mt-1">组织详情</p>
         </div>
         <div class="flex gap-3">
           <button
@@ -34,7 +34,7 @@
           </div>
           <div>
             <span class="text-gray-400 text-sm">创建时间</span>
-            <p class="text-white mt-1">{{ orgStore.currentOrg.createdAt || 'N/A' }}</p>
+            <p class="text-white mt-1">{{ orgStore.currentOrg.created_at || 'N/A' }}</p>
           </div>
         </div>
       </div>
@@ -52,14 +52,6 @@
                 class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
                 required
               />
-            </div>
-            <div class="mb-4">
-              <label class="block text-gray-400 mb-2 text-sm">描述</label>
-              <textarea
-                v-model="editForm.description"
-                class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-                rows="3"
-              ></textarea>
             </div>
             <p v-if="updateError" class="mb-4 text-sm text-red-400">{{ updateError }}</p>
             <div class="flex gap-3">
@@ -98,16 +90,13 @@ const loading = ref(false)
 const showEdit = ref(false)
 const updateLoading = ref(false)
 const updateError = ref('')
-const editForm = ref({ name: '', description: '' })
+const editForm = ref({ name: '' })
 
 onMounted(async () => {
   loading.value = true
   await orgStore.fetchOrg(String(route.params.id))
   if (orgStore.currentOrg) {
-    editForm.value = {
-      name: orgStore.currentOrg.name,
-      description: orgStore.currentOrg.description || ''
-    }
+    editForm.value = { name: orgStore.currentOrg.name }
   }
   loading.value = false
 })
@@ -116,7 +105,7 @@ const handleUpdate = async () => {
   updateLoading.value = true
   updateError.value = ''
   try {
-    await orgStore.updateOrg(String(route.params.id), editForm.value)
+    await orgStore.updateOrg(String(route.params.id), { name: editForm.value.name })
     showEdit.value = false
   } catch (e) {
     updateError.value = '保存失败'

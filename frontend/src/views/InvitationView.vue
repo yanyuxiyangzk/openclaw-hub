@@ -37,7 +37,7 @@ const loading = ref(true)
 const accepting = ref(false)
 const error = ref('')
 const success = ref(false)
-const invitation = ref<{ orgName: string } | null>(null)
+const invitation = ref<{ orgName: string | null; valid: boolean } | null>(null)
 
 onMounted(async () => {
   try {

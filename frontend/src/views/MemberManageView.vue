@@ -31,9 +31,9 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-700">
-            <tr v-for="member in orgStore.members" :key="member.userId" class="hover:bg-gray-750">
-              <td class="px-4 py-3 text-white">{{ member.userName }}</td>
-              <td class="px-4 py-3 text-gray-400">{{ member.userEmail }}</td>
+            <tr v-for="member in orgStore.members" :key="member.user_id" class="hover:bg-gray-750">
+              <td class="px-4 py-3 text-white">{{ member.user_name }}</td>
+              <td class="px-4 py-3 text-gray-400">{{ member.user_email }}</td>
               <td class="px-4 py-3">
                 <span class="px-2 py-1 text-xs rounded-full" :class="member.role === 'admin' ? 'bg-purple-500/20 text-purple-400' : 'bg-gray-600/50 text-gray-300'">
                   {{ member.role === 'admin' ? '管理员' : '成员' }}
@@ -42,7 +42,7 @@
               <td class="px-4 py-3 text-right">
                 <button
                   v-if="member.role !== 'owner'"
-                  @click="handleRemove(member.userId)"
+                  @click="handleRemove(member.user_id)"
                   class="text-sm text-red-400 hover:text-red-300"
                 >
                   移除

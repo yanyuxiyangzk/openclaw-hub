@@ -35,6 +35,6 @@ describe('LoginView', () => {
     const wrapper = mount(LoginView, {
       global: { plugins: [router] },
     })
-    expect(wrapper.find('router-link').text()).toBe('注册')
+    expect(wrapper.find('a').text()).toBe('注册')
   })
 })

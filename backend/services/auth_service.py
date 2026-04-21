@@ -1,3 +1,4 @@
+from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from models.user import User
 from schemas.auth import UserRegister, UserLogin, UserUpdate
@@ -11,7 +12,6 @@ class AuthService:
     def register(self, data: UserRegister) -> User:
         existing = self.db.query(User).filter(User.email == data.email).first()
         if existing:
-            from fastapi import HTTPException, status
             raise HTTPException(
                 status_code=status.HTTP_409_CONFLICT,
                 detail={"code": 40901, "message": "Email already registered"}
@@ -30,7 +30,6 @@ class AuthService:
     def login(self, data: UserLogin) -> dict:
         user = self.db.query(User).filter(User.email == data.email).first()
         if not user or not verify_password(data.password, user.password_hash):
-            from fastapi import HTTPException, status
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail={"code": 40101, "message": "Invalid email or password"}
@@ -53,7 +52,6 @@ class AuthService:
     def refresh_tokens(self, refresh_token: str) -> dict:
         payload = decode_token(refresh_token)
         if payload.get("type") != "refresh":
-            from fastapi import HTTPException, status
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail={"code": 40101, "message": "Invalid refresh token"}
@@ -62,7 +60,6 @@ class AuthService:
         user_id = payload.get("sub")
         user = self.db.query(User).filter(User.id == user_id).first()
         if not user or not user.is_active:
-            from fastapi import HTTPException, status
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail={"code": 40101, "message": "Invalid refresh token"}

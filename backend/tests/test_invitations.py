@@ -124,3 +124,94 @@ class TestInvitationExpired:
 
         response = client.post("/api/invitations/expired-token-123/accept", headers=headers)
         assert response.status_code == 400
+
+
+class TestInvitationEdgeCases:
+    def test_accept_already_accepted(self, client, db, test_org):
+        from models.invitation import Invitation
+        from models.user import User
+        from core.security import get_password_hash
+
+        invitee = User(
+            id=str(uuid.uuid4()),
+            email="already@example.com",
+            password_hash=get_password_hash("password"),
+            name="Already Member",
+            is_active=True,
+            is_superuser=False,
+        )
+        db.add(invitee)
+        db.commit()
+
+        invitation = Invitation(
+            id=str(uuid.uuid4()),
+            org_id=test_org.id,
+            email="already@example.com",
+            role="member",
+            token="accepted-token-123",
+            expires_at=datetime.now(timezone.utc) + timedelta(days=1),
+            status="accepted",
+        )
+        db.add(invitation)
+        db.commit()
+
+        login = client.post("/api/auth/login", json={"email": "already@example.com", "password": "password"})
+        headers = {"Authorization": f"Bearer {login.json()['data']['access_token']}"}
+
+        response = client.post("/api/invitations/accepted-token-123/accept", headers=headers)
+        assert response.status_code == 400
+
+    def test_revoke_not_owner(self, client, db, test_org):
+        from models.invitation import Invitation
+        from models.user import User
+        from core.security import get_password_hash
+
+        other = User(
+            id=str(uuid.uuid4()),
+            email="notowner@example.com",
+            password_hash=get_password_hash("password"),
+            name="Not Owner",
+            is_active=True,
+            is_superuser=False,
+        )
+        db.add(other)
+        db.commit()
+
+        invitation = Invitation(
+            id=str(uuid.uuid4()),
+            org_id=test_org.id,
+            email="revokenonowner@example.com",
+            role="member",
+            token="revoke-notowner-123",
+            expires_at=datetime.now(timezone.utc) + timedelta(days=1),
+            status="pending",
+        )
+        db.add(invitation)
+        db.commit()
+
+        login = client.post("/api/auth/login", json={"email": "notowner@example.com", "password": "password"})
+        headers = {"Authorization": f"Bearer {login.json()['data']['access_token']}"}
+
+        response = client.delete(f"/api/invitations/{invitation.id}", headers=headers)
+        assert response.status_code == 403
+
+    def test_accept_already_member(self, client, db, test_org, test_user):
+        from models.invitation import Invitation
+
+        invitation = Invitation(
+            id=str(uuid.uuid4()),
+            org_id=test_org.id,
+            email="test@example.com",
+            role="member",
+            token="already-member-token",
+            expires_at=datetime.now(timezone.utc) + timedelta(days=1),
+            status="pending",
+        )
+        db.add(invitation)
+        db.commit()
+
+        login = client.post("/api/auth/login", json={"email": "test@example.com", "password": "password123"})
+        headers = {"Authorization": f"Bearer {login.json()['data']['access_token']}"}
+
+        response = client.post("/api/invitations/already-member-token/accept", headers=headers)
+        assert response.status_code == 409

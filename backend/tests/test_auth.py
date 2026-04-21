@@ -22,7 +22,7 @@ class TestAuthRegister:
         })
         assert response.status_code == 409
         data = response.json()
-        assert data["detail"]["code"] == 40901
+        assert data["code"] == 40901
 
     def test_register_invalid_email(self, client):
         response = client.post("/api/auth/register", json={
@@ -51,7 +51,7 @@ class TestAuthLogin:
             "password": "wrongpassword"
         })
         assert response.status_code == 401
-        assert response.json()["detail"]["code"] == 40101
+        assert response.json()["code"] == 40101
 
     def test_login_nonexistent_user(self, client):
         response = client.post("/api/auth/login", json={
@@ -111,3 +111,47 @@ class TestAuthLogout:
         data = response.json()
         assert data["code"] == 0
         assert "logged out" in data["message"].lower()
+
+
+class TestAuthEdgeCases:
+    def test_login_inactive_user(self, client, db):
+        from models.user import User
+        from core.security import get_password_hash
+        import uuid
+
+        user = User(
+            id=str(uuid.uuid4()),
+            email="inactive@example.com",
+            password_hash=get_password_hash("password123"),
+            name="Inactive User",
+            is_active=False,
+            is_superuser=False,
+        )
+        db.add(user)
+        db.commit()
+
+        response = client.post("/api/auth/login", json={
+            "email": "inactive@example.com",
+            "password": "password123"
+        })
+        assert response.status_code == 401
+
+    def test_refresh_invalid_token(self, client):
+        response = client.post("/api/auth/refresh", json={
+            "refresh_token": "invalid-token"
+        })
+        assert response.status_code == 401
+
+    def test_access_with_invalid_scheme(self, client):
+        response = client.get("/api/auth/me", headers={"Authorization": "Basic abc"})
+        assert response.status_code == 401
+
+    def test_access_deleted_user(self, client, db, test_user):
+        from jose import jwt
+        from config import get_settings
+
+        settings = get_settings()
+        token = jwt.encode({"sub": "nonexistent-user-id", "type": "access", "exp": 9999999999}, settings.SECRET_KEY, algorithm=settings.JWT_ALGORITHM)
+
+        response = client.get("/api/auth/me", headers={"Authorization": f"Bearer {token}"})
+        assert response.status_code == 401

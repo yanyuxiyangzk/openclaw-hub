@@ -91,3 +91,24 @@ class TestUserToggleActive:
             "is_active": False
         })
         assert response.status_code == 400
+
+
+class TestUserAccessDenied:
+    def test_get_other_user_denied(self, client, db, auth_headers):
+        from models.user import User
+        from core.security import get_password_hash
+        import uuid
+
+        other = User(
+            id=str(uuid.uuid4()),
+            email="other2@example.com",
+            password_hash=get_password_hash("password123"),
+            name="Other User",
+            is_active=True,
+            is_superuser=False,
+        )
+        db.add(other)
+        db.commit()
+
+        response = client.get(f"/api/users/{other.id}", headers=auth_headers)
+        assert response.status_code == 403

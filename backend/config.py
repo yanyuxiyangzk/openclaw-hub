@@ -1,8 +1,10 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from functools import lru_cache
 
 
 class Settings(BaseSettings):
+    model_config = SettingsConfigDict(env_file=".env")
+
     APP_NAME: str = "OpenClawHub"
     APP_VERSION: str = "0.1.0"
     DEBUG: bool = True
@@ -20,9 +22,6 @@ class Settings(BaseSettings):
     PROJECT_DATA_PATH: str = "./data/projects"
     HARNESS_PATH: str = "./harness"
     LOG_PATH: str = "./logs"
-
-    class Config:
-        env_file = ".env"
 
 
 @lru_cache()

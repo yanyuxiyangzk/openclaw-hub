@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { mockOrgs, mockMembers, mockInvitation } from '@/utils/mock'
+import * as orgsApi from '@/api/orgs'
 import type { Org, OrgMember } from '@/types'
 
 export const useOrgStore = defineStore('org', () => {
@@ -9,75 +9,62 @@ export const useOrgStore = defineStore('org', () => {
   const members = ref<OrgMember[]>([])
 
   const fetchOrgs = async () => {
-    await new Promise(resolve => setTimeout(resolve, 300))
-    orgs.value = mockOrgs
+    const res = await orgsApi.listOrgs()
+    orgs.value = res.data.data
   }
 
-  const createOrg = async (name: string, description?: string) => {
-    await new Promise(resolve => setTimeout(resolve, 300))
-    const newOrg: Org = { id: String(Date.now()), name, description, ownerId: '1' }
+  const createOrg = async (name: string) => {
+    const res = await orgsApi.createOrg({ name })
+    const newOrg = res.data.data
     orgs.value.push(newOrg)
     return newOrg
   }
 
   const fetchOrg = async (id: string) => {
-    await new Promise(resolve => setTimeout(resolve, 300))
-    currentOrg.value = mockOrgs.find(o => o.id === id) || null
+    const res = await orgsApi.getOrg(id)
+    currentOrg.value = res.data.data
     return currentOrg.value
   }
 
-  const updateOrg = async (id: string, payload: { name?: string; description?: string }) => {
-    await new Promise(resolve => setTimeout(resolve, 300))
-    const org = mockOrgs.find(o => o.id === id)
-    if (org) {
-      Object.assign(org, payload)
-      currentOrg.value = { ...org }
-    }
+  const updateOrg = async (id: string, payload: { name: string }) => {
+    const res = await orgsApi.updateOrg(id, payload)
+    currentOrg.value = res.data.data
     const idx = orgs.value.findIndex(o => o.id === id)
-    if (idx !== -1) orgs.value[idx] = { ...orgs.value[idx], ...payload }
+    if (idx !== -1) orgs.value[idx] = res.data.data
   }
 
   const deleteOrg = async (id: string) => {
-    await new Promise(resolve => setTimeout(resolve, 200))
+    await orgsApi.deleteOrg(id)
     orgs.value = orgs.value.filter(o => o.id !== id)
   }
 
-  const fetchMembers = async (_orgId: string) => {
-    await new Promise(resolve => setTimeout(resolve, 300))
-    members.value = mockMembers
+  const fetchMembers = async (orgId: string) => {
+    const res = await orgsApi.getMembers(orgId)
+    members.value = res.data.data.items
   }
 
-  const removeMember = async (_orgId: string, userId: string) => {
-    await new Promise(resolve => setTimeout(resolve, 200))
-    members.value = members.value.filter(m => m.userId !== userId)
+  const removeMember = async (orgId: string, userId: string) => {
+    await orgsApi.removeMember(orgId, userId)
+    members.value = members.value.filter(m => m.user_id !== userId)
   }
 
-  const inviteMember = async (_orgId: string, _email: string, _role?: string) => {
-    await new Promise(resolve => setTimeout(resolve, 300))
+  const inviteMember = async (orgId: string, email: string, role?: string) => {
+    await orgsApi.sendInvitation(orgId, { email, role })
   }
 
-  const checkInvitation = async (_token: string) => {
-    await new Promise(resolve => setTimeout(resolve, 300))
-    return mockInvitation
+  const checkInvitation = async (token: string) => {
+    const res = await orgsApi.verifyInvitation(token)
+    const d = res.data.data
+    return { orgName: d.organization_name, valid: d.valid, invitation: d.invitation }
   }
 
-  const acceptInvite = async (_token: string) => {
-    await new Promise(resolve => setTimeout(resolve, 300))
+  const acceptInvite = async (token: string) => {
+    await orgsApi.acceptInvitation(token)
   }
 
   return {
-    orgs,
-    currentOrg,
-    members,
-    fetchOrgs,
-    createOrg,
-    fetchOrg,
-    updateOrg,
-    deleteOrg,
-    fetchMembers,
-    removeMember,
-    inviteMember,
-    checkInvitation,
-    acceptInvite,
+    orgs, currentOrg, members,
+    fetchOrgs, createOrg, fetchOrg, updateOrg, deleteOrg,
+    fetchMembers, removeMember, inviteMember, checkInvitation, acceptInvite,
   }
 })

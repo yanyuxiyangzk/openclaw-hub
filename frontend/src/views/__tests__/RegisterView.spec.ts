@@ -29,7 +29,7 @@ describe('RegisterView', () => {
     })
     await flushPromises()
     expect(wrapper.find('h1').exists()).toBe(true)
-    expect(wrapper.findAll('input').length).toBe(3)
+    expect(wrapper.findAll('input').length).toBe(4)
   })
 
   it('has submit button', async () => {

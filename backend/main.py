@@ -1,5 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
+from starlette.exceptions import HTTPException as StarletteHTTPException
 from config import get_settings
 from routers import auth_router, users_router, orgs_router, invitations_router
 from core.database import engine, Base
@@ -11,6 +14,28 @@ app = FastAPI(
     version=settings.APP_VERSION,
     debug=settings.DEBUG
 )
+
+
+@app.exception_handler(StarletteHTTPException)
+async def http_exception_handler(request: Request, exc: StarletteHTTPException):
+    detail = exc.detail
+    if isinstance(detail, dict) and "code" in detail:
+        return JSONResponse(
+            status_code=exc.status_code,
+            content={"code": detail["code"], "message": detail.get("message", "Error"), "data": None}
+        )
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"code": exc.status_code * 100, "message": str(detail) if detail else "Error", "data": None}
+    )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    return JSONResponse(
+        status_code=422,
+        content={"code": 42201, "message": "Validation error", "data": exc.errors()}
+    )
 
 app.add_middleware(
     CORSMiddleware,

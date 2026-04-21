@@ -16,11 +16,35 @@ api.interceptors.request.use((config) => {
 })
 
 api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem('token')
-      router.push('/login')
+  (response) => {
+    const res = response.data
+    if (res && res.code !== undefined && res.code !== 0) {
+      return Promise.reject(new Error(res.message || 'Request failed'))
+    }
+    return response
+  },
+  async (error) => {
+    const originalRequest = error.config
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true
+      const refreshToken = localStorage.getItem('refresh_token')
+      if (refreshToken) {
+        try {
+          const res = await api.post('/auth/refresh', { refresh_token: refreshToken })
+          const { access_token, refresh_token: new_refresh } = res.data.data
+          localStorage.setItem('token', access_token)
+          localStorage.setItem('refresh_token', new_refresh)
+          originalRequest.headers.Authorization = `Bearer ${access_token}`
+          return api(originalRequest)
+        } catch {
+          localStorage.removeItem('token')
+          localStorage.removeItem('refresh_token')
+          router.push('/login')
+        }
+      } else {
+        localStorage.removeItem('token')
+        router.push('/login')
+      }
     }
     return Promise.reject(error)
   }

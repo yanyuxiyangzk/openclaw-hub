@@ -1,13 +1,18 @@
 import api from './index'
+import type { ApiResponse, User, PaginatedData } from '@/types'
 
-export const listUsers = (params?: { page?: number; pageSize?: number }) =>
-  api.get('/users', { params })
+export const listUsers = (params?: { page?: number; page_size?: number }) =>
+  api.get<ApiResponse<PaginatedData<User>>>('/users', { params })
 
-export const getUser = (id: string) => api.get(`/users/${id}`)
+export const getUser = (id: string) => api.get<ApiResponse<User>>(`/users/${id}`)
 
-export const updateUser = (id: string, data: { name?: string; email?: string }) =>
-  api.put(`/users/${id}`, data)
+export const updateUser = (id: string, data: { name?: string; avatar?: string | null }) =>
+  api.put<ApiResponse<User>>(`/users/${id}`, data)
 
-export const deleteUser = (id: string) => api.delete(`/users/${id}`)
+export const deleteUser = (id: string) => api.delete<ApiResponse>(`/users/${id}`)
 
-export const toggleActive = (id: string) => api.put(`/users/${id}/toggle-active`)
+export const changePassword = (id: string, new_password: string) =>
+  api.put<ApiResponse>(`/users/${id}/password`, { new_password })
+
+export const toggleActive = (id: string, is_active: boolean) =>
+  api.put<ApiResponse<{ id: string; is_active: boolean }>>(`/users/${id}/toggle-active`, { is_active })

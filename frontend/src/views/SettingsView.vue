@@ -16,10 +16,19 @@
           <div class="mb-4">
             <label class="block text-gray-400 mb-2 text-sm">邮箱</label>
             <input
-              v-model="form.email"
+              :value="authStore.user?.email"
               type="email"
+              class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-gray-500 cursor-not-allowed"
+              disabled
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-400 mb-2 text-sm">头像 URL</label>
+            <input
+              v-model="form.avatar"
+              type="url"
               class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
-              required
+              placeholder="https://example.com/avatar.png"
             />
           </div>
           <p v-if="success" class="mb-4 text-sm text-green-400">保存成功</p>
@@ -55,7 +64,7 @@ import AppLayout from '@/components/layout/AppLayout.vue'
 const router = useRouter()
 const authStore = useAuthStore()
 
-const form = ref({ name: '', email: '' })
+const form = ref({ name: '', avatar: '' })
 const loading = ref(false)
 const success = ref(false)
 const error = ref('')
@@ -63,7 +72,7 @@ const error = ref('')
 onMounted(async () => {
   await authStore.fetchMe()
   if (authStore.user) {
-    form.value = { name: authStore.user.name, email: authStore.user.email }
+    form.value = { name: authStore.user.name, avatar: authStore.user.avatar || '' }
   }
 })
 
@@ -72,7 +81,7 @@ const handleUpdate = async () => {
   success.value = false
   error.value = ''
   try {
-    await authStore.updateUser(form.value)
+    await authStore.updateUser({ name: form.value.name, avatar: form.value.avatar || null })
     success.value = true
   } catch (e) {
     error.value = '保存失败'

@@ -1,3 +1,4 @@
+from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from models.organization import Organization, OrganizationMember
 from models.invitation import Invitation
@@ -100,7 +101,6 @@ class OrgService:
 
     def accept_invitation(self, invitation: Invitation, user: User) -> OrganizationMember:
         if invitation.status != "pending":
-            from fastapi import HTTPException, status
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail={"code": 42201, "message": "Invitation is not pending"}
@@ -112,7 +112,6 @@ class OrgService:
         if expires_at < now:
             invitation.status = "expired"
             self.db.commit()
-            from fastapi import HTTPException, status
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail={"code": 42201, "message": "Invitation has expired"}
@@ -123,7 +122,6 @@ class OrgService:
             OrganizationMember.user_id == user.id
         ).first()
         if existing:
-            from fastapi import HTTPException, status
             raise HTTPException(
                 status_code=status.HTTP_409_CONFLICT,
                 detail={"code": 40901, "message": "Already a member"}
@@ -145,7 +143,6 @@ class OrgService:
             return False
         org = self.get_org_by_id(invitation.org_id)
         if not org or not self.is_org_owner(org, user):
-            from fastapi import HTTPException, status
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail={"code": 40301, "message": "Only owner can revoke invitations"}
