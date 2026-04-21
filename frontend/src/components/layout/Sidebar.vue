@@ -12,6 +12,20 @@
         我的组织
       </router-link>
       <router-link
+        to="/projects"
+        class="block px-4 py-2 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition"
+        active-class="bg-gray-700 text-white"
+      >
+        我的项目
+      </router-link>
+      <router-link
+        to="/agents"
+        class="block px-4 py-2 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition"
+        active-class="bg-gray-700 text-white"
+      >
+        Agent 管理
+      </router-link>
+      <router-link
         to="/settings"
         class="block px-4 py-2 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white transition"
         active-class="bg-gray-700 text-white"

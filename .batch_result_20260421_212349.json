@@ -1,0 +1,48 @@
+{
+  "total": 5,
+  "succeeded": 5,
+  "failed": 0,
+  "duration": 0.0029969215393066406,
+  "results": [
+    {
+      "name": "TASK-Phase2-项目管理API",
+      "success": true,
+      "duration": 0,
+      "tests_passed": null,
+      "tests_failed": null,
+      "error": ""
+    },
+    {
+      "name": "TASK-Phase2-Agent基础API",
+      "success": true,
+      "duration": 0,
+      "tests_passed": null,
+      "tests_failed": null,
+      "error": ""
+    },
+    {
+      "name": "TASK-Phase2-RuntimeAPI",
+      "success": true,
+      "duration": 0,
+      "tests_passed": null,
+      "tests_failed": null,
+      "error": ""
+    },
+    {
+      "name": "TASK-Phase2-Frontend",
+      "success": true,
+      "duration": 0,
+      "tests_passed": null,
+      "tests_failed": null,
+      "error": ""
+    },
+    {
+      "name": "TASK-Phase2-Tests",
+      "success": true,
+      "duration": 0,
+      "tests_passed": null,
+      "tests_failed": null,
+      "error": ""
+    }
+  ]
+}

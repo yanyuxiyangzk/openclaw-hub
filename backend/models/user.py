@@ -21,3 +21,4 @@ class User(Base):
 
     owned_orgs = relationship("Organization", back_populates="owner")
     memberships = relationship("OrganizationMember", back_populates="user")
+    project_memberships = relationship("ProjectMember", back_populates="user")

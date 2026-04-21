@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Response
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from core.database import get_db
 from core.security import get_current_user
@@ -16,53 +16,33 @@ def api_response(code: int = 0, message: str = "success", data=None):
 
 @router.post("/register", response_model=dict)
 def register(data: UserRegister, db: Session = Depends(get_db)):
-    """POST /api/auth/register - User registration"""
+    """POST /api/auth/register - User registration (returns user + tokens)"""
     service = AuthService(db)
     user = service.register(data)
-    return api_response(data=UserResponse.model_validate(user).model_dump())
+    access_token = service.create_tokens(user)
+    return api_response(data={
+        "user": UserResponse.model_validate(user).model_dump(),
+        **access_token,
+    })
 
 
 @router.post("/login", response_model=dict)
-def login(data: UserLogin, res: Response, db: Session = Depends(get_db)):
-    """POST /api/auth/login - Login (returns access_token + refresh_token)"""
+def login(data: UserLogin, db: Session = Depends(get_db)):
+    """POST /api/auth/login - Login (returns user + tokens)"""
     service = AuthService(db)
-    tokens = service.login(data)
-    res.set_cookie(
-        key="access_token",
-        value=tokens["access_token"],
-        httponly=True,
-        max_age=7 * 24 * 60 * 60,
-        samesite="lax"
-    )
-    res.set_cookie(
-        key="refresh_token",
-        value=tokens["refresh_token"],
-        httponly=True,
-        max_age=30 * 24 * 60 * 60,
-        samesite="lax"
-    )
-    return api_response(data=tokens)
+    user = service.authenticate(data)
+    tokens = service.create_tokens(user)
+    return api_response(data={
+        "user": UserResponse.model_validate(user).model_dump(),
+        **tokens,
+    })
 
 
 @router.post("/refresh", response_model=dict)
-def refresh(data: RefreshTokenRequest, res: Response, db: Session = Depends(get_db)):
+def refresh(data: RefreshTokenRequest, db: Session = Depends(get_db)):
     """POST /api/auth/refresh - Refresh token"""
     service = AuthService(db)
     tokens = service.refresh_tokens(data.refresh_token)
-    res.set_cookie(
-        key="access_token",
-        value=tokens["access_token"],
-        httponly=True,
-        max_age=7 * 24 * 60 * 60,
-        samesite="lax"
-    )
-    res.set_cookie(
-        key="refresh_token",
-        value=tokens["refresh_token"],
-        httponly=True,
-        max_age=30 * 24 * 60 * 60,
-        samesite="lax"
-    )
     return api_response(data=tokens)
 
 
@@ -81,8 +61,6 @@ def update_me(data: UserUpdate, current_user: User = Depends(get_current_user), 
 
 
 @router.post("/logout", response_model=dict)
-def logout(res: Response):
+def logout():
     """POST /api/auth/logout - Logout"""
-    res.delete_cookie(key="access_token")
-    res.delete_cookie(key="refresh_token")
     return api_response(message="Logged out successfully")

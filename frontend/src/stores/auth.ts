@@ -6,26 +6,47 @@ import type { User } from '@/types'
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(null)
   const token = ref<string | null>(localStorage.getItem('token'))
-  const isAuthenticated = computed(() => !!token.value && !!user.value)
+  const isAuthenticated = computed(() => !!token.value)
+  const isInitialized = ref(false)
+
+  const initialize = async () => {
+    if (!token.value) {
+      isInitialized.value = true
+      return
+    }
+    try {
+      const res = await authApi.getMe()
+      user.value = res.data.data
+    } catch {
+      token.value = null
+      localStorage.removeItem('token')
+      localStorage.removeItem('refresh_token')
+    } finally {
+      isInitialized.value = true
+    }
+  }
 
   const login = async (email: string, password: string) => {
     const res = await authApi.login({ email, password })
-    const { access_token, refresh_token } = res.data.data
+    const { access_token, refresh_token, user: userData } = res.data.data
     token.value = access_token
     localStorage.setItem('token', access_token)
     localStorage.setItem('refresh_token', refresh_token)
-    const meRes = await authApi.getMe()
-    user.value = meRes.data.data
+    if (userData) {
+      user.value = userData
+    } else {
+      const meRes = await authApi.getMe()
+      user.value = meRes.data.data
+    }
   }
 
   const register = async (name: string, email: string, password: string) => {
     const res = await authApi.register({ name, email, password })
-    user.value = res.data.data
-    const loginRes = await authApi.login({ email, password })
-    const { access_token, refresh_token } = loginRes.data.data
+    const { access_token, refresh_token, user: userData } = res.data.data
     token.value = access_token
     localStorage.setItem('token', access_token)
     localStorage.setItem('refresh_token', refresh_token)
+    user.value = userData
   }
 
   const logout = async () => {
@@ -49,5 +70,5 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = res.data.data
   }
 
-  return { user, token, isAuthenticated, login, register, logout, fetchMe, updateUser }
+  return { user, token, isAuthenticated, isInitialized, login, register, logout, fetchMe, updateUser, initialize }
 })

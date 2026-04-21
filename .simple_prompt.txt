@@ -1,0 +1,1 @@
+Read D:\project\aicoding\OpenClawHub\frontend\src\stores\auth.ts and D:\project\aicoding\OpenClawHub\frontend\src\api\auth.ts then tell me if there are any issues with the integration. Keep response under 100 words.

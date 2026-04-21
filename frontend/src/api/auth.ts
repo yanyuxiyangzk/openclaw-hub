@@ -1,11 +1,18 @@
 import api from './index'
 import type { ApiResponse, User } from '@/types'
 
+interface AuthTokens {
+  access_token: string
+  refresh_token: string
+  token_type: string
+  user: User
+}
+
 export const login = (data: { email: string; password: string }) =>
-  api.post<ApiResponse<{ access_token: string; refresh_token: string }>>('/auth/login', data)
+  api.post<ApiResponse<AuthTokens>>('/auth/login', data)
 
 export const register = (data: { name: string; email: string; password: string }) =>
-  api.post<ApiResponse<User>>('/auth/register', data)
+  api.post<ApiResponse<AuthTokens>>('/auth/register', data)
 
 export const getMe = () => api.get<ApiResponse<User>>('/auth/me')
 

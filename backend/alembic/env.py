@@ -7,7 +7,7 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from core.database import Base
-from models import User, Organization, OrganizationMember, Invitation
+from models import User, Organization, OrganizationMember, Invitation, Project, Agent, ProjectAgent, ProjectMember
 from config import get_settings
 
 settings = get_settings()

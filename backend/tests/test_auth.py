@@ -11,8 +11,8 @@ class TestAuthRegister:
         assert response.status_code == 200
         data = response.json()
         assert data["code"] == 0
-        assert data["data"]["email"] == "newuser@example.com"
-        assert data["data"]["name"] == "New User"
+        assert data["data"]["user"]["email"] == "newuser@example.com"
+        assert data["data"]["user"]["name"] == "New User"
 
     def test_register_duplicate_email(self, client, test_user):
         response = client.post("/api/auth/register", json={

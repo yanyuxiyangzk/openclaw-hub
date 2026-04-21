@@ -48,6 +48,30 @@ const routes: RouteRecordRaw[] = [
     name: 'Invitation',
     component: () => import('@/views/InvitationView.vue'),
     meta: { guest: true }
+  },
+  {
+    path: '/projects',
+    name: 'ProjectList',
+    component: () => import('@/views/projects/ProjectListView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/projects/:id',
+    name: 'ProjectDetail',
+    component: () => import('@/views/projects/ProjectDetailView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/agents',
+    name: 'AgentList',
+    component: () => import('@/views/agents/AgentListView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/agents/:id',
+    name: 'AgentDetail',
+    component: () => import('@/views/agents/AgentDetailView.vue'),
+    meta: { auth: true }
   }
 ]
 
@@ -58,11 +82,15 @@ const router = createRouter({
 
 router.beforeEach((to, _from, next) => {
   const authStore = useAuthStore()
-  const isAuthenticated = !!authStore.token
 
-  if (to.meta.auth && !isAuthenticated) {
+  if (!authStore.isInitialized) {
+    next()
+    return
+  }
+
+  if (to.meta.auth && !authStore.isAuthenticated) {
     next('/login')
-  } else if (to.meta.guest && isAuthenticated) {
+  } else if (to.meta.guest && authStore.isAuthenticated) {
     next('/orgs')
   } else {
     next()

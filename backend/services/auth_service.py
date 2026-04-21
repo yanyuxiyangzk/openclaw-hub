@@ -27,7 +27,7 @@ class AuthService:
         self.db.refresh(user)
         return user
 
-    def login(self, data: UserLogin) -> dict:
+    def authenticate(self, data: UserLogin) -> User:
         user = self.db.query(User).filter(User.email == data.email).first()
         if not user or not verify_password(data.password, user.password_hash):
             raise HTTPException(
@@ -41,6 +41,9 @@ class AuthService:
                 detail={"code": 40101, "message": "User is inactive"}
             )
 
+        return user
+
+    def create_tokens(self, user: User) -> dict:
         access_token = create_access_token(data={"sub": user.id})
         refresh_token = create_refresh_token(data={"sub": user.id})
         return {
@@ -65,13 +68,7 @@ class AuthService:
                 detail={"code": 40101, "message": "Invalid refresh token"}
             )
 
-        access_token = create_access_token(data={"sub": user.id})
-        new_refresh_token = create_refresh_token(data={"sub": user.id})
-        return {
-            "access_token": access_token,
-            "refresh_token": new_refresh_token,
-            "token_type": "bearer"
-        }
+        return self.create_tokens(user)
 
     def update_user(self, user: User, data: UserUpdate) -> User:
         user.name = data.name
