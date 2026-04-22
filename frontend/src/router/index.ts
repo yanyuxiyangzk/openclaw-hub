@@ -132,6 +132,36 @@ const routes: RouteRecordRaw[] = [
     name: 'DueSoon',
     component: () => import('@/views/tasks/DueSoonView.vue'),
     meta: { auth: true }
+  },
+  {
+    path: '/executions',
+    name: 'ExecutionList',
+    component: () => import('@/views/executions/ExecutionListView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/executions/:id',
+    name: 'ExecutionDetail',
+    component: () => import('@/views/executions/ExecutionDetailView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/scheduler',
+    name: 'Scheduler',
+    component: () => import('@/views/scheduler/SchedulerView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/workflows',
+    name: 'WorkflowList',
+    component: () => import('@/views/workflows/WorkflowListView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/workflows/:id',
+    name: 'WorkflowDetail',
+    component: () => import('@/views/workflows/WorkflowDetailView.vue'),
+    meta: { auth: true }
   }
 ]
 

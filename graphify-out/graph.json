@@ -60,7 +60,7 @@
       "file_type": "code",
       "name": "main.py",
       "extension": ".py",
-      "line_count": 72,
+      "line_count": 76,
       "path": "backend/main.py"
     },
     {
@@ -116,6 +116,15 @@
       "extension": ".conf",
       "line_count": 26,
       "path": "docker/nginx.conf"
+    },
+    {
+      "id": "docs/API.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "API.md",
+      "extension": ".md",
+      "line_count": 453,
+      "path": "docs/API.md"
     },
     {
       "id": "docs/知识库快照.md",
@@ -368,6 +377,15 @@
       "extension": ".md",
       "line_count": 112,
       "path": "harness/TASK-Phase4.md"
+    },
+    {
+      "id": "harness/TASK-Phase5.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "TASK-Phase5.md",
+      "extension": ".md",
+      "line_count": 102,
+      "path": "harness/TASK-Phase5.md"
     },
     {
       "id": "harness/TASK-架构师_开发计划制定.md",
@@ -15508,6 +15526,15 @@
       "path": "frontend/src/api/auth.ts"
     },
     {
+      "id": "frontend/src/api/executions.ts",
+      "type": "file",
+      "file_type": "code",
+      "name": "executions.ts",
+      "extension": ".ts",
+      "line_count": 51,
+      "path": "frontend/src/api/executions.ts"
+    },
+    {
       "id": "frontend/src/api/index.ts",
       "type": "file",
       "file_type": "code",
@@ -15544,6 +15571,15 @@
       "path": "frontend/src/api/projects.ts"
     },
     {
+      "id": "frontend/src/api/scheduler.ts",
+      "type": "file",
+      "file_type": "code",
+      "name": "scheduler.ts",
+      "extension": ".ts",
+      "line_count": 56,
+      "path": "frontend/src/api/scheduler.ts"
+    },
+    {
       "id": "frontend/src/api/tasks.ts",
       "type": "file",
       "file_type": "code",
@@ -15562,12 +15598,21 @@
       "path": "frontend/src/api/users.ts"
     },
     {
+      "id": "frontend/src/api/workflows.ts",
+      "type": "file",
+      "file_type": "code",
+      "name": "workflows.ts",
+      "extension": ".ts",
+      "line_count": 59,
+      "path": "frontend/src/api/workflows.ts"
+    },
+    {
       "id": "frontend/src/router/index.ts",
       "type": "file",
       "file_type": "code",
       "name": "index.ts",
       "extension": ".ts",
-      "line_count": 161,
+      "line_count": 191,
       "path": "frontend/src/router/index.ts"
     },
     {
@@ -15751,6 +15796,24 @@
       "path": "frontend/src/views/agents/AgentRoleListView.vue"
     },
     {
+      "id": "frontend/src/views/executions/ExecutionDetailView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "ExecutionDetailView.vue",
+      "extension": ".vue",
+      "line_count": 144,
+      "path": "frontend/src/views/executions/ExecutionDetailView.vue"
+    },
+    {
+      "id": "frontend/src/views/executions/ExecutionListView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "ExecutionListView.vue",
+      "extension": ".vue",
+      "line_count": 138,
+      "path": "frontend/src/views/executions/ExecutionListView.vue"
+    },
+    {
       "id": "frontend/src/views/projects/ProjectDetailView.vue",
       "type": "file",
       "file_type": "other",
@@ -15767,6 +15830,24 @@
       "extension": ".vue",
       "line_count": 139,
       "path": "frontend/src/views/projects/ProjectListView.vue"
+    },
+    {
+      "id": "frontend/src/views/scheduler/SchedulerListView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "SchedulerListView.vue",
+      "extension": ".vue",
+      "line_count": 212,
+      "path": "frontend/src/views/scheduler/SchedulerListView.vue"
+    },
+    {
+      "id": "frontend/src/views/scheduler/SchedulerView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "SchedulerView.vue",
+      "extension": ".vue",
+      "line_count": 259,
+      "path": "frontend/src/views/scheduler/SchedulerView.vue"
     },
     {
       "id": "frontend/src/views/tasks/DueSoonView.vue",
@@ -15812,6 +15893,24 @@
       "extension": ".vue",
       "line_count": 256,
       "path": "frontend/src/views/tasks/TaskDetailView.vue"
+    },
+    {
+      "id": "frontend/src/views/workflows/WorkflowDetailView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "WorkflowDetailView.vue",
+      "extension": ".vue",
+      "line_count": 189,
+      "path": "frontend/src/views/workflows/WorkflowDetailView.vue"
+    },
+    {
+      "id": "frontend/src/views/workflows/WorkflowListView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "WorkflowListView.vue",
+      "extension": ".vue",
+      "line_count": 218,
+      "path": "frontend/src/views/workflows/WorkflowListView.vue"
     },
     {
       "id": "frontend/src/views/__tests__/InvitationView.spec.ts",
@@ -15886,6 +15985,24 @@
       "path": "frontend/src/components/agents/AgentCard.vue"
     },
     {
+      "id": "frontend/src/components/executions/ExecutionLogViewer.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "ExecutionLogViewer.vue",
+      "extension": ".vue",
+      "line_count": 59,
+      "path": "frontend/src/components/executions/ExecutionLogViewer.vue"
+    },
+    {
+      "id": "frontend/src/components/executions/ExecutionStatus.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "ExecutionStatus.vue",
+      "extension": ".vue",
+      "line_count": 34,
+      "path": "frontend/src/components/executions/ExecutionStatus.vue"
+    },
+    {
       "id": "frontend/src/components/layout/AppLayout.vue",
       "type": "file",
       "file_type": "other",
@@ -15900,7 +16017,7 @@
       "file_type": "other",
       "name": "Sidebar.vue",
       "extension": ".vue",
-      "line_count": 41,
+      "line_count": 62,
       "path": "frontend/src/components/layout/Sidebar.vue"
     },
     {
@@ -15920,6 +16037,15 @@
       "extension": ".vue",
       "line_count": 61,
       "path": "frontend/src/components/projects/ProjectCard.vue"
+    },
+    {
+      "id": "frontend/src/components/scheduler/SchedulerConfig.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "SchedulerConfig.vue",
+      "extension": ".vue",
+      "line_count": 109,
+      "path": "frontend/src/components/scheduler/SchedulerConfig.vue"
     },
     {
       "id": "frontend/src/components/tasks/CommentThread.vue",
@@ -15994,6 +16120,15 @@
       "path": "frontend/src/components/tasks/TaskFilter.vue"
     },
     {
+      "id": "frontend/src/components/workflows/WorkflowEditor.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "WorkflowEditor.vue",
+      "extension": ".vue",
+      "line_count": 129,
+      "path": "frontend/src/components/workflows/WorkflowEditor.vue"
+    },
+    {
       "id": "backend/alembic/script.py.mako",
       "type": "file",
       "file_type": "other",
@@ -16035,7 +16170,7 @@
       "file_type": "code",
       "name": "agent.py",
       "extension": ".py",
-      "line_count": 25,
+      "line_count": 27,
       "path": "backend/models/agent.py"
     },
     {
@@ -16066,6 +16201,15 @@
       "path": "backend/models/agent_skill.py"
     },
     {
+      "id": "backend/models/execution.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "execution.py",
+      "extension": ".py",
+      "line_count": 34,
+      "path": "backend/models/execution.py"
+    },
+    {
       "id": "backend/models/invitation.py",
       "type": "file",
       "file_type": "code",
@@ -16080,7 +16224,7 @@
       "file_type": "code",
       "name": "organization.py",
       "extension": ".py",
-      "line_count": 36,
+      "line_count": 37,
       "path": "backend/models/organization.py"
     },
     {
@@ -16111,12 +16255,21 @@
       "path": "backend/models/project_member.py"
     },
     {
+      "id": "backend/models/scheduler_job.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "scheduler_job.py",
+      "extension": ".py",
+      "line_count": 24,
+      "path": "backend/models/scheduler_job.py"
+    },
+    {
       "id": "backend/models/task.py",
       "type": "file",
       "file_type": "code",
       "name": "task.py",
       "extension": ".py",
-      "line_count": 73,
+      "line_count": 75,
       "path": "backend/models/task.py"
     },
     {
@@ -16147,6 +16300,15 @@
       "path": "backend/models/user.py"
     },
     {
+      "id": "backend/models/workflow.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "workflow.py",
+      "extension": ".py",
+      "line_count": 23,
+      "path": "backend/models/workflow.py"
+    },
+    {
       "id": "backend/models/__init__.py",
       "type": "file",
       "file_type": "code",
@@ -16165,6 +16327,15 @@
       "path": "backend/routers/agents.py"
     },
     {
+      "id": "backend/routers/agent_roles.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "agent_roles.py",
+      "extension": ".py",
+      "line_count": 30,
+      "path": "backend/routers/agent_roles.py"
+    },
+    {
       "id": "backend/routers/auth.py",
       "type": "file",
       "file_type": "code",
@@ -16172,6 +16343,15 @@
       "extension": ".py",
       "line_count": 67,
       "path": "backend/routers/auth.py"
+    },
+    {
+      "id": "backend/routers/executions.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "executions.py",
+      "extension": ".py",
+      "line_count": 183,
+      "path": "backend/routers/executions.py"
     },
     {
       "id": "backend/routers/invitations.py",
@@ -16210,6 +16390,15 @@
       "path": "backend/routers/projects.py"
     },
     {
+      "id": "backend/routers/scheduler.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "scheduler.py",
+      "extension": ".py",
+      "line_count": 92,
+      "path": "backend/routers/scheduler.py"
+    },
+    {
       "id": "backend/routers/tasks.py",
       "type": "file",
       "file_type": "code",
@@ -16228,6 +16417,15 @@
       "path": "backend/routers/users.py"
     },
     {
+      "id": "backend/routers/workflows.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "workflows.py",
+      "extension": ".py",
+      "line_count": 163,
+      "path": "backend/routers/workflows.py"
+    },
+    {
       "id": "backend/routers/ws.py",
       "type": "file",
       "file_type": "code",
@@ -16242,7 +16440,7 @@
       "file_type": "code",
       "name": "__init__.py",
       "extension": ".py",
-      "line_count": 12,
+      "line_count": 16,
       "path": "backend/routers/__init__.py"
     },
     {
@@ -16273,6 +16471,15 @@
       "path": "backend/schemas/auth.py"
     },
     {
+      "id": "backend/schemas/execution.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "execution.py",
+      "extension": ".py",
+      "line_count": 36,
+      "path": "backend/schemas/execution.py"
+    },
+    {
       "id": "backend/schemas/invitation.py",
       "type": "file",
       "file_type": "code",
@@ -16300,6 +16507,15 @@
       "path": "backend/schemas/project.py"
     },
     {
+      "id": "backend/schemas/scheduler_job.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "scheduler_job.py",
+      "extension": ".py",
+      "line_count": 38,
+      "path": "backend/schemas/scheduler_job.py"
+    },
+    {
       "id": "backend/schemas/task.py",
       "type": "file",
       "file_type": "code",
@@ -16318,6 +16534,15 @@
       "path": "backend/schemas/user.py"
     },
     {
+      "id": "backend/schemas/workflow.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "workflow.py",
+      "extension": ".py",
+      "line_count": 43,
+      "path": "backend/schemas/workflow.py"
+    },
+    {
       "id": "backend/schemas/__init__.py",
       "type": "file",
       "file_type": "code",
@@ -16325,6 +16550,15 @@
       "extension": ".py",
       "line_count": 56,
       "path": "backend/schemas/__init__.py"
+    },
+    {
+      "id": "backend/services/agent_role_service.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "agent_role_service.py",
+      "extension": ".py",
+      "line_count": 70,
+      "path": "backend/services/agent_role_service.py"
     },
     {
       "id": "backend/services/agent_service.py",
@@ -16343,6 +16577,15 @@
       "extension": ".py",
       "line_count": 89,
       "path": "backend/services/auth_service.py"
+    },
+    {
+      "id": "backend/services/execution_service.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "execution_service.py",
+      "extension": ".py",
+      "line_count": 198,
+      "path": "backend/services/execution_service.py"
     },
     {
       "id": "backend/services/org_service.py",
@@ -16372,6 +16615,15 @@
       "path": "backend/services/project_service.py"
     },
     {
+      "id": "backend/services/scheduler_service.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "scheduler_service.py",
+      "extension": ".py",
+      "line_count": 146,
+      "path": "backend/services/scheduler_service.py"
+    },
+    {
       "id": "backend/services/task_service.py",
       "type": "file",
       "file_type": "code",
@@ -16379,6 +16631,15 @@
       "extension": ".py",
       "line_count": 485,
       "path": "backend/services/task_service.py"
+    },
+    {
+      "id": "backend/services/workflow_service.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "workflow_service.py",
+      "extension": ".py",
+      "line_count": 167,
+      "path": "backend/services/workflow_service.py"
     },
     {
       "id": "backend/services/__init__.py",
@@ -16505,6 +16766,15 @@
       "extension": ".py",
       "line_count": 65,
       "path": "backend/alembic/versions/9a7b3c1d_create_agent_roles_skills_metrics.py"
+    },
+    {
+      "id": "backend/alembic/versions/9a7b3c1d_create_phase5_tables.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "9a7b3c1d_create_phase5_tables.py",
+      "extension": ".py",
+      "line_count": 70,
+      "path": "backend/alembic/versions/9a7b3c1d_create_phase5_tables.py"
     },
     {
       "id": "backend/alembic/versions/9a7b3c1d_create_tasks_tables.py",
@@ -42313,6 +42583,41 @@
       "type": "uses"
     },
     {
+      "source": "backend/models/execution.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/execution.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/execution.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/execution.py",
+      "target": "import:sqlalchemy.dialects.sqlite",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/execution.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/execution.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/execution.py",
+      "target": "import:enum",
+      "type": "uses"
+    },
+    {
       "source": "backend/models/invitation.py",
       "target": "import:uuid",
       "type": "uses"
@@ -42468,6 +42773,36 @@
       "type": "uses"
     },
     {
+      "source": "backend/models/scheduler_job.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/scheduler_job.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/scheduler_job.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/scheduler_job.py",
+      "target": "import:sqlalchemy.dialects.sqlite",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/scheduler_job.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/scheduler_job.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
       "source": "backend/models/task.py",
       "target": "import:uuid",
       "type": "uses"
@@ -42598,6 +42933,36 @@
       "type": "uses"
     },
     {
+      "source": "backend/models/workflow.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/workflow.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/workflow.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/workflow.py",
+      "target": "import:sqlalchemy.dialects.sqlite",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/workflow.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/workflow.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
       "source": "backend/models/__init__.py",
       "target": "import:models.user",
       "type": "uses"
@@ -42698,6 +43063,46 @@
       "type": "uses"
     },
     {
+      "source": "backend/routers/agent_roles.py",
+      "target": "import:fastapi",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/agent_roles.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/agent_roles.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/agent_roles.py",
+      "target": "import:core.security",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/agent_roles.py",
+      "target": "import:models.user",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/agent_roles.py",
+      "target": "import:models.organization",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/agent_roles.py",
+      "target": "import:schemas.agent_role",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/agent_roles.py",
+      "target": "import:services.agent_role_service",
+      "type": "uses"
+    },
+    {
       "source": "backend/routers/auth.py",
       "target": "import:fastapi",
       "type": "uses"
@@ -42735,6 +43140,51 @@
     {
       "source": "backend/routers/auth.py",
       "target": "import:services.auth_service",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/executions.py",
+      "target": "import:fastapi",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/executions.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/executions.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/executions.py",
+      "target": "import:core.security",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/executions.py",
+      "target": "import:models.user",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/executions.py",
+      "target": "import:schemas.execution",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/executions.py",
+      "target": "import:schemas.task",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/executions.py",
+      "target": "import:services.execution_service",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/executions.py",
+      "target": "import:pydantic",
       "type": "uses"
     },
     {
@@ -42903,6 +43353,41 @@
       "type": "uses"
     },
     {
+      "source": "backend/routers/scheduler.py",
+      "target": "import:fastapi",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/scheduler.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/scheduler.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/scheduler.py",
+      "target": "import:core.security",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/scheduler.py",
+      "target": "import:models.user",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/scheduler.py",
+      "target": "import:schemas.scheduler_job",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/scheduler.py",
+      "target": "import:services.scheduler_service",
+      "type": "uses"
+    },
+    {
       "source": "backend/routers/tasks.py",
       "target": "import:fastapi",
       "type": "uses"
@@ -42993,6 +43478,46 @@
       "type": "uses"
     },
     {
+      "source": "backend/routers/workflows.py",
+      "target": "import:fastapi",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/workflows.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/workflows.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/workflows.py",
+      "target": "import:core.security",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/workflows.py",
+      "target": "import:models.user",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/workflows.py",
+      "target": "import:schemas.workflow",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/workflows.py",
+      "target": "import:services.workflow_service",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/workflows.py",
+      "target": "import:json",
+      "type": "uses"
+    },
+    {
       "source": "backend/routers/ws.py",
       "target": "import:fastapi",
       "type": "uses"
@@ -43049,6 +43574,11 @@
     },
     {
       "source": "backend/routers/__init__.py",
+      "target": "import:routers.agent_roles",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/__init__.py",
       "target": "import:routers.ws",
       "type": "uses"
     },
@@ -43088,6 +43618,21 @@
       "type": "uses"
     },
     {
+      "source": "backend/schemas/execution.py",
+      "target": "import:pydantic",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/execution.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/execution.py",
+      "target": "import:typing",
+      "type": "uses"
+    },
+    {
       "source": "backend/schemas/invitation.py",
       "target": "import:pydantic",
       "type": "uses"
@@ -43115,6 +43660,21 @@
     {
       "source": "backend/schemas/project.py",
       "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/scheduler_job.py",
+      "target": "import:pydantic",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/scheduler_job.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/scheduler_job.py",
+      "target": "import:typing",
       "type": "uses"
     },
     {
@@ -43140,6 +43700,21 @@
     {
       "source": "backend/schemas/user.py",
       "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/workflow.py",
+      "target": "import:pydantic",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/workflow.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/workflow.py",
+      "target": "import:typing",
       "type": "uses"
     },
     {
@@ -43170,6 +43745,46 @@
     {
       "source": "backend/schemas/__init__.py",
       "target": "import:schemas.task",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/agent_role_service.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/agent_role_service.py",
+      "target": "import:json",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/agent_role_service.py",
+      "target": "import:fastapi",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/agent_role_service.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/agent_role_service.py",
+      "target": "import:models.agent_role",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/agent_role_service.py",
+      "target": "import:models.organization",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/agent_role_service.py",
+      "target": "import:models.user",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/agent_role_service.py",
+      "target": "import:schemas.agent_role",
       "type": "uses"
     },
     {
@@ -43245,6 +43860,56 @@
     {
       "source": "backend/services/auth_service.py",
       "target": "import:core.security",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/execution_service.py",
+      "target": "import:json",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/execution_service.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/execution_service.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/execution_service.py",
+      "target": "import:typing",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/execution_service.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/execution_service.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/execution_service.py",
+      "target": "import:models.execution",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/execution_service.py",
+      "target": "import:models.task",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/execution_service.py",
+      "target": "import:models.agent",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/execution_service.py",
+      "target": "import:models.project",
       "type": "uses"
     },
     {
@@ -43383,6 +44048,56 @@
       "type": "uses"
     },
     {
+      "source": "backend/services/scheduler_service.py",
+      "target": "import:json",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/scheduler_service.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/scheduler_service.py",
+      "target": "import:typing",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/scheduler_service.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/scheduler_service.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/scheduler_service.py",
+      "target": "import:models.scheduler_job",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/scheduler_service.py",
+      "target": "import:models.task",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/scheduler_service.py",
+      "target": "import:models.agent",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/scheduler_service.py",
+      "target": "import:models.project",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/scheduler_service.py",
+      "target": "import:models.project_member",
+      "type": "uses"
+    },
+    {
       "source": "backend/services/task_service.py",
       "target": "import:json",
       "type": "uses"
@@ -43430,6 +44145,56 @@
     {
       "source": "backend/services/task_service.py",
       "target": "import:models.task_attachment",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/workflow_service.py",
+      "target": "import:json",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/workflow_service.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/workflow_service.py",
+      "target": "import:typing",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/workflow_service.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/workflow_service.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/workflow_service.py",
+      "target": "import:models.workflow",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/workflow_service.py",
+      "target": "import:models.organization",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/workflow_service.py",
+      "target": "import:models.task",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/workflow_service.py",
+      "target": "import:models.agent",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/workflow_service.py",
+      "target": "import:models.execution",
       "type": "uses"
     },
     {
@@ -43643,6 +44408,21 @@
       "type": "uses"
     },
     {
+      "source": "backend/alembic/versions/9a7b3c1d_create_phase5_tables.py",
+      "target": "import:typing",
+      "type": "uses"
+    },
+    {
+      "source": "backend/alembic/versions/9a7b3c1d_create_phase5_tables.py",
+      "target": "import:alembic",
+      "type": "uses"
+    },
+    {
+      "source": "backend/alembic/versions/9a7b3c1d_create_phase5_tables.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
       "source": "backend/alembic/versions/9a7b3c1d_create_tasks_tables.py",
       "target": "import:typing",
       "type": "uses"
@@ -43661,17 +44441,17 @@
   "metadata": {
     "project": "D:\\project\\aicoding\\OpenClawHub",
     "project_name": "OpenClawHub",
-    "analyzed_at": "2026-04-21T22:21:53.050715",
+    "analyzed_at": "2026-04-23T00:14:29.529243",
     "stats": {
-      "total_files": 1835,
-      "code_files": 994,
-      "doc_files": 609,
+      "total_files": 1865,
+      "code_files": 1012,
+      "doc_files": 611,
       "config_files": 51,
-      "total_lines": 758461,
+      "total_lines": 762054,
       "languages": {
-        "Python": 914,
+        "Python": 929,
         "JavaScript": 5,
-        "TypeScript": 44,
+        "TypeScript": 47,
         "TypeScript (TSX)": 30,
         "Ruby": 1
       }

@@ -70,3 +70,5 @@ class Task(Base):
     comments = relationship("TaskComment", back_populates="task", cascade="all, delete-orphan")
     attachments = relationship("TaskAttachment", back_populates="task", cascade="all, delete-orphan")
     subtasks = relationship("Task", back_populates="parent", foreign_keys=[parent_id])
+    executions = relationship("Execution", back_populates="task", cascade="all, delete-orphan")
+    scheduler_jobs = relationship("SchedulerJob", back_populates="task", cascade="all, delete-orphan")

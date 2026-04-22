@@ -21,6 +21,7 @@ class Organization(Base):
     projects = relationship("Project", back_populates="organization", cascade="all, delete-orphan")
     agents = relationship("Agent", back_populates="organization", cascade="all, delete-orphan")
     agent_roles = relationship("AgentRole", back_populates="organization", cascade="all, delete-orphan")
+    workflows = relationship("Workflow", back_populates="organization", cascade="all, delete-orphan")
 
 
 class OrganizationMember(Base):
