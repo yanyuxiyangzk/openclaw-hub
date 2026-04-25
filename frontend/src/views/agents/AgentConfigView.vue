@@ -12,6 +12,66 @@
         </div>
       </div>
 
+      <!-- Agent Config Section -->
+      <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-semibold text-white">Agent 配置</h3>
+          <button
+            @click="handleSaveConfig"
+            :disabled="savingConfig"
+            class="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 disabled:opacity-50 transition"
+          >
+            {{ savingConfig ? '保存中...' : '保存配置' }}
+          </button>
+        </div>
+
+        <div v-if="loadingConfig" class="text-gray-400">加载中...</div>
+        <div v-else>
+          <div class="mb-4">
+            <label class="block text-gray-400 mb-2 text-sm">model</label>
+            <input
+              v-model="configForm.model"
+              type="text"
+              class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+              placeholder="例如: hermes-3-llama-3-8b"
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-400 mb-2 text-sm">temperature</label>
+            <input
+              v-model.number="configForm.temperature"
+              type="number"
+              step="0.1"
+              min="0"
+              max="2"
+              class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+              placeholder="0.0 - 2.0"
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-400 mb-2 text-sm">max_tokens</label>
+            <input
+              v-model.number="configForm.max_tokens"
+              type="number"
+              min="1"
+              class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+              placeholder="最大token数"
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-400 mb-2 text-sm">system_prompt</label>
+            <textarea
+              v-model="configForm.system_prompt"
+              rows="4"
+              class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+              placeholder="系统提示词..."
+            />
+          </div>
+          <p v-if="configError" class="text-sm text-red-400">{{ configError }}</p>
+          <p v-if="configSuccess" class="text-sm text-green-400">配置已保存</p>
+        </div>
+      </div>
+
       <!-- Skills Section -->
       <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-6">
         <div class="flex items-center justify-between mb-4">
@@ -146,10 +206,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import AppLayout from '@/components/layout/AppLayout.vue'
 import * as phase3Api from '@/api/phase3'
+import { getAgentConfig, updateAgentConfig } from '@/api/agents'
 import type { AgentSkill, AgentRole } from '@/types'
 
 const router = useRouter()
@@ -160,15 +221,66 @@ const skills = ref<AgentSkill[]>([])
 const roles = ref<AgentRole[]>([])
 const loadingSkills = ref(false)
 const loadingRoles = ref(false)
+const loadingConfig = ref(false)
+const savingConfig = ref(false)
+const configError = ref('')
+const configSuccess = ref(false)
 const showBindSkill = ref(false)
 const bindLoading = ref(false)
 const bindError = ref('')
 const bindSkillForm = ref({ skill_name: '', enabled: true })
 
+const configForm = reactive({
+  model: '',
+  temperature: 0.7,
+  max_tokens: 2048,
+  system_prompt: '',
+})
+
 onMounted(async () => {
+  await loadConfig()
   await loadSkills()
   await loadRoles()
 })
+
+const loadConfig = async () => {
+  loadingConfig.value = true
+  configError.value = ''
+  try {
+    const res = await getAgentConfig(agentId)
+    const config = res.data.data.config
+    if (config) {
+      configForm.model = (config.model as string) || ''
+      configForm.temperature = (config.temperature as number) || 0.7
+      configForm.max_tokens = (config.max_tokens as number) || 2048
+      configForm.system_prompt = (config.system_prompt as string) || ''
+    }
+  } catch {
+    configError.value = '加载配置失败'
+  } finally {
+    loadingConfig.value = false
+  }
+}
+
+const handleSaveConfig = async () => {
+  savingConfig.value = true
+  configError.value = ''
+  configSuccess.value = false
+  try {
+    const config: Record<string, unknown> = {}
+    if (configForm.model) config.model = configForm.model
+    if (configForm.temperature !== undefined) config.temperature = configForm.temperature
+    if (configForm.max_tokens !== undefined) config.max_tokens = configForm.max_tokens
+    if (configForm.system_prompt) config.system_prompt = configForm.system_prompt
+    await updateAgentConfig(agentId, config)
+    configSuccess.value = true
+    setTimeout(() => { configSuccess.value = false }, 3000)
+  } catch {
+    configError.value = '保存配置失败'
+  } finally {
+    savingConfig.value = false
+  }
+}
 
 const loadSkills = async () => {
   loadingSkills.value = true

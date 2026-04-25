@@ -57,6 +57,7 @@ def test_user(db):
         name="Test User",
         is_active=True,
         is_superuser=False,
+        tenant_id=str(uuid.uuid4()),
     )
     db.add(user)
     db.commit()
@@ -73,6 +74,7 @@ def superuser(db):
         name="Admin User",
         is_active=True,
         is_superuser=True,
+        tenant_id=str(uuid.uuid4()),
     )
     db.add(user)
     db.commit()

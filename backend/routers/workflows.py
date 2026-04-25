@@ -1,12 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Query
+from fastapi import APIRouter, Depends, HTTPException, status, Query, BackgroundTasks
 from sqlalchemy.orm import Session
-from core.database import get_db
+from core.database import get_db, SessionLocal
 from core.security import get_current_user
 from models.user import User
 from schemas.workflow import (
     WorkflowCreate, WorkflowUpdate, WorkflowResponse, WorkflowExecuteRequest
 )
 from services.workflow_service import WorkflowService
+from services.execution_service import ExecutionService
 import json
 
 router = APIRouter(prefix="/api/workflows", tags=["workflows"])
@@ -101,16 +102,44 @@ def get_workflow(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"code": 40401, "message": str(e)})
 
 
+def _process_execution_background(execution_id: str):
+    """Background task to process a single execution."""
+    db = SessionLocal()
+    try:
+        execution_service = ExecutionService(db)
+        execution_service.start_execution(execution_id)
+        # In production, this would call the agent runtime API
+        # For now, simulate completion with a placeholder result
+        execution_service.complete_execution(
+            execution_id,
+            output_data={"status": "completed", "message": "Execution processed"},
+        )
+    except Exception as e:
+        try:
+            execution_service.complete_execution(
+                execution_id,
+                error_message=str(e),
+            )
+        except Exception:
+            pass
+    finally:
+        db.close()
+
+
 @router.post("/{workflow_id}/execute", response_model=dict)
 def execute_workflow(
     workflow_id: str,
     data: WorkflowExecuteRequest,
+    background_tasks: BackgroundTasks,
     current_user: User = Depends(get_current_user),
     service: WorkflowService = Depends(get_workflow_service)
 ):
     """POST /api/workflows/{id}/execute - Execute workflow (T-522)"""
     try:
         executions = service.execute_workflow(workflow_id, data, current_user)
+        # Register background tasks to process each execution
+        for execution in executions:
+            background_tasks.add_task(_process_execution_background, execution.id)
         return response(data={"items": [_execution_to_response(e) for e in executions], "total": len(executions)})
     except PermissionError as e:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail={"code": 40301, "message": str(e)})

@@ -5,6 +5,7 @@ from typing import Optional
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
 
+from core.exceptions import NotFoundException, ForbiddenException, BadRequestException
 from models.execution import Execution, ExecutionStatus
 from models.task import Task
 from models.agent import Agent
@@ -21,19 +22,19 @@ class ExecutionService:
     def _get_execution_or_404(self, execution_id: str) -> Execution:
         execution = self.db.query(Execution).filter(Execution.id == execution_id).first()
         if not execution:
-            raise ValueError("Execution not found")
+            raise NotFoundException(f"Execution not found: {execution_id}")
         return execution
 
     def _get_task_or_404(self, task_id: str) -> Task:
         task = self.db.query(Task).filter(Task.id == task_id).first()
         if not task:
-            raise ValueError("Task not found")
+            raise NotFoundException(f"Task not found: {task_id}")
         return task
 
     def _get_agent_or_404(self, agent_id: str) -> Agent:
         agent = self.db.query(Agent).filter(Agent.id == agent_id).first()
         if not agent:
-            raise ValueError("Agent not found")
+            raise NotFoundException(f"Agent not found: {agent_id}")
         return agent
 
     def _check_project_access(self, project_id: str, user: User) -> bool:
@@ -64,7 +65,7 @@ class ExecutionService:
         agent = self._get_agent_or_404(data.agent_id)
 
         if not self._check_task_access(task, user):
-            raise PermissionError("Access denied to this task")
+            raise ForbiddenException("Access denied to this task")
 
         execution = Execution(
             task_id=data.task_id,
@@ -81,13 +82,13 @@ class ExecutionService:
         execution = self._get_execution_or_404(execution_id)
         task = self._get_task_or_404(execution.task_id)
         if not self._check_task_access(task, user):
-            raise PermissionError("Access denied to this execution")
+            raise ForbiddenException("Access denied to this execution")
         return execution
 
     def get_task_executions(self, task_id: str, user: User) -> tuple[list[Execution], int]:
         task = self._get_task_or_404(task_id)
         if not self._check_task_access(task, user):
-            raise PermissionError("Access denied to this task")
+            raise ForbiddenException("Access denied to this task")
 
         executions = self.db.query(Execution).filter(
             Execution.task_id == task_id
@@ -99,10 +100,10 @@ class ExecutionService:
         execution = self._get_execution_or_404(execution_id)
         task = self._get_task_or_404(execution.task_id)
         if not self._check_task_access(task, user):
-            raise PermissionError("Access denied to this execution")
+            raise ForbiddenException("Access denied to this execution")
 
         if execution.status not in [ExecutionStatus.pending.value, ExecutionStatus.running.value]:
-            raise ValueError("Cannot cancel execution in current state")
+            raise BadRequestException("Cannot cancel execution in current state")
 
         execution.status = ExecutionStatus.cancelled.value
         execution.completed_at = datetime.now(timezone.utc)
@@ -114,10 +115,10 @@ class ExecutionService:
         execution = self._get_execution_or_404(execution_id)
         task = self._get_task_or_404(execution.task_id)
         if not self._check_task_access(task, user):
-            raise PermissionError("Access denied to this execution")
+            raise ForbiddenException("Access denied to this execution")
 
         if execution.status not in [ExecutionStatus.failed.value, ExecutionStatus.cancelled.value]:
-            raise ValueError("Cannot retry execution in current state")
+            raise BadRequestException("Cannot retry execution in current state")
 
         new_execution = Execution(
             task_id=execution.task_id,
@@ -142,6 +143,23 @@ class ExecutionService:
             "status": execution.status,
         }
 
+    def list_executions(self, status: Optional[str], user: User) -> tuple[list[Execution], int]:
+        query = self.db.query(Execution)
+        if status:
+            query = query.filter(Execution.status == status)
+        executions = query.order_by(desc(Execution.created_at)).all()
+
+        filtered = []
+        for e in executions:
+            try:
+                task = self._get_task_or_404(e.task_id)
+            except NotFoundException:
+                continue
+            if self._check_task_access(task, user):
+                filtered.append(e)
+
+        return filtered, len(filtered)
+
     def get_active_executions(self, user: User) -> tuple[list[Execution], int]:
         executions = self.db.query(Execution).filter(
             Execution.status.in_([ExecutionStatus.pending.value, ExecutionStatus.running.value])
@@ -149,7 +167,11 @@ class ExecutionService:
 
         filtered = []
         for e in executions:
-            task = self._get_task_or_404(e.task_id)
+            try:
+                task = self._get_task_or_404(e.task_id)
+            except NotFoundException:
+                # Task was deleted, skip this orphaned execution
+                continue
             if self._check_task_access(task, user):
                 filtered.append(e)
 

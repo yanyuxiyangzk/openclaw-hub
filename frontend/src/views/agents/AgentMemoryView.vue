@@ -141,7 +141,8 @@ import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import AppLayout from '@/components/layout/AppLayout.vue'
 import * as phase3Api from '@/api/phase3'
-import type { AgentMemoryConfig, AgentHistory } from '@/types'
+import type { AgentMemoryConfig } from '@/types'
+import type { AgentHistory } from '@/api/phase3'
 
 const router = useRouter()
 const route = useRoute()

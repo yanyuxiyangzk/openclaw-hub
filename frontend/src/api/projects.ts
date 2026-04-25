@@ -5,6 +5,7 @@ import type { Project, ProjectMember, Agent } from '@/types'
 export interface ProjectCreate {
   name: string
   description?: string
+  org_id: string
 }
 
 export interface ProjectUpdate {

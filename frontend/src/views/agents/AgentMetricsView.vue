@@ -141,7 +141,8 @@ import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import AppLayout from '@/components/layout/AppLayout.vue'
 import * as phase3Api from '@/api/phase3'
-import type { AgentMetric, AgentTaskCount, AgentPerformance, AgentHealthDetail } from '@/types'
+import type { AgentTaskCount, AgentPerformance, AgentHealthDetail } from '@/types'
+import type { AgentMetricEntry } from '@/api/phase3'
 
 const router = useRouter()
 const route = useRoute()
@@ -149,7 +150,7 @@ const agentId = route.params.id as string
 
 const loading = ref(false)
 const selectedDays = ref(7)
-const metrics = ref<AgentMetric[]>([])
+const metrics = ref<AgentMetricEntry[]>([])
 const taskCounts = ref<AgentTaskCount | null>(null)
 const performance = ref<AgentPerformance | null>(null)
 const healthDetail = ref<AgentHealthDetail | null>(null)
@@ -167,7 +168,7 @@ const loadMetrics = async () => {
       phase3Api.getAgentPerformance(agentId, selectedDays.value),
       phase3Api.getAgentHealthDetail(agentId),
     ])
-    metrics.value = metricsRes.data.data
+    metrics.value = metricsRes.data.data?.metrics || []
     taskCounts.value = countsRes.data.data
     performance.value = perfRes.data.data
     healthDetail.value = healthRes.data.data

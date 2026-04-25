@@ -58,7 +58,9 @@ def _task_to_response(task: Task) -> dict:
         "assignee_id": task.assignee_id,
         "created_by": task.created_by,
         "created_at": task.created_at,
-        "updated_at": task.updated_at
+        "updated_at": task.updated_at,
+        "comment_count": len(task.comments) if task.comments else 0,
+        "subtask_count": len(task.subtasks) if task.subtasks else 0
     }
 
 
@@ -113,18 +115,56 @@ def list_tasks(
     status: str = Query(None),
     assignee_id: str = Query(None),
     priority: str = Query(None),
+    due: str = Query(None),  # overdue | today | this_week | no_date
+    tags: str = Query(None),  # comma-separated tags
     current_user: User = Depends(get_current_user),
     service: TaskService = Depends(get_task_service)
 ):
     """GET /api/tasks - List tasks (T-402)"""
+    # Parse tags if provided
+    tag_list = tags.split(",") if tags else None
     tasks, total = service.list_tasks(
         project_id=project_id,
         status=status,
         assignee_id=assignee_id,
         priority=priority,
+        due=due,
+        tags=tag_list,
         user=current_user
     )
     return response(data={"items": [_task_to_response(t) for t in tasks], "total": total})
+
+
+@router.get("/tasks/due-soon", response_model=dict)
+def get_due_soon_tasks(
+    hours: int = Query(24, ge=1, le=168),
+    current_user: User = Depends(get_current_user),
+    service: TaskService = Depends(get_task_service)
+):
+    """GET /api/tasks/due-soon - Tasks due soon (T-431)"""
+    result = service.get_due_soon_tasks(current_user, hours)
+    return response(data={
+        "tasks": [_task_to_response(t) for t in result["tasks"]],
+        "total": result["total"],
+        "overdue": result["overdue"],
+        "due_today": result["due_today"],
+        "due_this_week": result["due_this_week"]
+    })
+
+
+@router.get("/tasks/export", response_model=dict)
+def export_tasks(
+    project_id: str = Query(...),
+    format: str = Query("json"),
+    current_user: User = Depends(get_current_user),
+    service: TaskService = Depends(get_task_service)
+):
+    """GET /api/tasks/export - Export tasks (T-408)"""
+    try:
+        result = service.export_tasks(project_id, format, current_user)
+        return response(data={"format": format, "content": result})
+    except PermissionError as e:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail={"code": 40301, "message": str(e)})
 
 
 @router.get("/tasks/{task_id}", response_model=dict)
@@ -188,6 +228,8 @@ def bulk_create_tasks(
         return response(data={"items": [_task_to_response(t) for t in tasks], "total": len(tasks)})
     except PermissionError as e:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail={"code": 40301, "message": str(e)})
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"code": 40401, "message": str(e)})
 
 
 @router.put("/tasks/bulk/status", response_model=dict)
@@ -202,21 +244,8 @@ def bulk_update_status(
         return response(data={"items": [_task_to_response(t) for t in tasks], "total": len(tasks)})
     except PermissionError as e:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail={"code": 40301, "message": str(e)})
-
-
-@router.get("/tasks/export", response_model=dict)
-def export_tasks(
-    project_id: str = Query(...),
-    format: str = Query("json"),
-    current_user: User = Depends(get_current_user),
-    service: TaskService = Depends(get_task_service)
-):
-    """GET /api/tasks/export - Export tasks (T-408)"""
-    try:
-        result = service.export_tasks(project_id, format, current_user)
-        return response(data={"format": format, "content": result})
-    except PermissionError as e:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail={"code": 40301, "message": str(e)})
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"code": 40401, "message": str(e)})
 
 
 # ========== Task Collaboration (T-410 ~ T-417) ==========
@@ -374,17 +403,38 @@ async def upload_attachment(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"code": 40401, "message": str(e)})
 
 
+@router.get("/tasks/{task_id}/attachments", response_model=dict)
+def get_attachments(
+    task_id: str,
+    current_user: User = Depends(get_current_user),
+    service: TaskService = Depends(get_task_service)
+):
+    """GET /api/tasks/{id}/attachments - List attachments (T-417a)"""
+    try:
+        attachments, total = service.get_attachments(task_id, current_user)
+        return response(data={"items": [_attachment_to_response(a) for a in attachments], "total": total})
+    except PermissionError as e:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail={"code": 40301, "message": str(e)})
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"code": 40401, "message": str(e)})
+
+
 # ========== Kanban Views (T-420 ~ T-425) ==========
 
 @router.get("/projects/{project_id}/kanban", response_model=dict)
 def get_kanban_board(
     project_id: str,
+    priority: str = Query(None),
+    assignee_id: str = Query(None),
+    due: str = Query(None),  # overdue | today | this_week | no_date
+    tags: str = Query(None),  # comma-separated tags
     current_user: User = Depends(get_current_user),
     service: TaskService = Depends(get_task_service)
 ):
     """GET /api/projects/{id}/kanban - Kanban data (T-420)"""
     try:
-        result = service.get_kanban_board(project_id, current_user)
+        tag_list = tags.split(",") if tags else None
+        result = service.get_kanban_board(project_id, current_user, priority=priority, assignee_id=assignee_id, due=due, tags=tag_list)
         return response(data={
             "columns": [
                 {
@@ -398,6 +448,8 @@ def get_kanban_board(
         })
     except PermissionError as e:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail={"code": 40301, "message": str(e)})
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"code": 40401, "message": str(e)})
 
 
 @router.get("/projects/{project_id}/tasks/by-status", response_model=dict)
@@ -412,6 +464,8 @@ def get_tasks_by_status(
         return response(data={k: [_task_to_response(t) for t in v] for k, v in result.items()})
     except PermissionError as e:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail={"code": 40301, "message": str(e)})
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"code": 40401, "message": str(e)})
 
 
 @router.get("/projects/{project_id}/tasks/by-assignee", response_model=dict)
@@ -426,6 +480,8 @@ def get_tasks_by_assignee(
         return response(data={k: [_task_to_response(t) for t in v] for k, v in result.items()})
     except PermissionError as e:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail={"code": 40301, "message": str(e)})
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"code": 40401, "message": str(e)})
 
 
 @router.get("/projects/{project_id}/tasks/timeline", response_model=dict)
@@ -440,6 +496,8 @@ def get_timeline(
         return response(data=[_task_to_response(t) for t in tasks])
     except PermissionError as e:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail={"code": 40301, "message": str(e)})
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"code": 40401, "message": str(e)})
 
 
 @router.post("/tasks/{task_id}/move", response_model=dict)
@@ -492,23 +550,6 @@ def set_reminder(
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail={"code": 40301, "message": str(e)})
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"code": 40401, "message": str(e)})
-
-
-@router.get("/tasks/due-soon", response_model=dict)
-def get_due_soon_tasks(
-    hours: int = Query(24, ge=1, le=168),
-    current_user: User = Depends(get_current_user),
-    service: TaskService = Depends(get_task_service)
-):
-    """GET /api/tasks/due-soon - Tasks due soon (T-431)"""
-    result = service.get_due_soon_tasks(current_user, hours)
-    return response(data={
-        "tasks": [_task_to_response(t) for t in result["tasks"]],
-        "total": result["total"],
-        "overdue": result["overdue"],
-        "due_today": result["due_today"],
-        "due_this_week": result["due_this_week"]
-    })
 
 
 @router.post("/tasks/{task_id}/snooze", response_model=dict)

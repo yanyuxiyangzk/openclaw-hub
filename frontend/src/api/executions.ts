@@ -48,3 +48,8 @@ export const getExecutionOutput = (id: string) =>
 
 export const getActiveExecutions = () =>
   api.get<ApiResponse<{ items: Execution[]; total: number }>>(`/executions/active`)
+
+export const listExecutions = (status?: string) =>
+  api.get<ApiResponse<{ items: Execution[]; total: number }>>(
+    status ? `/executions?status=${status}` : `/executions`
+  )

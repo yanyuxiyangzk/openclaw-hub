@@ -133,8 +133,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import type { Task, TaskStatus, TaskPriority, TaskComment, ProjectMember } from '@/api/tasks'
-import type { Project } from '@/types'
+import type { Task, TaskStatus, TaskPriority, TaskComment } from '@/api/tasks'
+import type { Project, ProjectMember } from '@/types'
 import { getTask, getComments, getSubtasks, updateTask } from '@/api/tasks'
 import { getProject, getProjectMembers } from '@/api/projects'
 import CommentThread from '@/components/tasks/CommentThread.vue'

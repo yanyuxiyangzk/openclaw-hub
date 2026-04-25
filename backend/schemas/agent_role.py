@@ -1,5 +1,6 @@
-from pydantic import BaseModel, ConfigDict, Field
-from datetime import datetime
+import json
+from pydantic import BaseModel, ConfigDict, Field, model_validator
+from datetime import datetime, date
 
 
 class AgentRoleCreate(BaseModel):
@@ -29,6 +30,13 @@ class AgentRoleResponse(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
+    @model_validator(mode="before")
+    @classmethod
+    def deserialize_default_config(cls, data):
+        if hasattr(data, "default_config") and isinstance(data.default_config, str):
+            data.default_config = json.loads(data.default_config) if data.default_config else None
+        return data
+
 
 class AgentSkillBindRequest(BaseModel):
     skill_name: str = Field(..., min_length=1, max_length=128)
@@ -50,6 +58,13 @@ class AgentSkillResponse(BaseModel):
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
+
+    @model_validator(mode="before")
+    @classmethod
+    def deserialize_skill_config(cls, data):
+        if hasattr(data, "skill_config") and isinstance(data.skill_config, str):
+            data.skill_config = json.loads(data.skill_config) if data.skill_config else None
+        return data
 
 
 class AgentMemoryConfig(BaseModel):
@@ -85,7 +100,7 @@ class AgentHistoryResponse(BaseModel):
 class AgentMetricsResponse(BaseModel):
     id: str
     agent_id: str
-    date: str
+    date: date
     tasks_completed: int
     tasks_failed: int
     avg_response_time_ms: int
@@ -97,7 +112,7 @@ class AgentMetricsResponse(BaseModel):
 
 class AgentDailyStatsResponse(BaseModel):
     agent_id: str
-    date: str
+    date: date
     tasks_completed: int
     tasks_failed: int
     avg_response_time_ms: int

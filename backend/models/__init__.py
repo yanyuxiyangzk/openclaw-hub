@@ -11,6 +11,10 @@ from models.agent_metric import AgentMetric
 from models.task import Task, TaskStatus, TaskPriority
 from models.task_comment import TaskComment
 from models.task_attachment import TaskAttachment
+from models.execution import Execution, ExecutionStatus
+from models.scheduler_job import SchedulerJob
+from models.workflow import Workflow
+from models.activity import Activity
 
 __all__ = [
     "User",
@@ -29,4 +33,9 @@ __all__ = [
     "TaskPriority",
     "TaskComment",
     "TaskAttachment",
+    "Execution",
+    "ExecutionStatus",
+    "SchedulerJob",
+    "Workflow",
+    "Activity",
 ]

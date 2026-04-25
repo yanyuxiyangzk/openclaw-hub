@@ -10,7 +10,7 @@ class Project(Base):
     __tablename__ = "projects"
 
     id = Column(UUID, primary_key=True, default=lambda: str(uuid.uuid4()))
-    name = Column(String(64), nullable=False)
+    name = Column(String(128), nullable=False)
     description = Column(Text, nullable=True)
     org_id = Column(UUID, ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False)
     status = Column(String(20), nullable=False, default="active")

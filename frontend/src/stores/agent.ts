@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import * as agentsApi from '@/api/agents'
+import { useOrgStore } from './org'
 import type { Agent, AgentHealth, AgentLogs, AgentConfig } from '@/types'
 
 export const useAgentStore = defineStore('agent', () => {
@@ -20,7 +21,12 @@ export const useAgentStore = defineStore('agent', () => {
   }
 
   const createAgent = async (data: { name: string; description?: string; agent_type?: string; config?: AgentConfig }) => {
-    const res = await agentsApi.createAgent(data)
+    const orgStore = useOrgStore()
+    const orgId = orgStore.currentOrg?.id
+    if (!orgId) {
+      throw new Error('No organization selected')
+    }
+    const res = await agentsApi.createAgent({ ...data, org_id: orgId })
     const newAgent = res.data.data
     agents.value.push(newAgent)
     return newAgent
@@ -76,9 +82,23 @@ export const useAgentStore = defineStore('agent', () => {
     return agentLogs.value
   }
 
+  const agentConfig = ref<Record<string, unknown> | null>(null)
+
+  const fetchConfig = async (id: string) => {
+    const res = await agentsApi.getAgentConfig(id)
+    agentConfig.value = res.data.data.config
+    return agentConfig.value
+  }
+
+  const updateConfig = async (id: string, config: Record<string, unknown>) => {
+    const res = await agentsApi.updateAgentConfig(id, config)
+    agentConfig.value = res.data.data.config
+    return agentConfig.value
+  }
+
   return {
-    agents, currentAgent, agentHealth, agentLogs,
+    agents, currentAgent, agentHealth, agentLogs, agentConfig,
     fetchAgents, fetchActiveAgents, createAgent, fetchAgent, updateAgent, deleteAgent,
-    startAgent, stopAgent, fetchHealth, fetchLogs,
+    startAgent, stopAgent, fetchHealth, fetchLogs, fetchConfig, updateConfig,
   }
 })

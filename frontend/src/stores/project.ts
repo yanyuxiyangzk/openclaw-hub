@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import * as projectsApi from '@/api/projects'
+import { useOrgStore } from './org'
 import type { Project, ProjectMember } from '@/types'
 
 export const useProjectStore = defineStore('project', () => {
@@ -14,7 +15,12 @@ export const useProjectStore = defineStore('project', () => {
   }
 
   const createProject = async (data: { name: string; description?: string }) => {
-    const res = await projectsApi.createProject(data)
+    const orgStore = useOrgStore()
+    const orgId = orgStore.currentOrg?.id
+    if (!orgId) {
+      throw new Error('No organization selected')
+    }
+    const res = await projectsApi.createProject({ ...data, org_id: orgId })
     const newProject = res.data.data
     projects.value.push(newProject)
     return newProject

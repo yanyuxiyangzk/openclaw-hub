@@ -87,7 +87,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, watch } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import type { Project, ProjectMember } from '@/types'
 import type { Task, TaskStatus, TaskPriority, TaskFilters } from '@/api/tasks'

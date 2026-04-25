@@ -36,7 +36,7 @@
           </thead>
           <tbody class="divide-y divide-gray-700">
             <tr
-              v-for="execution in filteredExecutions"
+              v-for="execution in executions"
               :key="execution.id"
               class="hover:bg-gray-700/50 cursor-pointer"
               @click="router.push(`/executions/${execution.id}`)"
@@ -77,11 +77,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import AppLayout from '@/components/layout/AppLayout.vue'
 import ExecutionStatus from '@/components/executions/ExecutionStatus.vue'
-import { getActiveExecutions } from '@/api/executions'
+import { listExecutions } from '@/api/executions'
 import type { Execution } from '@/api/executions'
 
 const router = useRouter()
@@ -89,14 +89,9 @@ const loading = ref(true)
 const executions = ref<Execution[]>([])
 const statusFilter = ref('')
 
-const filteredExecutions = computed(() => {
-  if (!statusFilter.value) return executions.value
-  return executions.value.filter(e => e.status === statusFilter.value)
-})
-
 const loadExecutions = async () => {
   try {
-    const res = await getActiveExecutions()
+    const res = await listExecutions(statusFilter.value || undefined)
     executions.value = res.data.data?.items || []
   } catch (err) {
     console.error('Failed to load executions:', err)
@@ -104,6 +99,10 @@ const loadExecutions = async () => {
     loading.value = false
   }
 }
+
+watch(statusFilter, () => {
+  loadExecutions()
+})
 
 const handleCancel = async (id: string) => {
   try {

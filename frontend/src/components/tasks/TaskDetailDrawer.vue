@@ -125,11 +125,37 @@
           <div class="flex items-center justify-between mb-2">
             <label class="text-sm font-medium text-gray-700">Subtasks</label>
             <button
+              v-if="!showSubtaskForm"
               @click="showSubtaskForm = true"
               class="text-sm text-blue-600 hover:text-blue-700"
             >
               + Add subtask
             </button>
+          </div>
+          <!-- Subtask creation form -->
+          <div v-if="showSubtaskForm" class="mb-3 p-3 bg-gray-50 rounded-lg">
+            <input
+              v-model="newSubtaskTitle"
+              @keydown.enter="addSubtask"
+              placeholder="Enter subtask title..."
+              class="w-full border rounded px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500"
+              autofocus
+            />
+            <div class="flex gap-2 mt-2">
+              <button
+                @click="addSubtask"
+                :disabled="!newSubtaskTitle.trim()"
+                class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 disabled:opacity-50"
+              >
+                Add
+              </button>
+              <button
+                @click="cancelSubtask"
+                class="px-3 py-1 border text-sm rounded hover:bg-gray-100"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
           <SubtaskList
             :task-id="task.id"
@@ -183,10 +209,12 @@
 
 <script setup lang="ts">
 import { ref, watch, reactive } from 'vue'
-import type { Task, TaskComment, TaskActivity, ProjectMember } from '@/api/tasks'
+import type { Task, TaskComment, TaskActivity } from '@/api/tasks'
+import type { ProjectMember, TaskStatus, TaskPriority } from '@/types'
 import {
   getTask, updateTask as updateTaskApi, deleteTask as deleteTaskApi,
-  getComments, addComment, getSubtasks, getActivity, completeTask as completeTaskApi
+  getComments, getSubtasks, getActivity, completeTask as completeTaskApi,
+  createSubtask
 } from '@/api/tasks'
 import CommentThread from './CommentThread.vue'
 import SubtaskList from './SubtaskList.vue'
@@ -209,13 +237,14 @@ const comments = ref<TaskComment[]>([])
 const subtasks = ref<Task[]>([])
 const activities = ref<TaskActivity[]>([])
 const newTag = ref('')
+const newSubtaskTitle = ref('')
 const showSubtaskForm = ref(false)
 
 const editForm = reactive({
   title: '',
   description: '',
-  status: 'todo' as string,
-  priority: 'medium' as string,
+  status: 'todo' as TaskStatus,
+  priority: 'medium' as TaskPriority,
   due_date: '',
   reminder_at: '',
   assignee_id: ''
@@ -295,6 +324,22 @@ const removeTag = async (tag: string) => {
   await updateTaskApi(props.taskId!, { tags })
   await loadTask()
   emit('updated')
+}
+
+const addSubtask = async () => {
+  if (!newSubtaskTitle.value.trim() || !props.taskId) return
+  await createSubtask(props.taskId, {
+    title: newSubtaskTitle.value.trim()
+  })
+  newSubtaskTitle.value = ''
+  showSubtaskForm.value = false
+  await loadSubtasks()
+  emit('updated')
+}
+
+const cancelSubtask = () => {
+  newSubtaskTitle.value = ''
+  showSubtaskForm.value = false
 }
 
 const completeTask = async () => {

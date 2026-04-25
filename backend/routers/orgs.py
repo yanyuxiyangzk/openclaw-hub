@@ -9,6 +9,7 @@ from schemas.organization import (
 )
 from schemas.invitation import InvitationCreate, InvitationResponse
 from services.org_service import OrgService
+from services.agent_service import AgentService
 
 router = APIRouter(prefix="/api/orgs", tags=["organizations"])
 
@@ -168,3 +169,23 @@ def create_invitation(org_id: str, data: InvitationCreate, current_user: User = 
         )
     invitation = service.create_invitation(org_id, data)
     return response(data=InvitationResponse.model_validate(invitation).model_dump())
+
+
+@router.get("/{org_id}/agents/usage", response_model=dict)
+def get_org_agents_usage(org_id: str, days: int = Query(30, ge=1, le=365), current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    """GET /api/orgs/{id}/agents/usage - Get agents usage statistics for organization (T-323)"""
+    org_service = OrgService(db)
+    org = org_service.get_org_by_id(org_id)
+    if not org:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"code": 40401, "message": "Organization not found"}
+        )
+    if not org_service.is_org_member(org_id, current_user):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={"code": 40301, "message": "Access denied"}
+        )
+    agent_service = AgentService(db)
+    usage = agent_service.get_org_agents_usage(org_id, days)
+    return response(data=usage)

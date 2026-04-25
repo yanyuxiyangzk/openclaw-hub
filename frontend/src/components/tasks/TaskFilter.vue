@@ -15,7 +15,7 @@
         <label class="block text-sm text-gray-600 mb-1">Status</label>
         <select
           :value="filters.status"
-          @change="$emit('update:filters', { ...filters, status: ($event.target as HTMLSelectElement).value || undefined })"
+          @change="$emit('update:filters', { ...filters, status: (($event.target as HTMLSelectElement).value || undefined) as TaskStatus | undefined })"
           class="w-full border rounded px-2 py-1.5 text-sm"
         >
           <option value="">All</option>
@@ -31,7 +31,7 @@
         <label class="block text-sm text-gray-600 mb-1">Priority</label>
         <select
           :value="filters.priority"
-          @change="$emit('update:filters', { ...filters, priority: ($event.target as HTMLSelectElement).value || undefined })"
+          @change="$emit('update:filters', { ...filters, priority: (($event.target as HTMLSelectElement).value || undefined) as TaskPriority | undefined })"
           class="w-full border rounded px-2 py-1.5 text-sm"
         >
           <option value="">All</option>
@@ -60,7 +60,7 @@
         <label class="block text-sm text-gray-600 mb-1">Due Date</label>
         <select
           :value="filters.due"
-          @change="$emit('update:filters', { ...filters, due: ($event.target as HTMLSelectElement).value || undefined })"
+          @change="$emit('update:filters', { ...filters, due: (($event.target as HTMLSelectElement).value || undefined) as 'overdue' | 'today' | 'this_week' | 'no_date' | undefined })"
           class="w-full border rounded px-2 py-1.5 text-sm"
         >
           <option value="">All</option>
@@ -76,24 +76,18 @@
 
 <script setup lang="ts">
 import type { ProjectMember } from '@/types'
-
-interface TaskFilters {
-  status?: string
-  priority?: string
-  assignee_id?: string
-  due?: string
-}
+import type { TaskFilters, TaskStatus, TaskPriority } from '@/api/tasks'
 
 defineProps<{
   filters: TaskFilters
   members: ProjectMember[]
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   'update:filters': [filters: TaskFilters]
 }>()
 
 const reset = () => {
-  window.location.reload()
+  emit('update:filters', {})
 }
 </script>

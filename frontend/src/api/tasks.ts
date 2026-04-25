@@ -24,6 +24,8 @@ export interface Task {
   created_by: string
   created_at: string
   updated_at: string
+  comment_count?: number
+  subtask_count?: number
 }
 
 export type TaskStatus = 'todo' | 'in_progress' | 'in_review' | 'done' | 'blocked'
@@ -32,7 +34,7 @@ export type TaskPriority = 'low' | 'medium' | 'high' | 'urgent'
 export interface TaskCreate {
   title: string
   description?: string
-  project_id: string
+  project_id?: string  // Required for direct task creation, inherited from parent for subtasks
   status?: TaskStatus
   priority?: TaskPriority
   parent_id?: string
@@ -51,6 +53,8 @@ export interface TaskUpdate {
   description?: string
   status?: TaskStatus
   priority?: TaskPriority
+  parent_id?: string
+  root_id?: string
   position?: number
   estimated_hours?: number
   actual_hours?: number
@@ -58,6 +62,15 @@ export interface TaskUpdate {
   due_date?: string
   reminder_at?: string
   assignee_id?: string
+}
+
+export interface TaskFilters {
+  project_id?: string
+  status?: TaskStatus
+  assignee_id?: string
+  priority?: TaskPriority
+  search?: string
+  due?: 'overdue' | 'today' | 'this_week' | 'no_date'
 }
 
 export interface TaskComment {
@@ -124,6 +137,8 @@ export const listTasks = (params?: {
   status?: TaskStatus
   assignee_id?: string
   priority?: TaskPriority
+  due?: 'overdue' | 'today' | 'this_week' | 'no_date'
+  tags?: string
 }) =>
   api.get<ApiResponse<{ items: Task[]; total: number }>>('/tasks', { params })
 
@@ -183,8 +198,13 @@ export const getAttachments = (taskId: string) =>
 
 // ========== Kanban View APIs ==========
 
-export const getKanbanBoard = (projectId: string) =>
-  api.get<ApiResponse<KanbanBoard>>(`/projects/${projectId}/kanban`)
+export const getKanbanBoard = (projectId: string, filters?: {
+  priority?: TaskPriority
+  assignee_id?: string
+  due?: 'overdue' | 'today' | 'this_week' | 'no_date'
+  tags?: string
+}) =>
+  api.get<ApiResponse<KanbanBoard>>(`/projects/${projectId}/kanban`, { params: filters })
 
 export const getTasksByStatus = (projectId: string) =>
   api.get<ApiResponse<Record<TaskStatus, Task[]>>>(`/projects/${projectId}/tasks/by-status`)

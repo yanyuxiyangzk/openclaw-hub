@@ -281,3 +281,71 @@ class TestOrgAccessDenied:
             "role": "member"
         })
         assert response.status_code == 403
+
+
+class TestOrgAgentsUsage:
+    def test_get_org_agents_usage_success(self, client, auth_headers, test_org, db):
+        """Test T-323: GET /api/orgs/{id}/agents/usage - success case"""
+        from models.agent import Agent
+        import uuid
+
+        agent = Agent(
+            id=str(uuid.uuid4()),
+            name="Test Agent",
+            description="Test agent for usage",
+            agent_type="hermes",
+            config=None,
+            org_id=test_org.id,
+            status="online",
+        )
+        db.add(agent)
+        db.commit()
+
+        response = client.get(f"/api/orgs/{test_org.id}/agents/usage", headers=auth_headers)
+        assert response.status_code == 200
+        data = response.json()
+        assert data["code"] == 0
+        assert data["data"]["org_id"] == test_org.id
+        assert data["data"]["total_agents"] >= 1
+        assert "total_tasks_completed" in data["data"]
+        assert "total_tasks_failed" in data["data"]
+        assert "total_token_usage" in data["data"]
+        assert "agent_usages" in data["data"]
+        assert len(data["data"]["agent_usages"]) >= 1
+        assert data["data"]["agent_usages"][0]["agent_name"] == "Test Agent"
+
+    def test_get_org_agents_usage_with_days_param(self, client, auth_headers, test_org):
+        """Test T-323: GET /api/orgs/{id}/agents/usage with days parameter"""
+        response = client.get(f"/api/orgs/{test_org.id}/agents/usage?days=7", headers=auth_headers)
+        assert response.status_code == 200
+        data = response.json()
+        assert data["code"] == 0
+        assert data["data"]["org_id"] == test_org.id
+
+    def test_get_org_agents_usage_not_found(self, client, auth_headers):
+        """Test T-323: GET /api/orgs/{id}/agents/usage - org not found"""
+        response = client.get("/api/orgs/nonexistent-id/agents/usage", headers=auth_headers)
+        assert response.status_code == 404
+
+    def test_get_org_agents_usage_access_denied(self, client, db, test_org):
+        """Test T-323: GET /api/orgs/{id}/agents/usage - not a member"""
+        from models.user import User
+        from core.security import get_password_hash
+        import uuid
+
+        outsider = User(
+            id=str(uuid.uuid4()),
+            email="outsider@example.com",
+            password_hash=get_password_hash("password123"),
+            name="Outsider User",
+            is_active=True,
+            is_superuser=False,
+        )
+        db.add(outsider)
+        db.commit()
+
+        login = client.post("/api/auth/login", json={"email": "outsider@example.com", "password": "password123"})
+        headers = {"Authorization": f"Bearer {login.json()['data']['access_token']}"}
+
+        response = client.get(f"/api/orgs/{test_org.id}/agents/usage", headers=headers)
+        assert response.status_code == 403

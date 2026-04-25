@@ -74,7 +74,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, computed } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import type { Task, DueSoonTasks as DueSoonTasksType } from '@/api/tasks'
 import { getDueSoonTasks } from '@/api/tasks'
 import TaskDetailDrawer from '@/components/tasks/TaskDetailDrawer.vue'

@@ -51,6 +51,16 @@ class Phase3Service:
                 detail={"code": 40301, "message": "Access denied"}
             )
 
+        existing = self.db.query(AgentRole).filter(
+            AgentRole.name == data.name,
+            AgentRole.org_id == org_id
+        ).first()
+        if existing:
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail={"code": 40902, "message": "Agent role with this name already exists"}
+            )
+
         role = AgentRole(
             id=str(uuid.uuid4()),
             name=data.name,
@@ -66,6 +76,16 @@ class Phase3Service:
 
     def update_role(self, role: AgentRole, data: AgentRoleUpdate) -> AgentRole:
         if data.name is not None:
+            existing = self.db.query(AgentRole).filter(
+                AgentRole.name == data.name,
+                AgentRole.org_id == role.org_id,
+                AgentRole.id != role.id
+            ).first()
+            if existing:
+                raise HTTPException(
+                    status_code=status.HTTP_409_CONFLICT,
+                    detail={"code": 40902, "message": "Agent role with this name already exists"}
+                )
             role.name = data.name
         if data.description is not None:
             role.description = data.description
@@ -170,7 +190,7 @@ class Phase3Service:
         config["context"] = data.context
         agent.config = json.dumps(config)
         self.db.commit()
-        return {"agent_id": agent.id, "message": "Context set successfully"}
+        return {"agent_id": agent.id, "context": data.context, "message": "Context set successfully"}
 
     def get_agent_history(self, agent: Agent, limit: int = 50) -> dict:
         config = json.loads(agent.config) if agent.config else {}
@@ -277,7 +297,7 @@ class Phase3Service:
         total_completed = sum(m.tasks_completed for m in metrics)
         total_failed = sum(m.tasks_failed for m in metrics)
         total_tokens = sum(m.token_usage for m in metrics)
-        total_response_time = sum(m.avg_response_time_ms * total_tasks for m in metrics)
+        total_response_time = sum(m.avg_response_time_ms * (m.tasks_completed + m.tasks_failed) for m in metrics)
 
         success_rate = (total_completed / total_tasks * 100) if total_tasks > 0 else 0
         avg_response_time = (total_response_time / total_tasks) if total_tasks > 0 else 0

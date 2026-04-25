@@ -10,6 +10,8 @@ from schemas.project import (
     ProjectWithMembersResponse
 )
 from services.project_service import ProjectService
+from services.task_service import TaskService
+from models.task import Task
 
 router = APIRouter(prefix="/api/projects", tags=["projects"])
 
@@ -20,6 +22,40 @@ def response(code: int = 0, message: str = "success", data=None):
 
 class MemberRoleUpdate(BaseModel):
     role: str
+
+
+def _task_to_response(task: Task) -> dict:
+    import json
+    tags = task.tags
+    if isinstance(tags, str):
+        try:
+            tags = json.loads(tags)
+        except:
+            tags = None
+    return {
+        "id": task.id,
+        "title": task.title,
+        "description": task.description,
+        "status": task.status,
+        "priority": task.priority,
+        "parent_id": task.parent_id,
+        "root_id": task.root_id,
+        "position": task.position,
+        "estimated_hours": task.estimated_hours,
+        "actual_hours": task.actual_hours,
+        "tags": tags,
+        "due_date": task.due_date,
+        "reminder_at": task.reminder_at,
+        "started_at": task.started_at,
+        "completed_at": task.completed_at,
+        "project_id": task.project_id,
+        "assignee_id": task.assignee_id,
+        "created_by": task.created_by,
+        "created_at": task.created_at,
+        "updated_at": task.updated_at,
+        "comment_count": len(task.comments) if task.comments else 0,
+        "subtask_count": len(task.subtasks) if task.subtasks else 0
+    }
 
 
 @router.post("", response_model=dict)
@@ -364,3 +400,37 @@ def remove_project_agent(project_id: str, agent_id: str, current_user: User = De
             detail={"code": 40401, "message": "Agent not assigned to this project"}
         )
     return response(message="Agent removed from project successfully")
+
+
+@router.get("/{project_id}/tasks", response_model=dict)
+def list_project_tasks(
+    project_id: str,
+    status: str = Query(None),
+    assignee_id: str = Query(None),
+    priority: str = Query(None),
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """GET /api/projects/{id}/tasks - List project tasks (T-441)"""
+    service = ProjectService(db)
+    project = service.get_project_by_id(project_id)
+    if not project:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"code": 40401, "message": "Project not found"}
+        )
+    if not service.is_project_member(project_id, current_user):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={"code": 40301, "message": "Access denied"}
+        )
+
+    task_service = TaskService(db)
+    tasks, total = task_service.list_tasks(
+        project_id=project_id,
+        status=status,
+        assignee_id=assignee_id,
+        priority=priority,
+        user=current_user
+    )
+    return response(data={"items": [_task_to_response(t) for t in tasks], "total": total})

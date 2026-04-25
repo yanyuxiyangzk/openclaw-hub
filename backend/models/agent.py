@@ -14,6 +14,7 @@ class Agent(Base):
     description = Column(Text, nullable=True)
     agent_type = Column(String(32), nullable=False)
     config = Column(Text, nullable=True)
+    memory = Column(Text, nullable=True)
     org_id = Column(UUID, ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False)
     status = Column(String(20), nullable=False, default="offline")
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))

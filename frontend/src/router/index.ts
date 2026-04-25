@@ -128,6 +128,12 @@ const routes: RouteRecordRaw[] = [
     meta: { auth: true }
   },
   {
+    path: '/tasks/:id/edit',
+    name: 'TaskEdit',
+    component: () => import('@/views/tasks/TaskEditView.vue'),
+    meta: { auth: true }
+  },
+  {
     path: '/tasks/due-soon',
     name: 'DueSoon',
     component: () => import('@/views/tasks/DueSoonView.vue'),
@@ -161,6 +167,18 @@ const routes: RouteRecordRaw[] = [
     path: '/workflows/:id',
     name: 'WorkflowDetail',
     component: () => import('@/views/workflows/WorkflowDetailView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/activities',
+    name: 'ActivityFeed',
+    component: () => import('@/views/ActivityFeedView.vue'),
+    meta: { auth: true }
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: () => import('@/views/DashboardView.vue'),
     meta: { auth: true }
   }
 ]

@@ -54,16 +54,41 @@ OpenClawHub/
 
 ## 开发阶段
 
-- Phase 0: 项目初始化 ✅ (当前)
-- Phase 1: 认证模块
-- Phase 2: 项目管理模块
-- Phase 3: Agent 管理模块
-- Phase 4: 任务看板模块
-- Phase 5: 执行引擎集成
-- Phase 6: Activity Feed
-- Phase 7: Dashboard
-- Phase 8: 测试 + 修复
-- Phase 9: 部署上线
+- Phase 0: 项目初始化 ✅
+- Phase 1: 认证模块 ✅
+- Phase 2: 项目管理模块 ✅
+- Phase 3: Agent 管理模块 ✅
+- Phase 4: 任务看板模块 ✅
+- Phase 5: 执行引擎集成 ✅
+- Phase 6: Activity Feed ✅
+- Phase 7: Dashboard ✅
+- Phase 8: 测试 + 修复 ✅
+- Phase 9: 部署上线 ✅ (当前)
+
+## 部署
+
+### 生产环境部署
+
+```bash
+# Unix/macOS
+./deploy.sh --production
+
+# Windows PowerShell
+.\deploy.ps1 -Env production
+```
+
+### Docker Compose 生产部署
+
+```bash
+docker-compose -f docker/docker-compose.prod.yml up -d
+```
+
+### 健康检查
+
+- 整体健康: `http://localhost:8080/health`
+- API 健康: `http://localhost:8080/api/health`
+
+详见 [DEPLOY.md](./DEPLOY.md)
 
 ## 文档
 

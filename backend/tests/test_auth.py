@@ -22,7 +22,7 @@ class TestAuthRegister:
         })
         assert response.status_code == 409
         data = response.json()
-        assert data["code"] == 40901
+        assert data["code"] == 40904  # EmailAlreadyRegisteredException
 
     def test_register_invalid_email(self, client):
         response = client.post("/api/auth/register", json={
@@ -51,7 +51,7 @@ class TestAuthLogin:
             "password": "wrongpassword"
         })
         assert response.status_code == 401
-        assert response.json()["code"] == 40101
+        assert response.json()["code"] == 40102  # InvalidCredentialsException
 
     def test_login_nonexistent_user(self, client):
         response = client.post("/api/auth/login", json={

@@ -1,12 +1,39 @@
 {
   "nodes": [
     {
+      "id": "DEPLOY.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "DEPLOY.md",
+      "extension": ".md",
+      "line_count": 189,
+      "path": "DEPLOY.md"
+    },
+    {
+      "id": "deploy.ps1",
+      "type": "file",
+      "file_type": "other",
+      "name": "deploy.ps1",
+      "extension": ".ps1",
+      "line_count": 74,
+      "path": "deploy.ps1"
+    },
+    {
+      "id": "deploy.sh",
+      "type": "file",
+      "file_type": "other",
+      "name": "deploy.sh",
+      "extension": ".sh",
+      "line_count": 71,
+      "path": "deploy.sh"
+    },
+    {
       "id": "harness-context.md",
       "type": "file",
       "file_type": "doc",
       "name": "harness-context.md",
       "extension": ".md",
-      "line_count": 205,
+      "line_count": 201,
       "path": "harness-context.md"
     },
     {
@@ -15,7 +42,7 @@
       "file_type": "doc",
       "name": "README.md",
       "extension": ".md",
-      "line_count": 78,
+      "line_count": 103,
       "path": "README.md"
     },
     {
@@ -60,7 +87,7 @@
       "file_type": "code",
       "name": "main.py",
       "extension": ".py",
-      "line_count": 76,
+      "line_count": 153,
       "path": "backend/main.py"
     },
     {
@@ -69,7 +96,7 @@
       "file_type": "other",
       "name": "openclawhub.db",
       "extension": ".db",
-      "line_count": 285,
+      "line_count": 456,
       "path": "backend/openclawhub.db"
     },
     {
@@ -78,8 +105,35 @@
       "file_type": "doc",
       "name": "requirements.txt",
       "extension": ".txt",
-      "line_count": 18,
+      "line_count": 19,
       "path": "backend/requirements.txt"
+    },
+    {
+      "id": "deploy/nginx.conf",
+      "type": "file",
+      "file_type": "config",
+      "name": "nginx.conf",
+      "extension": ".conf",
+      "line_count": 117,
+      "path": "deploy/nginx.conf"
+    },
+    {
+      "id": "docker/docker-compose.local.yml",
+      "type": "file",
+      "file_type": "config",
+      "name": "docker-compose.local.yml",
+      "extension": ".yml",
+      "line_count": 75,
+      "path": "docker/docker-compose.local.yml"
+    },
+    {
+      "id": "docker/docker-compose.prod.yml",
+      "type": "file",
+      "file_type": "config",
+      "name": "docker-compose.prod.yml",
+      "extension": ".yml",
+      "line_count": 88,
+      "path": "docker/docker-compose.prod.yml"
     },
     {
       "id": "docker/docker-compose.yml",
@@ -109,6 +163,24 @@
       "path": "docker/Dockerfile.frontend"
     },
     {
+      "id": "docker/Dockerfile.frontend.prod",
+      "type": "file",
+      "file_type": "other",
+      "name": "Dockerfile.frontend.prod",
+      "extension": ".prod",
+      "line_count": 31,
+      "path": "docker/Dockerfile.frontend.prod"
+    },
+    {
+      "id": "docker/Dockerfile.prod",
+      "type": "file",
+      "file_type": "other",
+      "name": "Dockerfile.prod",
+      "extension": ".prod",
+      "line_count": 51,
+      "path": "docker/Dockerfile.prod"
+    },
+    {
       "id": "docker/nginx.conf",
       "type": "file",
       "file_type": "config",
@@ -125,6 +197,150 @@
       "extension": ".md",
       "line_count": 453,
       "path": "docs/API.md"
+    },
+    {
+      "id": "docs/SPLIT_RESULT_20260423_113517.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_RESULT_20260423_113517.md",
+      "extension": ".md",
+      "line_count": 54,
+      "path": "docs/SPLIT_RESULT_20260423_113517.md"
+    },
+    {
+      "id": "docs/SPLIT_RESULT_20260423_114711.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_RESULT_20260423_114711.md",
+      "extension": ".md",
+      "line_count": 54,
+      "path": "docs/SPLIT_RESULT_20260423_114711.md"
+    },
+    {
+      "id": "docs/SPLIT_RESULT_20260423_115753.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_RESULT_20260423_115753.md",
+      "extension": ".md",
+      "line_count": 54,
+      "path": "docs/SPLIT_RESULT_20260423_115753.md"
+    },
+    {
+      "id": "docs/SPLIT_RESULT_20260423_120907.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_RESULT_20260423_120907.md",
+      "extension": ".md",
+      "line_count": 49,
+      "path": "docs/SPLIT_RESULT_20260423_120907.md"
+    },
+    {
+      "id": "docs/SPLIT_RESULT_20260423_131116.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_RESULT_20260423_131116.md",
+      "extension": ".md",
+      "line_count": 89,
+      "path": "docs/SPLIT_RESULT_20260423_131116.md"
+    },
+    {
+      "id": "docs/SPLIT_RESULT_20260423_131438.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_RESULT_20260423_131438.md",
+      "extension": ".md",
+      "line_count": 42,
+      "path": "docs/SPLIT_RESULT_20260423_131438.md"
+    },
+    {
+      "id": "docs/SPLIT_RESULT_20260423_131756.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_RESULT_20260423_131756.md",
+      "extension": ".md",
+      "line_count": 40,
+      "path": "docs/SPLIT_RESULT_20260423_131756.md"
+    },
+    {
+      "id": "docs/SPLIT_TASKS_20260423_113418.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_TASKS_20260423_113418.md",
+      "extension": ".md",
+      "line_count": 27,
+      "path": "docs/SPLIT_TASKS_20260423_113418.md"
+    },
+    {
+      "id": "docs/SPLIT_TASKS_20260423_114617.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_TASKS_20260423_114617.md",
+      "extension": ".md",
+      "line_count": 27,
+      "path": "docs/SPLIT_TASKS_20260423_114617.md"
+    },
+    {
+      "id": "docs/SPLIT_TASKS_20260423_115657.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_TASKS_20260423_115657.md",
+      "extension": ".md",
+      "line_count": 27,
+      "path": "docs/SPLIT_TASKS_20260423_115657.md"
+    },
+    {
+      "id": "docs/SPLIT_TASKS_20260423_120124.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_TASKS_20260423_120124.md",
+      "extension": ".md",
+      "line_count": 27,
+      "path": "docs/SPLIT_TASKS_20260423_120124.md"
+    },
+    {
+      "id": "docs/SPLIT_TASKS_20260423_125743.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_TASKS_20260423_125743.md",
+      "extension": ".md",
+      "line_count": 51,
+      "path": "docs/SPLIT_TASKS_20260423_125743.md"
+    },
+    {
+      "id": "docs/SPLIT_TASKS_20260423_130755.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_TASKS_20260423_130755.md",
+      "extension": ".md",
+      "line_count": 23,
+      "path": "docs/SPLIT_TASKS_20260423_130755.md"
+    },
+    {
+      "id": "docs/SPLIT_TASKS_20260423_131310.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_TASKS_20260423_131310.md",
+      "extension": ".md",
+      "line_count": 23,
+      "path": "docs/SPLIT_TASKS_20260423_131310.md"
+    },
+    {
+      "id": "docs/异常处理.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "异常处理.md",
+      "extension": ".md",
+      "line_count": 238,
+      "path": "docs/异常处理.md"
+    },
+    {
+      "id": "docs/架构分析_数据库.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "架构分析_数据库.md",
+      "extension": ".md",
+      "line_count": 45,
+      "path": "docs/架构分析_数据库.md"
     },
     {
       "id": "docs/知识库快照.md",
@@ -15508,12 +15724,21 @@
       "path": "frontend/src/style.css"
     },
     {
+      "id": "frontend/src/api/activities.ts",
+      "type": "file",
+      "file_type": "code",
+      "name": "activities.ts",
+      "extension": ".ts",
+      "line_count": 12,
+      "path": "frontend/src/api/activities.ts"
+    },
+    {
       "id": "frontend/src/api/agents.ts",
       "type": "file",
       "file_type": "code",
       "name": "agents.ts",
       "extension": ".ts",
-      "line_count": 75,
+      "line_count": 243,
       "path": "frontend/src/api/agents.ts"
     },
     {
@@ -15526,12 +15751,21 @@
       "path": "frontend/src/api/auth.ts"
     },
     {
+      "id": "frontend/src/api/dashboard.ts",
+      "type": "file",
+      "file_type": "code",
+      "name": "dashboard.ts",
+      "extension": ".ts",
+      "line_count": 8,
+      "path": "frontend/src/api/dashboard.ts"
+    },
+    {
       "id": "frontend/src/api/executions.ts",
       "type": "file",
       "file_type": "code",
       "name": "executions.ts",
       "extension": ".ts",
-      "line_count": 51,
+      "line_count": 56,
       "path": "frontend/src/api/executions.ts"
     },
     {
@@ -15540,7 +15774,7 @@
       "file_type": "code",
       "name": "index.ts",
       "extension": ".ts",
-      "line_count": 53,
+      "line_count": 54,
       "path": "frontend/src/api/index.ts"
     },
     {
@@ -15558,7 +15792,7 @@
       "file_type": "code",
       "name": "phase3.ts",
       "extension": ".ts",
-      "line_count": 191,
+      "line_count": 199,
       "path": "frontend/src/api/phase3.ts"
     },
     {
@@ -15567,7 +15801,7 @@
       "file_type": "code",
       "name": "projects.ts",
       "extension": ".ts",
-      "line_count": 64,
+      "line_count": 65,
       "path": "frontend/src/api/projects.ts"
     },
     {
@@ -15585,7 +15819,7 @@
       "file_type": "code",
       "name": "tasks.ts",
       "extension": ".ts",
-      "line_count": 214,
+      "line_count": 234,
       "path": "frontend/src/api/tasks.ts"
     },
     {
@@ -15612,7 +15846,7 @@
       "file_type": "code",
       "name": "index.ts",
       "extension": ".ts",
-      "line_count": 191,
+      "line_count": 209,
       "path": "frontend/src/router/index.ts"
     },
     {
@@ -15621,7 +15855,7 @@
       "file_type": "code",
       "name": "agent.ts",
       "extension": ".ts",
-      "line_count": 84,
+      "line_count": 104,
       "path": "frontend/src/stores/agent.ts"
     },
     {
@@ -15648,8 +15882,26 @@
       "file_type": "code",
       "name": "project.ts",
       "extension": ".ts",
-      "line_count": 67,
+      "line_count": 73,
       "path": "frontend/src/stores/project.ts"
+    },
+    {
+      "id": "frontend/src/types/activity.ts",
+      "type": "file",
+      "file_type": "code",
+      "name": "activity.ts",
+      "extension": ".ts",
+      "line_count": 33,
+      "path": "frontend/src/types/activity.ts"
+    },
+    {
+      "id": "frontend/src/types/dashboard.ts",
+      "type": "file",
+      "file_type": "code",
+      "name": "dashboard.ts",
+      "extension": ".ts",
+      "line_count": 20,
+      "path": "frontend/src/types/dashboard.ts"
     },
     {
       "id": "frontend/src/types/index.ts",
@@ -15657,7 +15909,7 @@
       "file_type": "code",
       "name": "index.ts",
       "extension": ".ts",
-      "line_count": 285,
+      "line_count": 303,
       "path": "frontend/src/types/index.ts"
     },
     {
@@ -15668,6 +15920,24 @@
       "extension": ".ts",
       "line_count": 24,
       "path": "frontend/src/utils/mock.ts"
+    },
+    {
+      "id": "frontend/src/views/ActivityFeedView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "ActivityFeedView.vue",
+      "extension": ".vue",
+      "line_count": 13,
+      "path": "frontend/src/views/ActivityFeedView.vue"
+    },
+    {
+      "id": "frontend/src/views/DashboardView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "DashboardView.vue",
+      "extension": ".vue",
+      "line_count": 77,
+      "path": "frontend/src/views/DashboardView.vue"
     },
     {
       "id": "frontend/src/views/InvitationView.vue",
@@ -15684,7 +15954,7 @@
       "file_type": "other",
       "name": "LoginView.vue",
       "extension": ".vue",
-      "line_count": 68,
+      "line_count": 352,
       "path": "frontend/src/views/LoginView.vue"
     },
     {
@@ -15720,7 +15990,7 @@
       "file_type": "other",
       "name": "RegisterView.vue",
       "extension": ".vue",
-      "line_count": 104,
+      "line_count": 219,
       "path": "frontend/src/views/RegisterView.vue"
     },
     {
@@ -15738,7 +16008,7 @@
       "file_type": "other",
       "name": "AgentConfigView.vue",
       "extension": ".vue",
-      "line_count": 230,
+      "line_count": 342,
       "path": "frontend/src/views/agents/AgentConfigView.vue"
     },
     {
@@ -15765,7 +16035,7 @@
       "file_type": "other",
       "name": "AgentMemoryView.vue",
       "extension": ".vue",
-      "line_count": 250,
+      "line_count": 251,
       "path": "frontend/src/views/agents/AgentMemoryView.vue"
     },
     {
@@ -15774,7 +16044,7 @@
       "file_type": "other",
       "name": "AgentMetricsView.vue",
       "extension": ".vue",
-      "line_count": 193,
+      "line_count": 194,
       "path": "frontend/src/views/agents/AgentMetricsView.vue"
     },
     {
@@ -15810,7 +16080,7 @@
       "file_type": "other",
       "name": "ExecutionListView.vue",
       "extension": ".vue",
-      "line_count": 138,
+      "line_count": 137,
       "path": "frontend/src/views/executions/ExecutionListView.vue"
     },
     {
@@ -15819,7 +16089,7 @@
       "file_type": "other",
       "name": "ProjectDetailView.vue",
       "extension": ".vue",
-      "line_count": 429,
+      "line_count": 441,
       "path": "frontend/src/views/projects/ProjectDetailView.vue"
     },
     {
@@ -15846,7 +16116,7 @@
       "file_type": "other",
       "name": "SchedulerView.vue",
       "extension": ".vue",
-      "line_count": 259,
+      "line_count": 311,
       "path": "frontend/src/views/scheduler/SchedulerView.vue"
     },
     {
@@ -15864,7 +16134,7 @@
       "file_type": "other",
       "name": "ProjectKanbanView.vue",
       "extension": ".vue",
-      "line_count": 162,
+      "line_count": 164,
       "path": "frontend/src/views/tasks/ProjectKanbanView.vue"
     },
     {
@@ -15893,6 +16163,15 @@
       "extension": ".vue",
       "line_count": 256,
       "path": "frontend/src/views/tasks/TaskDetailView.vue"
+    },
+    {
+      "id": "frontend/src/views/tasks/TaskEditView.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "TaskEditView.vue",
+      "extension": ".vue",
+      "line_count": 301,
+      "path": "frontend/src/views/tasks/TaskEditView.vue"
     },
     {
       "id": "frontend/src/views/workflows/WorkflowDetailView.vue",
@@ -15974,6 +16253,24 @@
       "extension": ".ts",
       "line_count": 44,
       "path": "frontend/src/views/__tests__/SettingsView.spec.ts"
+    },
+    {
+      "id": "frontend/src/components/activities/ActivityFeed.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "ActivityFeed.vue",
+      "extension": ".vue",
+      "line_count": 40,
+      "path": "frontend/src/components/activities/ActivityFeed.vue"
+    },
+    {
+      "id": "frontend/src/components/activities/ActivityItem.vue",
+      "type": "file",
+      "file_type": "other",
+      "name": "ActivityItem.vue",
+      "extension": ".vue",
+      "line_count": 51,
+      "path": "frontend/src/components/activities/ActivityItem.vue"
     },
     {
       "id": "frontend/src/components/agents/AgentCard.vue",
@@ -16071,7 +16368,7 @@
       "file_type": "other",
       "name": "KanbanBoard.vue",
       "extension": ".vue",
-      "line_count": 52,
+      "line_count": 89,
       "path": "frontend/src/components/tasks/KanbanBoard.vue"
     },
     {
@@ -16080,7 +16377,7 @@
       "file_type": "other",
       "name": "KanbanColumn.vue",
       "extension": ".vue",
-      "line_count": 62,
+      "line_count": 89,
       "path": "frontend/src/components/tasks/KanbanColumn.vue"
     },
     {
@@ -16107,7 +16404,7 @@
       "file_type": "other",
       "name": "TaskDetailDrawer.vue",
       "extension": ".vue",
-      "line_count": 338,
+      "line_count": 383,
       "path": "frontend/src/components/tasks/TaskDetailDrawer.vue"
     },
     {
@@ -16116,7 +16413,7 @@
       "file_type": "other",
       "name": "TaskFilter.vue",
       "extension": ".vue",
-      "line_count": 100,
+      "line_count": 94,
       "path": "frontend/src/components/tasks/TaskFilter.vue"
     },
     {
@@ -16147,6 +16444,15 @@
       "path": "backend/core/database.py"
     },
     {
+      "id": "backend/core/exceptions.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "exceptions.py",
+      "extension": ".py",
+      "line_count": 202,
+      "path": "backend/core/exceptions.py"
+    },
+    {
       "id": "backend/core/security.py",
       "type": "file",
       "file_type": "code",
@@ -16165,12 +16471,21 @@
       "path": "backend/core/__init__.py"
     },
     {
+      "id": "backend/models/activity.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "activity.py",
+      "extension": ".py",
+      "line_count": 23,
+      "path": "backend/models/activity.py"
+    },
+    {
       "id": "backend/models/agent.py",
       "type": "file",
       "file_type": "code",
       "name": "agent.py",
       "extension": ".py",
-      "line_count": 27,
+      "line_count": 28,
       "path": "backend/models/agent.py"
     },
     {
@@ -16199,6 +16514,15 @@
       "extension": ".py",
       "line_count": 18,
       "path": "backend/models/agent_skill.py"
+    },
+    {
+      "id": "backend/models/dashboard.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "dashboard.py",
+      "extension": ".py",
+      "line_count": 1,
+      "path": "backend/models/dashboard.py"
     },
     {
       "id": "backend/models/execution.py",
@@ -16269,7 +16593,7 @@
       "file_type": "code",
       "name": "task.py",
       "extension": ".py",
-      "line_count": 75,
+      "line_count": 74,
       "path": "backend/models/task.py"
     },
     {
@@ -16296,7 +16620,7 @@
       "file_type": "code",
       "name": "user.py",
       "extension": ".py",
-      "line_count": 25,
+      "line_count": 26,
       "path": "backend/models/user.py"
     },
     {
@@ -16314,8 +16638,17 @@
       "file_type": "code",
       "name": "__init__.py",
       "extension": ".py",
-      "line_count": 33,
+      "line_count": 42,
       "path": "backend/models/__init__.py"
+    },
+    {
+      "id": "backend/routers/activities.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "activities.py",
+      "extension": ".py",
+      "line_count": 45,
+      "path": "backend/routers/activities.py"
     },
     {
       "id": "backend/routers/agents.py",
@@ -16323,7 +16656,7 @@
       "file_type": "code",
       "name": "agents.py",
       "extension": ".py",
-      "line_count": 267,
+      "line_count": 606,
       "path": "backend/routers/agents.py"
     },
     {
@@ -16332,7 +16665,7 @@
       "file_type": "code",
       "name": "agent_roles.py",
       "extension": ".py",
-      "line_count": 30,
+      "line_count": 90,
       "path": "backend/routers/agent_roles.py"
     },
     {
@@ -16345,12 +16678,21 @@
       "path": "backend/routers/auth.py"
     },
     {
+      "id": "backend/routers/dashboard.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "dashboard.py",
+      "extension": ".py",
+      "line_count": 120,
+      "path": "backend/routers/dashboard.py"
+    },
+    {
       "id": "backend/routers/executions.py",
       "type": "file",
       "file_type": "code",
       "name": "executions.py",
       "extension": ".py",
-      "line_count": 183,
+      "line_count": 246,
       "path": "backend/routers/executions.py"
     },
     {
@@ -16368,7 +16710,7 @@
       "file_type": "code",
       "name": "orgs.py",
       "extension": ".py",
-      "line_count": 170,
+      "line_count": 191,
       "path": "backend/routers/orgs.py"
     },
     {
@@ -16377,7 +16719,7 @@
       "file_type": "code",
       "name": "phase3.py",
       "extension": ".py",
-      "line_count": 317,
+      "line_count": 192,
       "path": "backend/routers/phase3.py"
     },
     {
@@ -16386,7 +16728,7 @@
       "file_type": "code",
       "name": "projects.py",
       "extension": ".py",
-      "line_count": 366,
+      "line_count": 436,
       "path": "backend/routers/projects.py"
     },
     {
@@ -16395,7 +16737,7 @@
       "file_type": "code",
       "name": "scheduler.py",
       "extension": ".py",
-      "line_count": 92,
+      "line_count": 125,
       "path": "backend/routers/scheduler.py"
     },
     {
@@ -16404,7 +16746,7 @@
       "file_type": "code",
       "name": "tasks.py",
       "extension": ".py",
-      "line_count": 529,
+      "line_count": 570,
       "path": "backend/routers/tasks.py"
     },
     {
@@ -16422,7 +16764,7 @@
       "file_type": "code",
       "name": "workflows.py",
       "extension": ".py",
-      "line_count": 163,
+      "line_count": 192,
       "path": "backend/routers/workflows.py"
     },
     {
@@ -16440,8 +16782,17 @@
       "file_type": "code",
       "name": "__init__.py",
       "extension": ".py",
-      "line_count": 16,
+      "line_count": 18,
       "path": "backend/routers/__init__.py"
+    },
+    {
+      "id": "backend/schemas/activity.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "activity.py",
+      "extension": ".py",
+      "line_count": 42,
+      "path": "backend/schemas/activity.py"
     },
     {
       "id": "backend/schemas/agent.py",
@@ -16449,7 +16800,7 @@
       "file_type": "code",
       "name": "agent.py",
       "extension": ".py",
-      "line_count": 107,
+      "line_count": 257,
       "path": "backend/schemas/agent.py"
     },
     {
@@ -16458,7 +16809,7 @@
       "file_type": "code",
       "name": "agent_role.py",
       "extension": ".py",
-      "line_count": 152,
+      "line_count": 167,
       "path": "backend/schemas/agent_role.py"
     },
     {
@@ -16521,7 +16872,7 @@
       "file_type": "code",
       "name": "task.py",
       "extension": ".py",
-      "line_count": 174,
+      "line_count": 176,
       "path": "backend/schemas/task.py"
     },
     {
@@ -16552,12 +16903,21 @@
       "path": "backend/schemas/__init__.py"
     },
     {
+      "id": "backend/services/activity_service.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "activity_service.py",
+      "extension": ".py",
+      "line_count": 44,
+      "path": "backend/services/activity_service.py"
+    },
+    {
       "id": "backend/services/agent_role_service.py",
       "type": "file",
       "file_type": "code",
       "name": "agent_role_service.py",
       "extension": ".py",
-      "line_count": 70,
+      "line_count": 129,
       "path": "backend/services/agent_role_service.py"
     },
     {
@@ -16566,7 +16926,7 @@
       "file_type": "code",
       "name": "agent_service.py",
       "extension": ".py",
-      "line_count": 194,
+      "line_count": 558,
       "path": "backend/services/agent_service.py"
     },
     {
@@ -16575,7 +16935,7 @@
       "file_type": "code",
       "name": "auth_service.py",
       "extension": ".py",
-      "line_count": 89,
+      "line_count": 77,
       "path": "backend/services/auth_service.py"
     },
     {
@@ -16584,7 +16944,7 @@
       "file_type": "code",
       "name": "execution_service.py",
       "extension": ".py",
-      "line_count": 198,
+      "line_count": 220,
       "path": "backend/services/execution_service.py"
     },
     {
@@ -16593,7 +16953,7 @@
       "file_type": "code",
       "name": "org_service.py",
       "extension": ".py",
-      "line_count": 155,
+      "line_count": 147,
       "path": "backend/services/org_service.py"
     },
     {
@@ -16602,7 +16962,7 @@
       "file_type": "code",
       "name": "phase3_service.py",
       "extension": ".py",
-      "line_count": 313,
+      "line_count": 333,
       "path": "backend/services/phase3_service.py"
     },
     {
@@ -16611,7 +16971,7 @@
       "file_type": "code",
       "name": "project_service.py",
       "extension": ".py",
-      "line_count": 137,
+      "line_count": 130,
       "path": "backend/services/project_service.py"
     },
     {
@@ -16629,7 +16989,7 @@
       "file_type": "code",
       "name": "task_service.py",
       "extension": ".py",
-      "line_count": 485,
+      "line_count": 701,
       "path": "backend/services/task_service.py"
     },
     {
@@ -16656,8 +17016,26 @@
       "file_type": "code",
       "name": "conftest.py",
       "extension": ".py",
-      "line_count": 122,
+      "line_count": 124,
       "path": "backend/tests/conftest.py"
+    },
+    {
+      "id": "backend/tests/test_activities.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "test_activities.py",
+      "extension": ".py",
+      "line_count": 25,
+      "path": "backend/tests/test_activities.py"
+    },
+    {
+      "id": "backend/tests/test_activity_service.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "test_activity_service.py",
+      "extension": ".py",
+      "line_count": 333,
+      "path": "backend/tests/test_activity_service.py"
     },
     {
       "id": "backend/tests/test_agents.py",
@@ -16665,8 +17043,26 @@
       "file_type": "code",
       "name": "test_agents.py",
       "extension": ".py",
-      "line_count": 346,
+      "line_count": 974,
       "path": "backend/tests/test_agents.py"
+    },
+    {
+      "id": "backend/tests/test_agent_memory.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "test_agent_memory.py",
+      "extension": ".py",
+      "line_count": 393,
+      "path": "backend/tests/test_agent_memory.py"
+    },
+    {
+      "id": "backend/tests/test_agent_roles.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "test_agent_roles.py",
+      "extension": ".py",
+      "line_count": 453,
+      "path": "backend/tests/test_agent_roles.py"
     },
     {
       "id": "backend/tests/test_auth.py",
@@ -16676,6 +17072,15 @@
       "extension": ".py",
       "line_count": 157,
       "path": "backend/tests/test_auth.py"
+    },
+    {
+      "id": "backend/tests/test_executions.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "test_executions.py",
+      "extension": ".py",
+      "line_count": 866,
+      "path": "backend/tests/test_executions.py"
     },
     {
       "id": "backend/tests/test_integration.py",
@@ -16701,7 +17106,7 @@
       "file_type": "code",
       "name": "test_orgs.py",
       "extension": ".py",
-      "line_count": 283,
+      "line_count": 351,
       "path": "backend/tests/test_orgs.py"
     },
     {
@@ -16723,6 +17128,24 @@
       "path": "backend/tests/test_project_agents.py"
     },
     {
+      "id": "backend/tests/test_scheduler.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "test_scheduler.py",
+      "extension": ".py",
+      "line_count": 380,
+      "path": "backend/tests/test_scheduler.py"
+    },
+    {
+      "id": "backend/tests/test_tasks.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "test_tasks.py",
+      "extension": ".py",
+      "line_count": 3270,
+      "path": "backend/tests/test_tasks.py"
+    },
+    {
       "id": "backend/tests/test_users.py",
       "type": "file",
       "file_type": "code",
@@ -16730,6 +17153,15 @@
       "extension": ".py",
       "line_count": 114,
       "path": "backend/tests/test_users.py"
+    },
+    {
+      "id": "backend/tests/test_workflows.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "test_workflows.py",
+      "extension": ".py",
+      "line_count": 307,
+      "path": "backend/tests/test_workflows.py"
     },
     {
       "id": "backend/tests/__init__.py",
@@ -16757,6 +17189,15 @@
       "extension": ".py",
       "line_count": 80,
       "path": "backend/alembic/versions/64d21646b23e_create_projects_agents_project_agents_.py"
+    },
+    {
+      "id": "backend/alembic/versions/9a7b3c1d_add_agent_memory_column.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "9a7b3c1d_add_agent_memory_column.py",
+      "extension": ".py",
+      "line_count": 26,
+      "path": "backend/alembic/versions/9a7b3c1d_add_agent_memory_column.py"
     },
     {
       "id": "backend/alembic/versions/9a7b3c1d_create_agent_roles_skills_metrics.py",
@@ -16840,6 +17281,16 @@
     {
       "source": "backend/main.py",
       "target": "import:starlette.exceptions",
+      "type": "uses"
+    },
+    {
+      "source": "backend/main.py",
+      "target": "import:starlette.staticfiles",
+      "type": "uses"
+    },
+    {
+      "source": "backend/main.py",
+      "target": "import:os",
       "type": "uses"
     },
     {
@@ -42433,6 +42884,16 @@
       "type": "uses"
     },
     {
+      "source": "backend/core/exceptions.py",
+      "target": "import:fastapi",
+      "type": "uses"
+    },
+    {
+      "source": "backend/core/exceptions.py",
+      "target": "import:typing",
+      "type": "uses"
+    },
+    {
       "source": "backend/core/security.py",
       "target": "import:datetime",
       "type": "uses"
@@ -42475,6 +42936,31 @@
     {
       "source": "backend/core/security.py",
       "target": "import:models.user",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/activity.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/activity.py",
+      "target": "import:sqlalchemy.sql",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/activity.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/activity.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
+      "source": "backend/models/activity.py",
+      "target": "import:uuid",
       "type": "uses"
     },
     {
@@ -43013,6 +43499,51 @@
       "type": "uses"
     },
     {
+      "source": "backend/routers/activities.py",
+      "target": "import:fastapi",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/activities.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/activities.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/activities.py",
+      "target": "import:core.security",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/activities.py",
+      "target": "import:models.user",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/activities.py",
+      "target": "import:models.activity",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/activities.py",
+      "target": "import:schemas.activity",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/activities.py",
+      "target": "import:services.activity_service",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/activities.py",
+      "target": "import:typing",
+      "type": "uses"
+    },
+    {
       "source": "backend/routers/agents.py",
       "target": "import:fastapi",
       "type": "uses"
@@ -43044,6 +43575,11 @@
     },
     {
       "source": "backend/routers/agents.py",
+      "target": "import:schemas.agent_role",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/agents.py",
       "target": "import:services.agent_service",
       "type": "uses"
     },
@@ -43055,11 +43591,6 @@
     {
       "source": "backend/routers/agents.py",
       "target": "import:json",
-      "type": "uses"
-    },
-    {
-      "source": "backend/routers/agents.py",
-      "target": "import:datetime",
       "type": "uses"
     },
     {
@@ -43143,6 +43674,56 @@
       "type": "uses"
     },
     {
+      "source": "backend/routers/dashboard.py",
+      "target": "import:fastapi",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/dashboard.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/dashboard.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/dashboard.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/dashboard.py",
+      "target": "import:core.security",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/dashboard.py",
+      "target": "import:models.user",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/dashboard.py",
+      "target": "import:models.project",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/dashboard.py",
+      "target": "import:models.task",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/dashboard.py",
+      "target": "import:models.agent",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/dashboard.py",
+      "target": "import:models.activity",
+      "type": "uses"
+    },
+    {
       "source": "backend/routers/executions.py",
       "target": "import:fastapi",
       "type": "uses"
@@ -43160,6 +43741,11 @@
     {
       "source": "backend/routers/executions.py",
       "target": "import:core.security",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/executions.py",
+      "target": "import:core.exceptions",
       "type": "uses"
     },
     {
@@ -43263,6 +43849,11 @@
       "type": "uses"
     },
     {
+      "source": "backend/routers/orgs.py",
+      "target": "import:services.agent_service",
+      "type": "uses"
+    },
+    {
       "source": "backend/routers/phase3.py",
       "target": "import:fastapi",
       "type": "uses"
@@ -43350,6 +43941,16 @@
     {
       "source": "backend/routers/projects.py",
       "target": "import:services.project_service",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/projects.py",
+      "target": "import:services.task_service",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/projects.py",
+      "target": "import:models.task",
       "type": "uses"
     },
     {
@@ -43514,6 +44115,11 @@
     },
     {
       "source": "backend/routers/workflows.py",
+      "target": "import:services.execution_service",
+      "type": "uses"
+    },
+    {
+      "source": "backend/routers/workflows.py",
       "target": "import:json",
       "type": "uses"
     },
@@ -43593,6 +44199,21 @@
       "type": "uses"
     },
     {
+      "source": "backend/schemas/activity.py",
+      "target": "import:pydantic",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/activity.py",
+      "target": "import:typing",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/activity.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
       "source": "backend/schemas/agent.py",
       "target": "import:pydantic",
       "type": "uses"
@@ -43600,6 +44221,16 @@
     {
       "source": "backend/schemas/agent.py",
       "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/agent.py",
+      "target": "import:typing",
+      "type": "uses"
+    },
+    {
+      "source": "backend/schemas/agent_role.py",
+      "target": "import:json",
       "type": "uses"
     },
     {
@@ -43748,6 +44379,31 @@
       "type": "uses"
     },
     {
+      "source": "backend/services/activity_service.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/activity_service.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/activity_service.py",
+      "target": "import:models.activity",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/activity_service.py",
+      "target": "import:schemas.activity",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/activity_service.py",
+      "target": "import:typing",
+      "type": "uses"
+    },
+    {
       "source": "backend/services/agent_role_service.py",
       "target": "import:uuid",
       "type": "uses"
@@ -43799,7 +44455,7 @@
     },
     {
       "source": "backend/services/agent_service.py",
-      "target": "import:fastapi",
+      "target": "import:datetime",
       "type": "uses"
     },
     {
@@ -43810,6 +44466,16 @@
     {
       "source": "backend/services/agent_service.py",
       "target": "import:models.agent",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/agent_service.py",
+      "target": "import:models.agent_skill",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/agent_service.py",
+      "target": "import:models.agent_metric",
       "type": "uses"
     },
     {
@@ -43825,21 +44491,6 @@
     {
       "source": "backend/services/agent_service.py",
       "target": "import:models.project_agent",
-      "type": "uses"
-    },
-    {
-      "source": "backend/services/agent_service.py",
-      "target": "import:models.user",
-      "type": "uses"
-    },
-    {
-      "source": "backend/services/agent_service.py",
-      "target": "import:schemas.agent",
-      "type": "uses"
-    },
-    {
-      "source": "backend/services/auth_service.py",
-      "target": "import:fastapi",
       "type": "uses"
     },
     {
@@ -43860,6 +44511,11 @@
     {
       "source": "backend/services/auth_service.py",
       "target": "import:core.security",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/auth_service.py",
+      "target": "import:core.exceptions",
       "type": "uses"
     },
     {
@@ -43894,6 +44550,11 @@
     },
     {
       "source": "backend/services/execution_service.py",
+      "target": "import:core.exceptions",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/execution_service.py",
       "target": "import:models.execution",
       "type": "uses"
     },
@@ -43905,16 +44566,6 @@
     {
       "source": "backend/services/execution_service.py",
       "target": "import:models.agent",
-      "type": "uses"
-    },
-    {
-      "source": "backend/services/execution_service.py",
-      "target": "import:models.project",
-      "type": "uses"
-    },
-    {
-      "source": "backend/services/org_service.py",
-      "target": "import:fastapi",
       "type": "uses"
     },
     {
@@ -43945,6 +44596,11 @@
     {
       "source": "backend/services/org_service.py",
       "target": "import:schemas.invitation",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/org_service.py",
+      "target": "import:core.exceptions",
       "type": "uses"
     },
     {
@@ -44009,11 +44665,6 @@
     },
     {
       "source": "backend/services/project_service.py",
-      "target": "import:fastapi",
-      "type": "uses"
-    },
-    {
-      "source": "backend/services/project_service.py",
       "target": "import:sqlalchemy.orm",
       "type": "uses"
     },
@@ -44040,6 +44691,11 @@
     {
       "source": "backend/services/project_service.py",
       "target": "import:schemas.project",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/project_service.py",
+      "target": "import:core.exceptions",
       "type": "uses"
     },
     {
@@ -44104,6 +44760,11 @@
     },
     {
       "source": "backend/services/task_service.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/services/task_service.py",
       "target": "import:csv",
       "type": "uses"
     },
@@ -44140,11 +44801,6 @@
     {
       "source": "backend/services/task_service.py",
       "target": "import:models.task_comment",
-      "type": "uses"
-    },
-    {
-      "source": "backend/services/task_service.py",
-      "target": "import:models.task_attachment",
       "type": "uses"
     },
     {
@@ -44258,6 +44914,61 @@
       "type": "uses"
     },
     {
+      "source": "backend/tests/test_activities.py",
+      "target": "import:pytest",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_activity_service.py",
+      "target": "import:pytest",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_activity_service.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_activity_service.py",
+      "target": "import:sqlalchemy.orm",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_activity_service.py",
+      "target": "import:sqlalchemy.pool",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_activity_service.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_activity_service.py",
+      "target": "import:core.database",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_activity_service.py",
+      "target": "import:models.activity",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_activity_service.py",
+      "target": "import:models.user",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_activity_service.py",
+      "target": "import:schemas.activity",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_activity_service.py",
+      "target": "import:services.activity_service",
+      "type": "uses"
+    },
+    {
       "source": "backend/tests/test_agents.py",
       "target": "import:pytest",
       "type": "uses"
@@ -44273,8 +44984,88 @@
       "type": "uses"
     },
     {
+      "source": "backend/tests/test_agent_memory.py",
+      "target": "import:pytest",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_agent_memory.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_agent_memory.py",
+      "target": "import:json",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_agent_memory.py",
+      "target": "import:models.agent",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_agent_roles.py",
+      "target": "import:pytest",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_agent_roles.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_agent_roles.py",
+      "target": "import:models.agent_role",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_agent_roles.py",
+      "target": "import:core.security",
+      "type": "uses"
+    },
+    {
       "source": "backend/tests/test_auth.py",
       "target": "import:pytest",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_executions.py",
+      "target": "import:pytest",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_executions.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_executions.py",
+      "target": "import:json",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_executions.py",
+      "target": "import:models.task",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_executions.py",
+      "target": "import:models.project",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_executions.py",
+      "target": "import:models.project_member",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_executions.py",
+      "target": "import:models.agent",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_executions.py",
+      "target": "import:models.execution",
       "type": "uses"
     },
     {
@@ -44358,8 +45149,118 @@
       "type": "uses"
     },
     {
+      "source": "backend/tests/test_scheduler.py",
+      "target": "import:pytest",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_scheduler.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_scheduler.py",
+      "target": "import:models.scheduler_job",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_scheduler.py",
+      "target": "import:models.task",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_scheduler.py",
+      "target": "import:models.agent",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_scheduler.py",
+      "target": "import:models.project",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_scheduler.py",
+      "target": "import:models.project_member",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_tasks.py",
+      "target": "import:pytest",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_tasks.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_tasks.py",
+      "target": "import:models.task",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_tasks.py",
+      "target": "import:models.project",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_tasks.py",
+      "target": "import:models.project_member",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_tasks.py",
+      "target": "import:models.user",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_tasks.py",
+      "target": "import:core.security",
+      "type": "uses"
+    },
+    {
       "source": "backend/tests/test_users.py",
       "target": "import:pytest",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_workflows.py",
+      "target": "import:pytest",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_workflows.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_workflows.py",
+      "target": "import:json",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_workflows.py",
+      "target": "import:models.workflow",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_workflows.py",
+      "target": "import:models.task",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_workflows.py",
+      "target": "import:models.agent",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_workflows.py",
+      "target": "import:models.project",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_workflows.py",
+      "target": "import:models.project_member",
       "type": "uses"
     },
     {
@@ -44389,6 +45290,21 @@
     },
     {
       "source": "backend/alembic/versions/64d21646b23e_create_projects_agents_project_agents_.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
+      "source": "backend/alembic/versions/9a7b3c1d_add_agent_memory_column.py",
+      "target": "import:typing",
+      "type": "uses"
+    },
+    {
+      "source": "backend/alembic/versions/9a7b3c1d_add_agent_memory_column.py",
+      "target": "import:alembic",
+      "type": "uses"
+    },
+    {
+      "source": "backend/alembic/versions/9a7b3c1d_add_agent_memory_column.py",
       "target": "import:sqlalchemy",
       "type": "uses"
     },
@@ -44441,17 +45357,17 @@
   "metadata": {
     "project": "D:\\project\\aicoding\\OpenClawHub",
     "project_name": "OpenClawHub",
-    "analyzed_at": "2026-04-23T00:14:29.529243",
+    "analyzed_at": "2026-04-25T23:55:17.852640",
     "stats": {
-      "total_files": 1865,
-      "code_files": 1012,
-      "doc_files": 611,
-      "config_files": 51,
-      "total_lines": 762054,
+      "total_files": 1914,
+      "code_files": 1032,
+      "doc_files": 628,
+      "config_files": 54,
+      "total_lines": 773983,
       "languages": {
-        "Python": 929,
+        "Python": 945,
         "JavaScript": 5,
-        "TypeScript": 47,
+        "TypeScript": 51,
         "TypeScript (TSX)": 30,
         "Ruby": 1
       }

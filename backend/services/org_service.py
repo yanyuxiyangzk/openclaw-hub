@@ -1,10 +1,14 @@
-from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from models.organization import Organization, OrganizationMember
 from models.invitation import Invitation
 from models.user import User
 from schemas.organization import OrganizationCreate, OrganizationUpdate
 from schemas.invitation import InvitationCreate
+from core.exceptions import (
+    BadRequestException, ForbiddenException, ConflictException,
+    InvitationNotPendingException, InvitationExpiredException,
+    AlreadyMemberException, OnlyOwnerCanRevokeException
+)
 from datetime import datetime, timedelta, timezone
 import secrets
 
@@ -101,10 +105,7 @@ class OrgService:
 
     def accept_invitation(self, invitation: Invitation, user: User) -> OrganizationMember:
         if invitation.status != "pending":
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail={"code": 42201, "message": "Invitation is not pending"}
-            )
+            raise InvitationNotPendingException()
         now = datetime.now(timezone.utc)
         expires_at = invitation.expires_at
         if expires_at.tzinfo is None:
@@ -112,20 +113,14 @@ class OrgService:
         if expires_at < now:
             invitation.status = "expired"
             self.db.commit()
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail={"code": 42201, "message": "Invitation has expired"}
-            )
+            raise InvitationExpiredException()
 
         existing = self.db.query(OrganizationMember).filter(
             OrganizationMember.org_id == invitation.org_id,
             OrganizationMember.user_id == user.id
         ).first()
         if existing:
-            raise HTTPException(
-                status_code=status.HTTP_409_CONFLICT,
-                detail={"code": 40901, "message": "Already a member"}
-            )
+            raise AlreadyMemberException()
 
         invitation.status = "accepted"
         member = OrganizationMember(
@@ -143,10 +138,7 @@ class OrgService:
             return False
         org = self.get_org_by_id(invitation.org_id)
         if not org or not self.is_org_owner(org, user):
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail={"code": 40301, "message": "Only owner can revoke invitations"}
-            )
+            raise OnlyOwnerCanRevokeException()
         self.db.delete(invitation)
         self.db.commit()
         return True

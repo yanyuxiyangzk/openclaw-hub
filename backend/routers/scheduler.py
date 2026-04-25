@@ -59,6 +59,39 @@ def list_jobs(
     return response(data={"items": [_job_to_response(j) for j in jobs], "total": total})
 
 
+@router.get("/jobs/{job_id}", response_model=dict)
+def get_job(
+    job_id: str,
+    current_user: User = Depends(get_current_user),
+    service: SchedulerService = Depends(get_scheduler_service)
+):
+    """GET /api/scheduler/jobs/{id} - Get scheduled task (T-514)"""
+    try:
+        job = service.get_job(job_id, current_user)
+        return response(data=_job_to_response(job))
+    except PermissionError as e:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail={"code": 40301, "message": str(e)})
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"code": 40401, "message": str(e)})
+
+
+@router.put("/jobs/{job_id}", response_model=dict)
+def update_job(
+    job_id: str,
+    data: SchedulerJobUpdate,
+    current_user: User = Depends(get_current_user),
+    service: SchedulerService = Depends(get_scheduler_service)
+):
+    """PUT /api/scheduler/jobs/{id} - Update scheduled task (T-515)"""
+    try:
+        job = service.update_job(job_id, data, current_user)
+        return response(data=_job_to_response(job))
+    except PermissionError as e:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail={"code": 40301, "message": str(e)})
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"code": 40401, "message": str(e)})
+
+
 @router.delete("/jobs/{job_id}", response_model=dict)
 def delete_job(
     job_id: str,

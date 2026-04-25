@@ -3,7 +3,7 @@ version: '3.9'
 services:
   backend:
     build:
-      context: .
+      context: /mnt/d/project/aicoding/OpenClawHub
       dockerfile: docker/Dockerfile.backend
     ports:
       - "8008:8008"
@@ -20,7 +20,7 @@ services:
 
   frontend:
     build:
-      context: .
+      context: /mnt/d/project/aicoding/OpenClawHub
       dockerfile: docker/Dockerfile.frontend
     ports:
       - "80:80"

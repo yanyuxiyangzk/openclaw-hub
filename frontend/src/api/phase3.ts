@@ -114,7 +114,7 @@ export const resetAgentState = (agentId: string) =>
 
 // ========== Agent Metrics ==========
 
-export interface AgentMetric {
+export interface AgentMetricEntry {
   id: string
   agent_id: string
   date: string
@@ -122,7 +122,15 @@ export interface AgentMetric {
   tasks_failed: number
   avg_response_time_ms: number
   token_usage: number
-  created_at: string
+}
+
+export interface AgentMetricsResponse {
+  id: string
+  metrics: AgentMetricEntry[]
+  total_tasks_completed: number
+  total_tasks_failed: number
+  avg_response_time_ms: number
+  total_token_usage: number
 }
 
 export interface AgentDailyStats {
@@ -173,7 +181,7 @@ export interface AgentHealthDetail {
 }
 
 export const getAgentMetrics = (agentId: string, days = 7) =>
-  api.get<ApiResponse<AgentMetric[]>>(`/agents/${agentId}/metrics?days=${days}`)
+  api.get<ApiResponse<AgentMetricsResponse>>(`/agents/${agentId}/metrics?days=${days}`)
 
 export const getAgentDailyStats = (agentId: string, startDate: string, endDate: string) =>
   api.get<ApiResponse<AgentDailyStats[]>>(`/agents/${agentId}/metrics/daily?start_date=${startDate}&end_date=${endDate}`)

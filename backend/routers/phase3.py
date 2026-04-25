@@ -49,93 +49,7 @@ def check_agent_access(db: Session, agent: Agent, user: User):
         )
 
 
-# ========== Agent Roles (T-301 ~ T-308) ==========
-
-@router.get("/agent-roles", response_model=dict)
-def list_agent_roles(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """GET /api/agent-roles - List roles (T-301)"""
-    org_id = get_org_id_from_user(db, current_user)
-    if not org_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={"code": 40301, "message": "User does not belong to any organization"}
-        )
-    service = Phase3Service(db)
-    roles = service.get_org_roles(org_id)
-    return response(data=[AgentRoleResponse.model_validate(r).model_dump() for r in roles])
-
-
-@router.post("/agent-roles", response_model=dict)
-def create_agent_role(data: AgentRoleCreate, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """POST /api/agent-roles - Create role (T-302)"""
-    service = Phase3Service(db)
-    role = service.create_role(data, current_user)
-    return response(data=AgentRoleResponse.model_validate(role).model_dump())
-
-
-@router.get("/agent-roles/{role_id}", response_model=dict)
-def get_agent_role(role_id: str, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """GET /api/agent-roles/{id} - Get role (T-303)"""
-    service = Phase3Service(db)
-    role = service.get_role_by_id(role_id)
-    if not role:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail={"code": 40401, "message": "Role not found"}
-        )
-
-    org_id = get_org_id_from_user(db, current_user)
-    if role.org_id != org_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={"code": 40301, "message": "Access denied"}
-        )
-    return response(data=AgentRoleResponse.model_validate(role).model_dump())
-
-
-@router.put("/agent-roles/{role_id}", response_model=dict)
-def update_agent_role(role_id: str, data: AgentRoleUpdate, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """PUT /api/agent-roles/{id} - Update role (T-304)"""
-    service = Phase3Service(db)
-    role = service.get_role_by_id(role_id)
-    if not role:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail={"code": 40401, "message": "Role not found"}
-        )
-
-    org_id = get_org_id_from_user(db, current_user)
-    if role.org_id != org_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={"code": 40301, "message": "Access denied"}
-        )
-
-    role = service.update_role(role, data)
-    return response(data=AgentRoleResponse.model_validate(role).model_dump())
-
-
-@router.delete("/agent-roles/{role_id}", response_model=dict)
-def delete_agent_role(role_id: str, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """DELETE /api/agent-roles/{id} - Delete role (T-305)"""
-    service = Phase3Service(db)
-    role = service.get_role_by_id(role_id)
-    if not role:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail={"code": 40401, "message": "Role not found"}
-        )
-
-    org_id = get_org_id_from_user(db, current_user)
-    if role.org_id != org_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={"code": 40301, "message": "Access denied"}
-        )
-
-    service.delete_role(role)
-    return response(message="Role deleted successfully")
-
+# ========== Agent Skills (T-306 ~ T-308) ==========
 
 @router.post("/agents/{agent_id}/skills", response_model=dict)
 def bind_agent_skill(agent_id: str, data: AgentSkillBindRequest, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
@@ -178,27 +92,7 @@ def list_agent_skills(agent_id: str, current_user: User = Depends(get_current_us
 
 
 # ========== Agent Memory (T-310 ~ T-315) ==========
-
-@router.get("/agents/{agent_id}/memory", response_model=dict)
-def get_agent_memory(agent_id: str, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """GET /api/agents/{id}/memory - Get memory config (T-310)"""
-    agent = get_agent_or_404(db, agent_id)
-    check_agent_access(db, agent, current_user)
-
-    service = Phase3Service(db)
-    memory = service.get_agent_memory_config(agent)
-    return response(data=memory)
-
-
-@router.put("/agents/{agent_id}/memory", response_model=dict)
-def update_agent_memory(agent_id: str, data: AgentMemoryConfig, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """PUT /api/agents/{id}/memory - Update memory config (T-311)"""
-    agent = get_agent_or_404(db, agent_id)
-    check_agent_access(db, agent, current_user)
-
-    service = Phase3Service(db)
-    memory = service.update_agent_memory_config(agent, data)
-    return response(data=memory)
+# Note: GET/PUT/DELETE /api/agents/{id}/memory* is implemented in agents.py router
 
 
 @router.post("/agents/{agent_id}/context", response_model=dict)
@@ -223,15 +117,7 @@ def get_agent_history(agent_id: str, limit: int = Query(50, ge=1, le=200), curre
     return response(data=history)
 
 
-@router.delete("/agents/{agent_id}/memory/clear", response_model=dict)
-def clear_agent_memory(agent_id: str, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """DELETE /api/agents/{id}/memory/clear - Clear memory (T-314)"""
-    agent = get_agent_or_404(db, agent_id)
-    check_agent_access(db, agent, current_user)
-
-    service = Phase3Service(db)
-    result = service.clear_agent_memory(agent)
-    return response(data=result)
+# Note: DELETE /api/agents/{id}/memory/clear is implemented in agents.py router
 
 
 @router.post("/agents/{agent_id}/reset", response_model=dict)
@@ -304,14 +190,3 @@ def get_agent_performance(agent_id: str, days: int = Query(7, ge=1, le=90), curr
     service = Phase3Service(db)
     perf = service.get_agent_performance(agent, days)
     return response(data=perf)
-
-
-@router.get("/agents/{agent_id}/health", response_model=dict)
-def get_agent_health_detail(agent_id: str, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """GET /api/agents/{id}/health - Get agent health (T-325)"""
-    agent = get_agent_or_404(db, agent_id)
-    check_agent_access(db, agent, current_user)
-
-    service = Phase3Service(db)
-    health = service.get_agent_health_detail(agent)
-    return response(data=health)

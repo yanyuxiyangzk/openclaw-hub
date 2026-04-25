@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
+from starlette.staticfiles import StaticFiles
+import os
 from config import get_settings
 from routers import auth_router, users_router, orgs_router, invitations_router, projects_router, agents_router, agent_roles_router, ws_router, phase3_router, tasks_router, executions_router, scheduler_router, workflows_router, activities_router, dashboard_router
 from core.database import engine, Base
@@ -128,6 +130,11 @@ app.include_router(scheduler_router)
 app.include_router(workflows_router)
 app.include_router(activities_router)
 app.include_router(dashboard_router)
+
+# Serve uploaded files
+uploads_dir = os.path.join(os.path.dirname(__file__), "uploads")
+if os.path.exists(uploads_dir):
+    app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads")
 
 
 @app.get("/health")

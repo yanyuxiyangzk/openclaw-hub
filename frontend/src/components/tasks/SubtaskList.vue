@@ -34,7 +34,7 @@
 import type { Task, TaskStatus } from '@/api/tasks'
 import { updateTask } from '@/api/tasks'
 
-const props = defineProps<{
+defineProps<{
   taskId: string
   subtasks: Task[]
 }>()

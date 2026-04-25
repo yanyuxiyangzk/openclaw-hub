@@ -1,0 +1,1 @@
+# Dashboard statistics - no database model needed

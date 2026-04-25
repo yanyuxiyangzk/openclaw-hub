@@ -1,10 +1,15 @@
-from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from models.project import Project
 from models.project_member import ProjectMember
 from models.organization import Organization, OrganizationMember
 from models.user import User
 from schemas.project import ProjectCreate, ProjectUpdate
+from core.exceptions import (
+    NotFoundException, ForbiddenException, ConflictException,
+    OrganizationNotFoundException, ProjectNotFoundException,
+    UserAlreadyMemberException, CannotRemoveOwnerException,
+    InvalidProjectRoleException
+)
 import uuid
 
 
@@ -15,16 +20,10 @@ class ProjectService:
     def create_project(self, data: ProjectCreate, user: User) -> Project:
         org = self.db.query(Organization).filter(Organization.id == data.org_id).first()
         if not org:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail={"code": 40401, "message": "Organization not found"}
-            )
+            raise OrganizationNotFoundException(data.org_id)
 
         if not self.is_org_member(data.org_id, user):
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail={"code": 40301, "message": "Access denied"}
-            )
+            raise ForbiddenException(message="Access denied")
 
         project = Project(
             id=str(uuid.uuid4()),
@@ -97,10 +96,7 @@ class ProjectService:
             ProjectMember.user_id == user_id
         ).first()
         if existing:
-            raise HTTPException(
-                status_code=status.HTTP_409_CONFLICT,
-                detail={"code": 40901, "message": "User is already a project member"}
-            )
+            raise UserAlreadyMemberException()
 
         member = ProjectMember(
             id=str(uuid.uuid4()),
@@ -121,10 +117,7 @@ class ProjectService:
         if not member:
             return False
         if member.role == "owner":
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail={"code": 40301, "message": "Cannot remove project owner"}
-            )
+            raise CannotRemoveOwnerException()
         self.db.delete(member)
         self.db.commit()
         return True

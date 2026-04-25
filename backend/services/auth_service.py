@@ -1,8 +1,11 @@
-from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from models.user import User
 from schemas.auth import UserRegister, UserLogin, UserUpdate
 from core.security import get_password_hash, verify_password, create_access_token, create_refresh_token, decode_token
+from core.exceptions import (
+    EmailAlreadyRegisteredException, InvalidCredentialsException,
+    InvalidRefreshTokenException, UserInactiveException
+)
 
 
 class AuthService:
@@ -12,10 +15,7 @@ class AuthService:
     def register(self, data: UserRegister) -> User:
         existing = self.db.query(User).filter(User.email == data.email).first()
         if existing:
-            raise HTTPException(
-                status_code=status.HTTP_409_CONFLICT,
-                detail={"code": 40901, "message": "Email already registered"}
-            )
+            raise EmailAlreadyRegisteredException()
 
         user = User(
             email=data.email,
@@ -30,16 +30,10 @@ class AuthService:
     def authenticate(self, data: UserLogin) -> User:
         user = self.db.query(User).filter(User.email == data.email).first()
         if not user or not verify_password(data.password, user.password_hash):
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail={"code": 40101, "message": "Invalid email or password"}
-            )
+            raise InvalidCredentialsException()
 
         if not user.is_active:
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail={"code": 40101, "message": "User is inactive"}
-            )
+            raise UserInactiveException()
 
         return user
 
@@ -55,18 +49,12 @@ class AuthService:
     def refresh_tokens(self, refresh_token: str) -> dict:
         payload = decode_token(refresh_token)
         if payload.get("type") != "refresh":
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail={"code": 40101, "message": "Invalid refresh token"}
-            )
+            raise InvalidRefreshTokenException()
 
         user_id = payload.get("sub")
         user = self.db.query(User).filter(User.id == user_id).first()
         if not user or not user.is_active:
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail={"code": 40101, "message": "Invalid refresh token"}
-            )
+            raise InvalidRefreshTokenException()
 
         return self.create_tokens(user)
 

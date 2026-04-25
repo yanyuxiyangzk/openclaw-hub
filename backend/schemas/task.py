@@ -6,7 +6,7 @@ from typing import Optional
 class TaskCreate(BaseModel):
     title: str = Field(..., min_length=1, max_length=256)
     description: Optional[str] = None
-    project_id: str
+    project_id: Optional[str] = None  # Required for direct task creation, inherited from parent for subtasks
     status: str = "todo"
     priority: str = "medium"
     parent_id: Optional[str] = None
@@ -25,6 +25,8 @@ class TaskUpdate(BaseModel):
     description: Optional[str] = None
     status: Optional[str] = None
     priority: Optional[str] = None
+    parent_id: Optional[str] = None
+    root_id: Optional[str] = None
     position: Optional[int] = None
     estimated_hours: Optional[float] = None
     actual_hours: Optional[float] = None

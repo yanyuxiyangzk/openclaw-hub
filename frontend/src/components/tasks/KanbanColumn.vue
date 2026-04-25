@@ -52,10 +52,37 @@ const onDragStart = (task: Task) => {
   draggedTask.value = task
 }
 
-const onDrop = async () => {
-  if (draggedTask.value && draggedTask.value.status !== props.column.status) {
-    emit('taskMoved', draggedTask.value.id, props.column.status, props.column.tasks.length)
-    draggedTask.value = null
+const onDrop = async (event: DragEvent) => {
+  if (!draggedTask.value) return
+
+  // Find the task list element
+  const taskListEl = (event.target as HTMLElement).closest('.task-list') as HTMLElement
+  if (!taskListEl) return
+
+  // Get all task cards except the dragged one
+  const taskCards = Array.from(taskListEl.querySelectorAll('.task-card')) as HTMLElement[]
+  const validCards = taskCards.filter(card => !card.classList.contains('opacity-50'))
+
+  let dropIndex = validCards.length
+  const mouseY = event.clientY
+
+  for (let i = 0; i < validCards.length; i++) {
+    const rect = validCards[i].getBoundingClientRect()
+    if (mouseY < rect.top + rect.height / 2) {
+      dropIndex = i
+      break
+    }
   }
+
+  // Emit task-moved if status changed OR position changed
+  const hasStatusChanged = draggedTask.value.status !== props.column.status
+  const currentIndex = props.column.tasks.findIndex(t => t.id === draggedTask.value!.id)
+  const hasPositionChanged = currentIndex !== -1 && dropIndex !== currentIndex
+
+  if (hasStatusChanged || hasPositionChanged) {
+    emit('taskMoved', draggedTask.value.id, props.column.status, dropIndex)
+  }
+
+  draggedTask.value = null
 }
 </script>

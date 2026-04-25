@@ -184,10 +184,26 @@ export interface AgentPerformance {
   uptime_percent: number
 }
 
+export interface AgentHistoryItem {
+  id: string
+  tenant_id: string
+  actor_id: string
+  actor_name: string
+  actor_avatar: string | null
+  action_type: string
+  entity_type: string
+  entity_id: string
+  entity_name: string | null
+  extra_data: Record<string, unknown> | null
+  created_at: string
+}
+
 export interface AgentHistory {
-  agent_id: string
-  messages: Record<string, unknown>[]
+  items: AgentHistoryItem[]
   total: number
+  page: number
+  limit: number
+  pages: number
 }
 
 export interface AgentHealthDetail {
@@ -227,6 +243,8 @@ export interface Task {
   created_by: string
   created_at: string
   updated_at: string
+  comment_count?: number
+  subtask_count?: number
 }
 
 export interface TaskComment {

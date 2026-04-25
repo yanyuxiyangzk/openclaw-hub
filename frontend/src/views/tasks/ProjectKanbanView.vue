@@ -16,6 +16,8 @@
     <KanbanBoard
       ref="kanbanRef"
       :project-id="projectId"
+      :members="projectMembers"
+      :show-filter="true"
       @task-click="onTaskClick"
     />
 

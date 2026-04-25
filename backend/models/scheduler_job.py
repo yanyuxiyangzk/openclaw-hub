@@ -19,5 +19,5 @@ class SchedulerJob(Base):
     next_run_at = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
-    task_template = relationship("Task", back_populates="scheduler_jobs")
+    task = relationship("Task")
     agent = relationship("Agent", back_populates="scheduler_jobs")
