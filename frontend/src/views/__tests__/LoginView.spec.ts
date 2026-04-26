@@ -25,7 +25,7 @@ describe('LoginView', () => {
     const wrapper = mount(LoginView, {
       global: { plugins: [router] },
     })
-    expect(wrapper.find('h1').text()).toBe('OpenClawHub 登录')
+    expect(wrapper.find('h1').text()).toBe('OpenClawHub')
     expect(wrapper.find('input[type="email"]').exists()).toBe(true)
     expect(wrapper.find('input[type="password"]').exists()).toBe(true)
     expect(wrapper.find('button[type="submit"]').text()).toBe('登录')
@@ -35,6 +35,6 @@ describe('LoginView', () => {
     const wrapper = mount(LoginView, {
       global: { plugins: [router] },
     })
-    expect(wrapper.find('a').text()).toBe('注册')
+    expect(wrapper.find('a').text()).toBe('注册新账号')
   })
 })
