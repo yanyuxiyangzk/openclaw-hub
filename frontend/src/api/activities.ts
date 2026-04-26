@@ -8,4 +8,10 @@ export const activitiesApi = {
   create: (data: ActivityCreateData) => {
     return api.post<{ code: number; data: Activity }>('/activities', data);
   },
+  unreadCount: () => {
+    return api.get<{ code: number; data: { unread_count: number } }>('/activities/unread');
+  },
+  markAsRead: (activityIds?: string[]) => {
+    return api.post<{ code: number; data: { marked_count: number } }>('/activities/mark-read', activityIds);
+  },
 };

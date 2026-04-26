@@ -6,7 +6,7 @@ from models.user import User
 from models.activity import Activity
 from schemas.activity import ActivityResponse, ActivityCreate, ActivityListResponse
 from services.activity_service import ActivityService
-from typing import Optional
+from typing import Optional, List
 
 router = APIRouter(prefix="/api/activities", tags=["activities"])
 
@@ -43,3 +43,24 @@ def create_activity(
     service = ActivityService(db)
     activity = service.create_activity(tenant_id=current_user.tenant_id, data=data)
     return api_response(data=ActivityResponse.model_validate(activity).model_dump())
+
+@router.get("/unread", response_model=dict)
+def get_unread_count(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """获取未读活动数量"""
+    service = ActivityService(db)
+    count = service.get_unread_count(tenant_id=current_user.tenant_id)
+    return api_response(data={"unread_count": count})
+
+@router.post("/mark-read", response_model=dict)
+def mark_as_read(
+    activity_ids: Optional[List[str]] = Query(None, description="要标记为已读的活动ID列表，空列表或None表示标记全部"),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """标记活动为已读"""
+    service = ActivityService(db)
+    count = service.mark_as_read(tenant_id=current_user.tenant_id, activity_ids=activity_ids)
+    return api_response(data={"marked_count": count})

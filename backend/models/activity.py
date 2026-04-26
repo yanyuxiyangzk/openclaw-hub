@@ -19,4 +19,5 @@ class Activity(Base):
     entity_id = Column(String(36), nullable=False, index=True)
     entity_name = Column(String(256), nullable=True)
     extra_data = Column(JSON, nullable=True)  # 额外上下文数据
+    read_at = Column(DateTime(timezone=True), nullable=True)  # NULL = 未读, 有值 = 已读
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False, index=True)

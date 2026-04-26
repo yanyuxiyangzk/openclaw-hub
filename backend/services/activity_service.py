@@ -2,7 +2,8 @@ from sqlalchemy.orm import Session
 from sqlalchemy import desc
 from models.activity import Activity
 from schemas.activity import ActivityCreate, ActivityResponse, ActivityListData
-from typing import Optional
+from typing import Optional, List
+from datetime import datetime
 
 class ActivityService:
     def __init__(self, db: Session):
@@ -42,3 +43,24 @@ class ActivityService:
         self.db.commit()
         self.db.refresh(activity)
         return activity
+
+    def get_unread_count(self, tenant_id: str) -> int:
+        """获取未读活动数量"""
+        return self.db.query(Activity).filter(
+            Activity.tenant_id == tenant_id,
+            Activity.read_at.is_(None)
+        ).count()
+
+    def mark_as_read(self, tenant_id: str, activity_ids: Optional[List[str]] = None) -> int:
+        """标记活动为已读。如果提供 activity_ids，则只标记指定的活动；否则标记所有未读活动"""
+        query = self.db.query(Activity).filter(
+            Activity.tenant_id == tenant_id,
+            Activity.read_at.is_(None)
+        )
+        if activity_ids:
+            query = query.filter(Activity.id.in_(activity_ids))
+
+        now = datetime.utcnow()
+        count = query.update({Activity.read_at: now}, synchronize_session=False)
+        self.db.commit()
+        return count
