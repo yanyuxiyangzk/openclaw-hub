@@ -3,7 +3,7 @@
     <TaskFilter
       v-if="showFilter"
       :filters="filters"
-      :members="members"
+      :members="members ?? []"
       @update:filters="onFilterUpdate"
     />
     <div class="kanban-board flex gap-4 overflow-x-auto pb-4">
@@ -20,8 +20,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 import type { KanbanColumn as KanbanColumnType, Task, TaskStatus, TaskFilters } from '@/api/tasks'
+import type { TaskPriority } from '@/api/tasks'
 import { getKanbanBoard, moveTask } from '@/api/tasks'
 import type { ProjectMember } from '@/types'
 import KanbanColumn from './KanbanColumn.vue'
@@ -40,26 +41,17 @@ const emit = defineEmits<{
 const columns = ref<KanbanColumnType[]>([])
 const filters = ref<TaskFilters>({})
 
-const buildFilterParams = () => {
+const loadBoard = async () => {
   const params: {
-    priority?: TaskStatus
+    priority?: TaskPriority
     assignee_id?: string
     due?: 'overdue' | 'today' | 'this_week' | 'no_date'
-    tags?: string
   } = {}
 
   if (filters.value.priority) params.priority = filters.value.priority
   if (filters.value.assignee_id) params.assignee_id = filters.value.assignee_id
   if (filters.value.due) params.due = filters.value.due
-  if (filters.value.tags && filters.value.tags.length > 0) {
-    params.tags = filters.value.tags.join(',')
-  }
 
-  return params
-}
-
-const loadBoard = async () => {
-  const params = buildFilterParams()
   const res = await getKanbanBoard(props.projectId, Object.keys(params).length > 0 ? params : undefined)
   if (res.data.code === 0) {
     columns.value = res.data.data.columns

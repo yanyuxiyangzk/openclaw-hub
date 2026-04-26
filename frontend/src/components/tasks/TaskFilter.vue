@@ -80,7 +80,7 @@ import type { TaskFilters, TaskStatus, TaskPriority } from '@/api/tasks'
 
 defineProps<{
   filters: TaskFilters
-  members: ProjectMember[]
+  members?: ProjectMember[]
 }>()
 
 const emit = defineEmits<{
