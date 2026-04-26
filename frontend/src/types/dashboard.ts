@@ -18,3 +18,25 @@ export interface RecentActivity {
   entity_name?: string;
   created_at: string;
 }
+
+// Phase 7 Chart types
+export interface AgentsTasksChartData {
+  labels: string[];
+  datasets: {
+    agent_id: string;
+    agent_name: string;
+    data: number[];
+  }[];
+}
+
+export interface TaskCompletionChartData {
+  labels: string[];
+  completed: number[];
+  failed: number[];
+}
+
+export interface ActivityHeatmapData {
+  days: string[];
+  hours: number[];
+  values: number[][];
+}
