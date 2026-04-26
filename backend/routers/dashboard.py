@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from sqlalchemy import desc, func
 from core.database import get_db
@@ -118,3 +118,128 @@ def get_recent_activities(
         }
         for a in activities
     ])
+
+
+@router.get("/chart/agents-tasks", response_model=dict)
+def get_agents_tasks_chart(
+    days: int = Query(7, description="统计天数"),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """获取 Agent 完成任务趋势图表数据"""
+    from datetime import datetime, timezone, timedelta
+    from models.execution import Execution
+
+    org_id = get_org_id_from_user(db, current_user)
+    if not org_id:
+        return api_response(data={"labels": [], "datasets": []})
+
+    end_date = datetime.now(timezone.utc)
+    start_date = end_date - timedelta(days=days)
+
+    # 获取所有 agent
+    agents = db.query(Agent).filter(Agent.org_id == org_id).all()
+
+    # 生成日期标签
+    labels = []
+    for i in range(days):
+        day = (end_date - timedelta(days=days - 1 - i)).strftime("%Y-%m-%d")
+        labels.append(day)
+
+    # 对每个 agent 计算每天的任务数
+    datasets = []
+    for agent in agents:
+        agent_data = []
+        for i in range(days):
+            day_start = datetime.combine((end_date - timedelta(days=days - 1 - i)).date(), datetime.min.time()).replace(tzinfo=timezone.utc)
+            day_end = datetime.combine((end_date - timedelta(days=days - 1 - i)).date(), datetime.max.time()).replace(tzinfo=timezone.utc)
+            count = db.query(Execution).filter(
+                Execution.agent_id == agent.id,
+                Execution.status == 'completed',
+                Execution.created_at >= day_start,
+                Execution.created_at <= day_end
+            ).count()
+            agent_data.append(count)
+        datasets.append({
+            "agent_id": agent.id,
+            "agent_name": agent.name or agent.id,
+            "data": agent_data
+        })
+
+    return api_response(data={"labels": labels, "datasets": datasets})
+
+
+@router.get("/chart/task-completion", response_model=dict)
+def get_task_completion_chart(
+    days: int = Query(7, description="统计天数"),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """获取任务完成趋势图表数据"""
+    from datetime import datetime, timezone, timedelta
+
+    org_id = get_org_id_from_user(db, current_user)
+    if not org_id:
+        return api_response(data={"labels": [], "completed": [], "failed": []})
+
+    end_date = datetime.now(timezone.utc)
+
+    labels = []
+    completed = []
+    failed = []
+
+    for i in range(days):
+        day = (end_date - timedelta(days=days - 1 - i)).strftime("%Y-%m-%d")
+        labels.append(day)
+        day_start = datetime.combine((end_date - timedelta(days=days - 1 - i)).date(), datetime.min.time()).replace(tzinfo=timezone.utc)
+        day_end = datetime.combine((end_date - timedelta(days=days - 1 - i)).date(), datetime.max.time()).replace(tzinfo=timezone.utc)
+
+        comp = db.query(Task).join(Project).filter(
+            Project.org_id == org_id,
+            Task.status == "completed",
+            Task.completed_at >= day_start,
+            Task.completed_at <= day_end
+        ).count()
+        fail = db.query(Task).join(Project).filter(
+            Project.org_id == org_id,
+            Task.status == "failed",
+            Task.completed_at >= day_start,
+            Task.completed_at <= day_end
+        ).count()
+        completed.append(comp)
+        failed.append(fail)
+
+    return api_response(data={"labels": labels, "completed": completed, "failed": failed})
+
+
+@router.get("/chart/activity-heatmap", response_model=dict)
+def get_activity_heatmap(
+    days: int = Query(7, description="统计天数"),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """获取活动热力图数据"""
+    from datetime import datetime, timezone, timedelta
+
+    org_id = get_org_id_from_user(db, current_user)
+    if not org_id:
+        return api_response(data={"days": [], "hours": list(range(24)), "values": []})
+
+    end_date = datetime.now(timezone.utc)
+
+    days_labels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    hours = list(range(24))
+    values = [[0] * 24 for _ in range(7)]
+
+    activities = db.query(Activity).filter(
+        Activity.tenant_id == current_user.tenant_id,
+        Activity.created_at >= end_date - timedelta(days=days)
+    ).all()
+
+    for activity in activities:
+        if activity.created_at:
+            weekday = activity.created_at.weekday()  # 0=Monday
+            hour = activity.created_at.hour
+            values[weekday][hour] += 1
+
+    return api_response(data={"days": days_labels, "hours": hours, "values": values})
