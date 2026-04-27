@@ -33,8 +33,17 @@
       "file_type": "doc",
       "name": "harness-context.md",
       "extension": ".md",
-      "line_count": 201,
+      "line_count": 110,
       "path": "harness-context.md"
+    },
+    {
+      "id": "openclawhub.db",
+      "type": "file",
+      "file_type": "other",
+      "name": "openclawhub.db",
+      "extension": ".db",
+      "line_count": 1,
+      "path": "openclawhub.db"
     },
     {
       "id": "README.md",
@@ -53,6 +62,24 @@
       "extension": ".py",
       "line_count": 55,
       "path": "verify_hermes.py"
+    },
+    {
+      "id": "axure/1.txt",
+      "type": "file",
+      "file_type": "doc",
+      "name": "1.txt",
+      "extension": ".txt",
+      "line_count": 459,
+      "path": "axure/1.txt"
+    },
+    {
+      "id": "axure/2.txt",
+      "type": "file",
+      "file_type": "doc",
+      "name": "2.txt",
+      "extension": ".txt",
+      "line_count": 488,
+      "path": "axure/2.txt"
     },
     {
       "id": "backend/alembic.ini",
@@ -96,7 +123,7 @@
       "file_type": "other",
       "name": "openclawhub.db",
       "extension": ".db",
-      "line_count": 456,
+      "line_count": 457,
       "path": "backend/openclawhub.db"
     },
     {
@@ -262,6 +289,42 @@
       "path": "docs/SPLIT_RESULT_20260423_131756.md"
     },
     {
+      "id": "docs/SPLIT_RESULT_20260426_182345.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_RESULT_20260426_182345.md",
+      "extension": ".md",
+      "line_count": 47,
+      "path": "docs/SPLIT_RESULT_20260426_182345.md"
+    },
+    {
+      "id": "docs/SPLIT_RESULT_20260426_182358.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_RESULT_20260426_182358.md",
+      "extension": ".md",
+      "line_count": 60,
+      "path": "docs/SPLIT_RESULT_20260426_182358.md"
+    },
+    {
+      "id": "docs/SPLIT_RESULT_20260426_185215.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_RESULT_20260426_185215.md",
+      "extension": ".md",
+      "line_count": 35,
+      "path": "docs/SPLIT_RESULT_20260426_185215.md"
+    },
+    {
+      "id": "docs/SPLIT_RESULT_20260426_190245.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_RESULT_20260426_190245.md",
+      "extension": ".md",
+      "line_count": 34,
+      "path": "docs/SPLIT_RESULT_20260426_190245.md"
+    },
+    {
       "id": "docs/SPLIT_TASKS_20260423_113418.md",
       "type": "file",
       "file_type": "doc",
@@ -323,6 +386,60 @@
       "extension": ".md",
       "line_count": 23,
       "path": "docs/SPLIT_TASKS_20260423_131310.md"
+    },
+    {
+      "id": "docs/SPLIT_TASKS_20260426_171933.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_TASKS_20260426_171933.md",
+      "extension": ".md",
+      "line_count": 47,
+      "path": "docs/SPLIT_TASKS_20260426_171933.md"
+    },
+    {
+      "id": "docs/SPLIT_TASKS_20260426_174202.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_TASKS_20260426_174202.md",
+      "extension": ".md",
+      "line_count": 48,
+      "path": "docs/SPLIT_TASKS_20260426_174202.md"
+    },
+    {
+      "id": "docs/SPLIT_TASKS_20260426_180416.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_TASKS_20260426_180416.md",
+      "extension": ".md",
+      "line_count": 27,
+      "path": "docs/SPLIT_TASKS_20260426_180416.md"
+    },
+    {
+      "id": "docs/SPLIT_TASKS_20260426_181947.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_TASKS_20260426_181947.md",
+      "extension": ".md",
+      "line_count": 45,
+      "path": "docs/SPLIT_TASKS_20260426_181947.md"
+    },
+    {
+      "id": "docs/SPLIT_TASKS_20260426_184833.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_TASKS_20260426_184833.md",
+      "extension": ".md",
+      "line_count": 19,
+      "path": "docs/SPLIT_TASKS_20260426_184833.md"
+    },
+    {
+      "id": "docs/SPLIT_TASKS_20260426_185452.md",
+      "type": "file",
+      "file_type": "doc",
+      "name": "SPLIT_TASKS_20260426_185452.md",
+      "extension": ".md",
+      "line_count": 19,
+      "path": "docs/SPLIT_TASKS_20260426_185452.md"
     },
     {
       "id": "docs/异常处理.md",
@@ -15729,7 +15846,7 @@
       "file_type": "code",
       "name": "activities.ts",
       "extension": ".ts",
-      "line_count": 12,
+      "line_count": 18,
       "path": "frontend/src/api/activities.ts"
     },
     {
@@ -15756,7 +15873,7 @@
       "file_type": "code",
       "name": "dashboard.ts",
       "extension": ".ts",
-      "line_count": 8,
+      "line_count": 12,
       "path": "frontend/src/api/dashboard.ts"
     },
     {
@@ -15900,7 +16017,7 @@
       "file_type": "code",
       "name": "dashboard.ts",
       "extension": ".ts",
-      "line_count": 20,
+      "line_count": 42,
       "path": "frontend/src/types/dashboard.ts"
     },
     {
@@ -16368,7 +16485,7 @@
       "file_type": "other",
       "name": "KanbanBoard.vue",
       "extension": ".vue",
-      "line_count": 89,
+      "line_count": 81,
       "path": "frontend/src/components/tasks/KanbanBoard.vue"
     },
     {
@@ -16476,7 +16593,7 @@
       "file_type": "code",
       "name": "activity.py",
       "extension": ".py",
-      "line_count": 23,
+      "line_count": 24,
       "path": "backend/models/activity.py"
     },
     {
@@ -16647,7 +16764,7 @@
       "file_type": "code",
       "name": "activities.py",
       "extension": ".py",
-      "line_count": 45,
+      "line_count": 66,
       "path": "backend/routers/activities.py"
     },
     {
@@ -16683,7 +16800,7 @@
       "file_type": "code",
       "name": "dashboard.py",
       "extension": ".py",
-      "line_count": 120,
+      "line_count": 245,
       "path": "backend/routers/dashboard.py"
     },
     {
@@ -16908,7 +17025,7 @@
       "file_type": "code",
       "name": "activity_service.py",
       "extension": ".py",
-      "line_count": 44,
+      "line_count": 66,
       "path": "backend/services/activity_service.py"
     },
     {
@@ -17074,6 +17191,15 @@
       "path": "backend/tests/test_auth.py"
     },
     {
+      "id": "backend/tests/test_dashboard.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "test_dashboard.py",
+      "extension": ".py",
+      "line_count": 232,
+      "path": "backend/tests/test_dashboard.py"
+    },
+    {
       "id": "backend/tests/test_executions.py",
       "type": "file",
       "file_type": "code",
@@ -17180,6 +17306,15 @@
       "extension": ".py",
       "line_count": 76,
       "path": "backend/alembic/versions/001_initial.py"
+    },
+    {
+      "id": "backend/alembic/versions/2026_04_26_0001_add_activity_read_at.py",
+      "type": "file",
+      "file_type": "code",
+      "name": "2026_04_26_0001_add_activity_read_at.py",
+      "extension": ".py",
+      "line_count": 24,
+      "path": "backend/alembic/versions/2026_04_26_0001_add_activity_read_at.py"
     },
     {
       "id": "backend/alembic/versions/64d21646b23e_create_projects_agents_project_agents_.py",
@@ -44404,6 +44539,11 @@
       "type": "uses"
     },
     {
+      "source": "backend/services/activity_service.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
       "source": "backend/services/agent_role_service.py",
       "target": "import:uuid",
       "type": "uses"
@@ -45029,6 +45169,46 @@
       "type": "uses"
     },
     {
+      "source": "backend/tests/test_dashboard.py",
+      "target": "import:pytest",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_dashboard.py",
+      "target": "import:uuid",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_dashboard.py",
+      "target": "import:datetime",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_dashboard.py",
+      "target": "import:models.task",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_dashboard.py",
+      "target": "import:models.project",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_dashboard.py",
+      "target": "import:models.project_member",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_dashboard.py",
+      "target": "import:models.agent",
+      "type": "uses"
+    },
+    {
+      "source": "backend/tests/test_dashboard.py",
+      "target": "import:models.activity",
+      "type": "uses"
+    },
+    {
       "source": "backend/tests/test_executions.py",
       "target": "import:pytest",
       "type": "uses"
@@ -45279,6 +45459,16 @@
       "type": "uses"
     },
     {
+      "source": "backend/alembic/versions/2026_04_26_0001_add_activity_read_at.py",
+      "target": "import:alembic",
+      "type": "uses"
+    },
+    {
+      "source": "backend/alembic/versions/2026_04_26_0001_add_activity_read_at.py",
+      "target": "import:sqlalchemy",
+      "type": "uses"
+    },
+    {
       "source": "backend/alembic/versions/64d21646b23e_create_projects_agents_project_agents_.py",
       "target": "import:typing",
       "type": "uses"
@@ -45357,15 +45547,15 @@
   "metadata": {
     "project": "D:\\project\\aicoding\\OpenClawHub",
     "project_name": "OpenClawHub",
-    "analyzed_at": "2026-04-25T23:55:17.852640",
+    "analyzed_at": "2026-04-26T23:42:14.283982",
     "stats": {
-      "total_files": 1914,
-      "code_files": 1032,
-      "doc_files": 628,
+      "total_files": 1929,
+      "code_files": 1034,
+      "doc_files": 640,
       "config_files": 54,
-      "total_lines": 773983,
+      "total_lines": 775671,
       "languages": {
-        "Python": 945,
+        "Python": 947,
         "JavaScript": 5,
         "TypeScript": 51,
         "TypeScript (TSX)": 30,
